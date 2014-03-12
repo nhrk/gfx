@@ -17,12 +17,13 @@
 	}
 </style>
 <body>
-	
+
 	<div id="espn-bar" class="espn-gfx"></div>
+	<div id="espn-bar2" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.bar.js"></script>
-	
+
 	<script>
 
 	var interval = 4000;
@@ -33,6 +34,7 @@
 
 	setInterval(function(){
 		bar.draw(getRandom());
+		bar2.draw(getRandom());
 	},interval);
 
 	var bar = d3.select("#espn-bar")
@@ -47,6 +49,18 @@
 	});
 
 	bar.draw(getRandom());
+
+	var bar2 = d3.select('#espn-bar2')
+	.chart("bar", {
+		"title": 'Control',
+		colors: ['#000', '#e5e5e5'],
+		width: 90,
+		height: 75,
+		barHeight: 12,
+		hideLabel: true
+	});
+
+	bar2.draw(getRandom());
 
 	</script>
 </body>
