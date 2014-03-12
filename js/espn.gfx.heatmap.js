@@ -24,7 +24,7 @@ d3.chart("heatmap", {
 
 		this.height(this.width());
 
-		squareSize = this.width() / 3;
+		squareSize = this.width() / chart.config.gridSize;
 
 		this.base
 			.attr("class", "chart");
