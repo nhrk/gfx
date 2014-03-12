@@ -1,0 +1,56 @@
+.espn-gfx svg {
+	font: 10px sans-serif;
+	shape-rendering: crispEdges;
+	float: left; /*testing*/
+}
+.espn-gfx path{
+	shape-rendering: auto;
+}
+.espn-gfx circle{
+	shape-rendering: auto;
+}
+
+.espn-gfx rect {
+	fill: #ddd;
+}
+
+.espn-gfx .axis path, .espn-gfx .axis line {
+	fill: none;
+	stroke: #fff;
+}
+
+.espn-gfx .bar {
+	fill: #0068C4;
+	fill: orange;
+}
+
+.espn-gfx .bar:hover {
+	fill: orangered;
+}
+
+.espn-gfx .timelineEvent{
+	display: none;
+}
+
+.espn-gfx .timelineEvent.p1{
+	fill : rgb(33, 102, 172);
+	display: block;
+}
+
+.espn-gfx .timelineEvent.p2{
+	fill : rgb(127, 188, 65);
+}
+
+.espn-gfx .timelineEvent.p3{
+	fill : rgb(227, 26, 28);
+}
+
+.espn-gfx rect.axisBackground {
+	fill: #eee;
+}
+
+/*.espn-gfx .brush .extent {
+	stroke: #efefef;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+}*/

@@ -1,0 +1,13 @@
+{
+  "name": "gfx",
+  "version": "0.0.1",
+  "description": "ESPNcricinfo match centre prototyping",
+  "author": "Nihar",
+  "private": true,
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    
+  }
+}
