@@ -4,7 +4,7 @@ d3.chart("bar", {
 		barHeight : 12,
 		colors : ['#faa304' , '#8a89a6'],
 		animDuration : 750,
-		top : 25,
+		barPosY : 25,
 		textPaddingLeft : 12,
 		labelPaddingTop : 30,
 		textPosX : 1,
@@ -28,6 +28,8 @@ d3.chart("bar", {
 			valAttr = options.valAttr || this.config.valAttr,
 			textPosY = options.textPosY || this.config.textPosY,
 			textPosX = options.textPosX || this.config.textPosX,
+			hideLabel = (!options.hideLabel),
+			barPosY = options.barPosY || this.config.barPosY,
 			colors = options.colors || this.config.colors;
 
 		this.base = this.base.append("svg");
@@ -39,11 +41,13 @@ d3.chart("bar", {
 		this.base
 			.attr("class", "chart");
 
-		this.label = chart.base.append('text')
+		if(hideLabel){
+			this.label = chart.base.append('text')
 				.text(options.title || "Percentage")
 				.attr('dx',textPosX)
 				.attr('dy',textPosY)
 				.attr(labelAttr);
+		}
 
 		if(options.colors && options.colors.length === 2){
 			this.config.colors = options.colors;
@@ -54,14 +58,14 @@ d3.chart("bar", {
 		  var length = this.chart().length;
 
 		  this.attr("x", function(d,i){ return (i == 0) ? 0 : chart.width() - chart.width() * d.percent / 100; })
-				.attr("y", function(d) { return chart.config.top; })
+				.attr("y", function(d) { return barPosY; })
 				.attr("width", function(d,i){ return chart.width() * d.percent / 100 })
 				.attr("height", barHeight)
 				.attr("style",function(d,i){
 					return 'fill:' +  ((i==0) ? colors[0] : colors[1]);
 				})
 				.each(function(d,i){
-					if(i === 0){
+					if(hideLabel && i === 0){
 						d3.select(this.parentNode)
 						.append('text')
 							.text(function(){ return d.percent; })
