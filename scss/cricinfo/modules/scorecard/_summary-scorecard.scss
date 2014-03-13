@@ -1,0 +1,412 @@
+/*
+ * Styles related to Summary - Match Information, Scorecard
+ */
+
+.summary-block{
+    padding-top:5px;
+
+    h6{
+        float:left;
+        font-size: $switch-font-size-super-tny;
+        padding: 0 4px 0 0;
+    }
+}
+
+.innings-information{
+
+    .team-1-name, .team-2-name{
+        font-size:16px;
+        margin:5px 0;
+
+        .innings-1-score,.innings-2-score{
+            @include BentonSansBold;
+        }
+
+        .innings-current{
+            color: $color-dark-blue;
+        }
+
+    }
+
+    .innings-requirement{
+        padding: 5px 0px;
+        font-size:11px;
+    }
+
+}
+
+.match-information{
+
+
+    div{
+        font-size:$switch-font-size-tny;
+        padding: 2px 0;
+        font-size: 11px;
+    }
+
+}
+hr.border-top-score-squad{
+    margin:10px 0 0 0;
+}
+table.score-table, table.squad-table{
+    margin:0px 0 5px 0;
+    //border-top: 1px solid $color-black-shade-1;
+
+    th, td{
+        height: 22px;
+        //font-size:$switch-font-size-tny;
+        font-size: 11px;
+
+        span.current-time-info{
+            font-weight: normal;
+        }
+
+    }
+
+}
+table.score-table{
+
+    .match-status-info{
+        float: left;
+    }
+
+    .current-time-info{
+        //float: right;
+    }
+
+    .match-n-time-head{
+        padding-right: 5px;
+        min-width:124px;
+    }
+
+    .career-head{
+        border-left: 1px solid $color-light-gray-shade-2;
+    }
+}
+
+table.squad-table{
+    border-bottom: 2px solid $color-black-shade-1;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+
+    .match-status-info{
+        float: left;
+    }
+
+    .current-time-info{
+        float: right;
+    }
+
+    table.team-1, table.team-2{
+        border-top: 1px solid $color-light-gray-shade-2;
+        border-bottom: 1px solid $color-light-gray-shade-2;
+
+        .team-1-name, .team-2-name{
+            @include BentonSansBold;
+            border-bottom: 1px solid $color-light-gray-shade-2;
+        }
+        .player-names{
+            line-height: 1.6em;
+        }
+    }
+
+    table.team-2{
+        border-bottom: none;
+    }
+
+}
+
+table.batsmen, table.batsmen-career, table.bowlers, table.bowlers-career{
+
+    td, th{
+        font-family: tahoma, arial, sans-serif;
+        padding:0px 4px 0 0;
+        text-align:right;
+    }
+
+    th{
+        font-weight: normal;
+        color: $color-black;
+        font-weight: bold;
+        background: $color-gray-shade-1;
+    }
+
+    tr.row1{
+        //border-bottom: 1px solid $color-light-gray-shade-2;
+    }
+
+}
+
+// this was done due to script hack for the stopgap resolution 1025 to 1200
+#summary {
+    table.batsmen, table.batsmen-career, table.bowlers, table.bowlers-career{
+        tr.row1{
+            vertical-align: top;
+
+            td{
+            padding-top: 3px;
+            }
+        }
+        tr.row2{
+            vertical-align: top;
+
+            td{
+            padding-top: 3px;
+            }
+        }
+    }
+
+    table.batsmen td, table.batsmen th, table.batsmen-career td, table.batsmen-career th, table.bowlers td, table.bowlers th, table.bowlers-career td, table.bowlers-career th{
+        white-space: nowrap;
+    }
+}
+
+table.batsmen, table.bowlers{
+    //border-right: 1px solid $color-light-gray-shade-2;
+    //width: 490px;
+
+    th:last-child, td:last-child{
+        padding-right:4px;
+    }
+
+    .current-player{
+        color: $color-red-shade-1;
+        a{
+            color: $color-red-shade-1;
+        }
+    }
+
+    img.icon-player{
+        padding: 0 4px 3px 0;
+    }
+}
+
+table.batsmen-career, table.bowlers-career{
+    border-left: 1px solid $color-light-gray-shade-2;
+    //width: 139px;
+}
+
+table.batsmen, table.batsmen-career{
+    border-top: 1px solid $color-light-gray-shade-2;
+    //border-bottom: 1px solid $color-light-gray-shade-2;
+}
+
+table.bowlers, table.bowlers-career{
+    border-top: 1px solid $color-light-gray-shade-2;
+    border-bottom: 2px solid $color-light-gray-shade-2;
+}
+
+table.batsmen{
+
+    .th-batsmen{
+        text-align:left;
+        //width:200px;
+        width: 190px;
+    }
+
+    .th-r, .th-b, .th-4s, .th-6s{
+        width: 26px;
+    }
+
+    .th-sr{
+        width: 43px;
+    }
+
+    .th-this-bowler{
+        width:75px;
+    }
+
+    .th-last-10-ovs{
+        width: 70px;
+    }
+
+    .batsman-1-name, .batsman-2-name
+    {
+        //@include BentonSansBold;
+        font-weight: bold;
+        text-align:left;
+    }
+
+}
+
+table.batsmen-career{
+
+    .th-mats, .th-mat, .th-runs, .th-hs{
+        width:30px;
+    }
+    .th-sr{
+        width:40px;
+    }
+
+}
+
+table.bowlers{
+
+    .th-bowlers{
+        text-align:left;
+        //width:200px;
+        width: 190px;
+    }
+
+    .th-o, .th-m, .th-r, .th-w{
+        width: 25px;
+    }
+
+    .th-econ{
+        width: 43px;
+    }
+
+    .th-0s, .th-4s, .th-6s{
+         width:25px;
+    }
+
+    .th-this-spell{
+        width: 70px;
+    }
+
+    .bowler-1-name, .bowler-2-name
+    {
+        //@include BentonSansBold;
+        font-weight: bold;
+        text-align:left;
+    }
+
+}
+
+table.bowlers-career{
+
+    .th-mat, .th-wkts, .th-bbt{
+        width:30px;
+    }
+    .th-econ{
+        width: 40px;
+    }
+
+}
+
+.more-match-stats{
+    font-size:$switch-font-size-super-tny;
+
+    p{
+        margin-bottom:0;
+        padding:2px 0;
+    }
+
+    span.head{
+        padding:0 2px 0 0;
+        //@include BentonSansBold;
+        font-weight: bold;
+    }
+
+    .recent-overs{
+        line-height:16px;
+        padding:0px;
+
+        span.head{
+            float:left;
+        }
+
+        ul.recent-over{
+            padding:0px 5px;
+            float:left;
+            border-right:1px solid;
+            margin-bottom:0;
+
+            li{
+                font-size:$switch-font-size-super-tny;
+                text-align:center;
+                line-height:16px;
+                margin:2px;
+                width: 14px;
+            }
+
+        }
+
+    }
+
+    .current-partnership{
+
+        img.icon-partnership{
+            padding: 0 4px 3px 0;
+        }
+
+    }
+
+}
+#light_wallpaper {
+    background-color: #FFFFFF;
+    z-index: 99999999;
+    left:1px;
+    border:1px solid $color-dark-blue;
+    min-height: 100px;
+    padding: 5px;
+    width:99.8%;
+    .popupBox{
+    background-color: #FFFFFF;
+    overflow: auto;
+    padding: 10px;
+    left:1px;
+    min-height: 100px;
+    border:1px solid $color-dark-blue;
+    }
+    input[type="text"].custom-input-class, textarea {
+      background:$color-light-gray-shade-1;
+      color:$color-black;
+    }
+    .medium-10 {
+        width:50%;
+    }
+    .loaderImg {
+        top:30px;
+        position:relative;
+        text-align:center;
+        min-height: 100px;
+        border:1px solid $color-dark-blue;
+    }
+    .blueBut {
+        background:$color-dark-blue;
+        border:0;
+        border-radius:3px;
+        padding:10px 20px;
+        text-transform:capitalize;
+        color:$color-white;
+        font-size:14px;
+        margin-right:10px;
+    }
+    h5 {
+        border-bottom: 1px solid $color-dark-blue;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    textarea {
+        height:140px;
+    }
+}
+.palinBut {
+        background:$color-aqua-shade-3;
+        border:0;
+        border-radius:3px;
+        padding:10px 12px;
+        text-transform:capitalize;
+        color:$color-white;
+        font-size:12px;
+        margin:10px;
+}
+span.type-of-player{
+    color: $color-black;
+    font-weight: normal;
+}
+#commIFrame {
+    position:absolute;
+    z-index:99999999999;
+    .closeBox { color:$color-dark-blue; font-size:30px; float:right;line-height:20px;
+        font-weight: bold;
+        display:none;
+        top: 25px;
+        position: relative;
+        right: 16px;
+        &:hover {
+            text-decoration:none;
+        }
+    }
+}

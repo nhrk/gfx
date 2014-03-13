@@ -1,0 +1,103 @@
+/*
+ * Styles related to Tabs
+ */
+
+#tabs_live{
+    border: 1px solid $color-black-shade-1;
+    border-radius: 2px;
+        .tabs-block{
+
+        }
+        .icon-block{
+            padding:0;
+            margin:0 0 0 0;
+            float: right;
+            li{
+				padding: 0;
+                a{
+					padding: 7px 3px 8px 3px;
+					display: inline-block;
+				}
+				a.selected{
+					background: $color-aqua-shade-3;
+					display: inline-block;
+				}
+            }
+        }
+    .large-14.columns{
+        padding-right: 0px;
+    }
+    .large-6.columns{
+        padding-left: 0px;
+    }
+}
+
+.tabs-block{
+    font-size: 0;
+    display: table;
+    width: 100%;
+
+    li{
+        border-right: 1px solid $color-black-shade-2;
+        display: table-cell;
+        background: $color-black-shade-1;
+
+
+        a{
+            @include BentonSansBold;
+            font-size: $switch-font-size-tny;
+            display: block;
+            width: 100%;
+            text-align: center;
+            height:40px;
+            line-height:40px;
+            color: $color-white;
+
+            &:hover{
+                background: $color-aqua-shade-3;
+                text-decoration: none;
+            }
+
+            &.selected{
+                color: $color-white;
+                //background: $color-ocean-blue url(http://i.imgci.com/espncricinfo/scorecard/sprite-v2.png) repeat-y right -61px;
+                background: $color-aqua-shade-3;
+            }
+
+        }
+
+    /*&.tab-summary{
+        width:15%;
+    }
+
+    &.tab-full-scorecard{
+        width: 19%;
+    }
+
+    &.tab-commentary{
+        width: 17%;
+    }
+
+    &.tab-statistics{
+        width: 13%;
+    }
+
+    &.tab-hawkeye{
+        width: 12%;
+    }
+
+    &.tab-graphs{
+        width: 10%;
+    }
+
+    &.tab-predictor{
+        width: 13%;
+    }*/
+
+    &:last-child{
+        //float: left!important;
+        border-right:none;
+    }
+
+    }
+}

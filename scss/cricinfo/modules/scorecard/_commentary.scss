@@ -1,0 +1,115 @@
+/*
+ * Style related statistics - LHS
+ *
+ */
+
+.full-commentary-block{
+	padding-top: 10px!important;
+}
+
+.commentary-block {
+	padding-top: 5px;
+	#tabs .tabs-block {
+		display: table;
+		width: 100%;
+		li {
+			display:table-cell;
+		}
+	}
+	#tabs .tabs-block li a {
+		font-size:11px;
+		height:30px;
+		line-height:30px;		
+		@include BentonSansBold;
+		&.selected {
+			background:$color-dark-blue;
+		}
+	}
+
+	h6 {
+		margin:5px 0;
+	}
+	p {
+		margin-bottom:16px;
+	}
+	.loaderImg{
+		display:none;
+		text-align: center;
+		position: absolute;
+		top: 8em;
+		left: 50%;
+	}
+	.innings-sel {
+		ul{
+			margin-bottom:20px;
+			background:$color-light-gray-shade-2;
+			li {
+				display:inline;
+				padding-right:10px;
+				&:last-child span {
+					border:0;
+				}
+				&:first-child span {
+					padding-left:10px;
+				}
+				span {
+					font-size:11px;
+					padding-right:10px;
+					line-height:28px;
+					border-right:1px solid $color-dark-blue;
+					cursor:pointer;
+					color:$color-dark-blue;
+				}
+				span.active {
+					color:$color-black;
+				}
+			}
+		}
+ 	}
+	.commentator-name {
+		float:left;
+		line-height:18px;
+		margin-right: 3px;
+	}
+	.comments-link-list {
+		margin-left:0;
+		li {
+			padding:5px 0 5px 5px;
+			border-bottom:1px dotted  $color-dark-blue;
+			span {
+				font-size:11px;
+				color:$color-dark-blue;
+				cursor:pointer;
+			}
+		}
+	}
+	.commentary-event {
+		margin-bottom:12px;
+		font-size:13px;
+		p {
+			margin-bottom:0;
+		}
+	}
+	.end-of-over-info {
+
+		font-size:12px;
+		p {
+			span {
+				@include BentonSansBold;
+			}
+		}
+	}
+	.end-of-over-batsmen, .end-of-over-bowlers {
+		li  span:first-child {
+			@include BentonSansBold;
+		}
+	}
+	.highlight-score {
+		background:$color-light-gray-shade-2;
+		line-height:20px;
+	}
+	.commsImportant {
+		font-weight:bold;
+	}
+
+}

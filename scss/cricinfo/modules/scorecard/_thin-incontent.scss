@@ -1,0 +1,43 @@
+/*
+ * Styles related to in content thin block - Report, Poll
+ */
+
+
+.thin-incontent-block{
+    padding-top:7px;
+
+    ul.report-block{
+
+        li{
+
+            p{
+                margin-bottom:0px;
+                line-height:$paragraph-aside-line-height;
+            }
+
+        }
+
+    }
+    .social-comm-section {
+    	background: $color-gray-shade-1;
+    	text-align:center;
+    	padding-top:5px;
+    	margin-bottom:10px;
+    	h6 {
+    		font-size:12px;
+    	}
+    	span{ 
+    		font-size:11px;
+    		margin-bottom: 5px;
+			display: inline-block;
+    	}
+    	hr.thick-2 {
+    		margin-top:0;
+    	}
+        .palinBut {
+            background:$color-aqua-shade-3;
+            float:none;
+        }
+    }
+
+}

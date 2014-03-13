@@ -1,0 +1,141 @@
+/* The Grid ---------------------- */
+.lt-ie9 .row { width: 1280px; max-width: 100%; min-width: 768px; margin: 0 auto; }
+.lt-ie9 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
+.lt-ie9 .row.large-collapse .column,
+.lt-ie9 .row.large-collapse .columns { padding: 0; }
+.lt-ie9 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
+.lt-ie9 .row .row.large-collapse { margin: 0; }
+
+.lt-ie9 .column, .lt-ie9 .columns { float: left; min-height: 1px; padding: 0 15px; position: relative; }
+.lt-ie9 .column.large-centered, .columns.large-centered { float: none; margin: 0 auto; }
+
+.lt-ie9 [class*="column"] + [class*="column"]:last-child { float: right; }
+.lt-ie9 [class*="column"] + [class*="column"].end { float: left; }
+
+.lt-ie9 .large-1,
+.lt-ie9 .row .large-1 { width: 5%; }
+
+.lt-ie9 .large-2,
+.lt-ie9 .row .large-2 { width: 10%; }
+
+.lt-ie9 .large-3,
+.lt-ie9 .row .large-3 { width: 15%; }
+
+.lt-ie9 .large-4,
+.lt-ie9 .row .large-4 { width: 20%; }
+
+.lt-ie9 .large-5,
+.lt-ie9 .row .large-5 { width: 25%; }
+
+.lt-ie9 .large-6,
+.lt-ie9 .row .large-6 { width: 30%; }
+
+.lt-ie9 .large-7,
+.lt-ie9 .row .large-7 { width: 35%; }
+
+.lt-ie9 .large-8,
+.lt-ie9 .row .large-8 { width: 40%; }
+
+.lt-ie9 .large-9,
+.lt-ie9 .row .large-9 { width: 45%; }
+
+.lt-ie9 .large-10,
+.lt-ie9 .row .large-10 { width: 50%; }
+
+.lt-ie9 .large-11,
+.lt-ie9 .row .large-11 { width: 55%; }
+
+.lt-ie9 .large-12,
+.lt-ie9 .row .large-12 { width: 60%; }
+
+.lt-ie9 .large-13,
+.lt-ie9 .row .large-13 { width: 65%; }
+
+.lt-ie9 .large-14,
+.lt-ie9 .row .large-14 { width: 70%; }
+
+.lt-ie9 .large-15,
+.lt-ie9 .row .large-15 { width: 75%; }
+
+.lt-ie9 .large-16,
+.lt-ie9 .row .large-16 { width: 80%; }
+
+.lt-ie9 .large-17,
+.lt-ie9 .row .large-17 { width: 85%; }
+
+.lt-ie9 .large-18,
+.lt-ie9 .row .large-18 { width: 90%; }
+
+.lt-ie9 .large-19,
+.lt-ie9 .row .large-19 { width: 95%; }
+
+.lt-ie9 .large-20,
+.lt-ie9 .row .large-20 { width: 100%; }
+
+.lt-ie9 .row .large-offset-1 { margin-left: 8.33333%; }
+.lt-ie9 .row .large-offset-2 { margin-left: 16.66667%; }
+.lt-ie9 .row .large-offset-3 { margin-left: 25%; }
+.lt-ie9 .row .large-offset-4 { margin-left: 33.33333%; }
+.lt-ie9 .row .large-offset-5 { margin-left: 41.66667%; }
+.lt-ie9 .row .large-offset-6 { margin-left: 50%; }
+.lt-ie9 .row .large-offset-7 { margin-left: 58.33333%; }
+.lt-ie9 .row .large-offset-8 { margin-left: 66.66667%; }
+.lt-ie9 .row .large-offset-9 { margin-left: 75%; }
+.lt-ie9 .row .large-offset-10 { margin-left: 83.33333%; }
+
+.lt-ie9 .pull-2 { right: 16.66667%; }
+.lt-ie9 .pull-3 { right: 25%; }
+.lt-ie9 .pull-4 { right: 33.33333%; }
+.lt-ie9 .pull-5 { right: 41.66667%; }
+.lt-ie9 .pull-6 { right: 50%; }
+.lt-ie9 .pull-7 { right: 58.33333%; }
+.lt-ie9 .pull-8 { right: 66.66667%; }
+.lt-ie9 .pull-9 { right: 75%; }
+.lt-ie9 .pull-10 { right: 83.33333%; }
+
+.lt-ie9 .push-2 { left: 16.66667%; }
+.lt-ie9 .push-3 { left: 25%; }
+.lt-ie9 .push-4 { left: 33.33333%; }
+.lt-ie9 .push-5 { left: 41.66667%; }
+.lt-ie9 .push-6 { left: 50%; }
+.lt-ie9 .push-7 { left: 58.33333%; }
+.lt-ie9 .push-8 { left: 66.66667%; }
+.lt-ie9 .push-9 { left: 75%; }
+.lt-ie9 .push-10 { left: 83.33333%; }
+
+/* Nicolas Gallagher's micro clearfix */
+.lt-ie9 .row { *zoom: 1; }
+.lt-ie9 .row:before, .row:after { content: " "; display: table; }
+.lt-ie9 .row:after { clear: both; }
+
+
+/* Block grids created with li */
+.lt-ie9 .large-block-grid-2, .lt-ie9 .large-block-grid-3, .lt-ie9 .large-block-grid-4,
+.lt-ie9 .large-block-grid-5, .lt-ie9 .large-block-grid-6, .lt-ie9 .large-block-grid-7,
+.lt-ie9 .large-block-grid-8, .lt-ie9 .large-block-grid-9, .lt-ie9 .large-block-grid-10,
+.lt-ie9 .large-block-grid-11, .lt-ie9 .large-block-grid-12{
+
+    li{
+        display:inline-block;
+        height: auto;
+        float:left;
+        padding:0 5px 15px 5px;
+    }
+
+}
+
+.lt-ie9 .large-block-grid-1 li{width:100%;}
+.lt-ie9 .large-block-grid-2 li{width:50%;}
+.lt-ie9 .large-block-grid-3 li{width:33.33333333%;}
+.lt-ie9 .large-block-grid-4 li{width:25%;}
+.lt-ie9 .large-block-grid-5 li{width:20%;}
+.lt-ie9 .large-block-grid-6 li{width:16.66666667%;}
+.lt-ie9 .large-block-grid-7 li{width:14.28571429%;}
+.lt-ie9 .large-block-grid-8 li{width:12.5%;}
+.lt-ie9 .large-block-grid-9 li{width:11.11111111%;}
+.lt-ie9 .large-block-grid-10 li{width:10%;}
+.lt-ie9 .large-block-grid-11 li{width:9.090909091%;}
+.lt-ie9 .large-block-grid-12 li{width:8.333333333%;}
+
+/* Block Grids end */
+

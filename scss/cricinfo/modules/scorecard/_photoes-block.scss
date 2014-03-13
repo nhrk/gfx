@@ -1,0 +1,108 @@
+/*
+ * Styles related to Photoes Block
+ */
+.photos-block {
+	margin-bottom: 10px;
+
+	ul{margin-bottom:0;}
+
+	.pagination-but {
+  		font-size:36px;
+  		line-height:24px;
+  		height:28px;
+  		padding:0 5px 4px;
+  		width:27px;
+  		background-color: $color-dark-blue;
+  		color:$color-white;
+  		text-decoration: none;
+		text-align: center;
+		display: inline-block;
+  		position:absolute;
+  		bottom:0px;
+  		border:0;
+  		margin:0;
+  	}
+
+	.left-nav {
+		left:0px;
+	}
+
+	.right-nav {
+		right:0px;
+	}
+
+	.nextInactive,.nextInactive:hover, .prevInactive:hover, .prevInactive  {
+		background:$color-gray-shade-1; cursor:default;
+	}
+
+	p {
+		margin:10px 0 5px;
+	}
+
+	.photoes-nav {
+		position:relative;bottom:0;
+	}
+
+	#imgMain {
+		cursor:pointer;
+		min-height:347px;
+	}
+
+	#imgLoading {
+		text-align: center;
+		width: 625px;
+		height: 50%;
+		position: absolute;
+		left: 0;
+		top: 100px;
+		background-color: $color-white;
+		z-index: 1000;
+	}
+
+	#imgLoading img {
+		display: block;
+		margin: auto;
+		height: 32px;
+		width: 32px;
+		position: relative;
+		top: 44%;
+	}
+	.photos-list {
+		ul {
+			margin-bottom:5px;
+			float:left;
+			li {
+				list-style-type:none;
+				float:left;
+				display:inline;
+				margin-right:5px;
+				a {
+					color:$color-dark-blue;
+					font-size:12px;
+					padding:0 5px 0 0;
+					border-right:1px solid $color-dark-blue;
+
+				}
+				&:last-child a {
+					border-right:0;
+				}
+			}
+		}
+	}
+	.no-border{border:0 !important;}
+}
+
+.sponsored-links li p{
+	margin-bottom: 0;
+}
+.rhscontent-loader{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	background:#fff;
+	opacity:0.7;
+	width:100%;
+	text-align:center;
+	min-height:393px;
+}

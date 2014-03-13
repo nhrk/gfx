@@ -1,0 +1,108 @@
+/*
+ * Styles related to Match Coverage - Main block, Analysis grid block, Headlines list
+ */
+.match-coverage-block{
+    margin:10px 0 0;
+}
+ul.daily-analysis-block{
+
+    p{
+        line-height:$paragraph-aside-line-height;
+        margin-bottom:0px;
+    }
+}
+
+//Warning: re-used in Full scorecard > Match Notes
+.coverage-day-list{
+    font-size: 0;
+    text-align:right;
+
+    li, dd{
+        border-right: 1px solid $color-dark-blue;
+
+        &.active{
+            background: $color-aqua-shade-3;
+            font-weight: bold;
+
+            a{
+                color: $color-white;
+            }
+        }
+    }
+
+
+    a{
+        font-size: $switch-font-size-super-tny;
+        padding: 2px 7px;
+        display: inline-block;
+        color:$color-dark-gray;
+    }
+}
+
+ul.headlines-list{
+    margin:0;
+
+    li {
+        padding:4px 0;
+        border-bottom:1px solid $color-light-gray-shade-2;
+        font-size: 12px;
+        &.media-list {        
+            background: url(http://i.imgci.com/espncricinfo/scorecard/play_icon_1_normal.png) 1px 9px no-repeat;
+            padding-left:18px;
+        }
+        &.media-list:hover {
+            background: url(http://i.imgci.com/espncricinfo/scorecard/play_icon_1_hover.png) 1px 9px no-repeat;
+        }
+        &:last-child {
+                        border-bottom:0;
+        }
+        
+    }
+
+
+}
+
+.small-bold {
+    @include BentonSansBold;
+    font-size:11px;
+}
+
+.playtime {
+    font-size:11px;
+    line-height: 1.5;
+    padding-top: 1px;
+}
+
+.match-block-list {
+    font-size:11px;
+    margin:0;
+    li {
+    }
+}
+.match-inline-list {
+    font-size:11px;
+    margin:0;
+    display:inline;
+    float: left;
+    li {
+        float:left;
+        padding:0 2px;
+    }
+}
+
+.match-coverage-vid-1024{
+    height: 240px;
+}
+.match-coverage-vid-1280{
+    height: 345px;
+}
+.match-notes-block hr, .score-provided {
+    margin-bottom:10px;
+}
+.match-coverage-block ul.headlines-list li {
+    color:$color-dark-gray;
+    font-size: 15px;
+    a {
+            color:$color-dark-gray;
+    }
+}

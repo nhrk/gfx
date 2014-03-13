@@ -1,0 +1,111 @@
+/*
+ * Specify styles for IE8
+ */
+
+ul.end-of-over-batsmen, .end-of-over-bowlers{
+    li{
+        width:100%!important;
+    }
+}
+
+.match-card-template {
+    clear:both;
+	.tooltip-tag {
+		top:135px!important;
+	}
+	.quote .gradient-bg {
+	}
+}
+.match-card-template.columns {
+	padding-right:0;
+}
+.tabs-block{
+	&#stats-tabs {
+       .columns { padding:0;}
+    }
+}
+.end-of-over-batsmen, .end-of-over-bowlers {
+	.columns { padding:0;}
+}
+
+.lt-ie9 .tabs-block li {
+    padding-left: 0px;
+    padding-right:0px;
+}
+
+.social-comm-section .palinBut {
+	padding:6px;
+}
+
+.search-block form input.search-field {
+	background-position-x : 183px;
+	background-position-y : -109px;
+}
+.masthead-block .home {
+	padding:0;
+}
+.score-strip-block div.match-select #droplist {
+	margin-left: 0;
+}
+
+/* to be at right always, even before the match starts */
+.thin-incontent-block{
+    float: right!important;
+}
+
+/* Hiding small Match Coverage video */
+
+.lt-ie9 .match-coverage-vid-1024 {
+    display: none;
+}
+
+/* Hiding small video kit, youtube, watch espn module */
+
+.lt-ie9 .vid-module-1024 {
+    display: none;
+}
+
+.lt-ie9 #tabs_live .icon-block li{
+    padding: 0;
+}
+
+.lt-ie9   #light_wallpaper {
+	.row {
+		width:100%!important;
+	}
+	.medium-10 {
+        width:32%;
+    }
+    .medium-20 {
+        width:100%;
+    }
+    .columns {
+    	float:left;
+    	padding:0 10px;
+    }
+    #comm_text {
+    	width:63%;
+    }
+}
+.lt-ie9  .match-select {
+	padding-left:0;
+}
+.lt-ie9  {
+    .show-for-large{
+        display:none!important;
+    }
+    .show-for-medium{
+        display:block!important;
+    }
+
+    .commentary-overs{
+            width:15%;
+    }
+
+        .commentary-text{
+            width:85%;
+    }
+    #tabs_live .icon-block li a{
+        padding-left:0;
+    }
+}

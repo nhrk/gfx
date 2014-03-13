@@ -1,0 +1,36 @@
+/*
+ * Mixins - font, colors
+ */
+
+
+@mixin BentonSansBold {
+  font: {
+    family: tahoma, arial;
+    weight: bold;
+  }
+}
+
+@mixin normal-text {
+  font: {
+    family: tahoma, arial;
+    weight: normal;
+  }
+}
+
+@mixin gradient($from, $fromto, $tofrom, $to) {
+
+	background:$from none;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, $from), color-stop(50%, $fromto), color-stop(50%, $tofrom), color-stop(100%, $to));
+    background: -webkit-linear-gradient($from, $fromto 50%, $tofrom 50%, $to);
+    background: -moz-linear-gradient($from, $fromto 50%, $tofrom 50%,$to);
+    background: -o-linear-gradient($from, $fromto 50%, $tofrom 50%, $to);
+    background: -ms-linear-gradient($from, $fromto 50%, $tofrom 50%, $to);
+    background: linear-gradient($from, $fromto 50%, $tofrom 50%, $to);
+
+	-webkit-box-shadow: 0 1px 0 rgba(70,157,200,1) inset;
+	box-shadow: 0 1px 0 rgba(70,157,200,1) inset;
+	-webkit-transition: background-color 300ms ease-out;
+	-moz-transition: background-color 300ms ease-out;
+	transition: background-color 300ms ease-out;
+}
+

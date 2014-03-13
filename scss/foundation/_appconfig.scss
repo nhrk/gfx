@@ -1,0 +1,51 @@
+/*
+ * Override any foundation specific variables in this file and include it
+ * after variables.scss file.
+ */
+
+// Define Columns and Gutter
+$espn-default-gutter: 15;
+$espn-default-columns: 20;
+
+// Define screen size/ break points
+$small-screen: 768px;
+$medium-screen: 1024px;
+$large-screen: 1280px;
+
+// Override default font size (16px)
+$base-font-size: 13px;
+$em-base: $base-font-size;
+
+//Grids
+$row-width: emCalc($large-screen);
+$column-gutter: emCalc($espn-default-gutter);
+$total-columns: $espn-default-columns;
+
+
+//control the maximum number of block grid elements per row
+$block-grid-elements: 12;
+$block-grid-default-spacing: emCalc($espn-default-gutter);
+
+
+$medium: "only screen and (max-width:"#{$medium-screen}")";
+
+$body-font-family: tahoma, arial,sans-serif;
+$body-font-color: $color-black;
+
+//Sets other fonts sizes are differnt from 13px
+$switch-font-size-tny: 12px;
+$switch-font-size-super-tny : 11px;
+
+//Headers
+$header-font-family: arial,tahoma,sans-serif;
+
+//Font-size for module headers
+$h2-font-size: emCalc(16);
+
+
+//Paragrph with less line-height, mostly for links under paragraph below images
+$paragraph-aside-line-height: 1.2;
+
+// default hr
+$hr-border-color: $color-black-shade-1;
+$hr-margin: emCalc(5);

@@ -1,0 +1,18 @@
+/*
+ * Styles related to Header - Logo, Leaderboard Ad
+ */
+
+.header-block{
+    margin: 10px 0 0 0;
+
+    .logo{
+       margin-top: 22px;
+
+    }
+
+    hr{
+        margin: 10px 0;
+        border-color: $color-black;
+    }
+
+}

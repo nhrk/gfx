@@ -1,0 +1,245 @@
+/*
+ * Style related Full-Score card tab - LSH side
+ *
+ *
+ */
+
+.full-scorecard-block {
+    padding-top: 10px;
+}
+
+#full-scorecard{
+    .squad-table{
+        margin-top:5px;
+    }
+}
+
+.batting-table {
+    border-top: 1px solid $color-dark-blue;
+    margin: 10px 0px;
+    th{
+        @include BentonSansBold;
+        background: $color-aqua-shade-1;
+        text-align: right;
+        font-size:11px;
+
+        &.th-innings-heading{
+            text-align: left;
+        }
+
+        &.th-sr{
+            width: 8%;
+        }
+
+        &.th-r, &.th-m, &.th-b{
+            width: 5%;
+        }
+
+        &.th-4s, &.th-6s{
+            width: 4%;
+        }
+
+        &:last-child{
+            padding-right: 5px;
+        }
+    }
+
+    tr{
+
+        &.tr-heading{
+        border-bottom: none;
+        }
+
+        &.dismissal-detail{
+            display: none;
+            background: #F7F7F7;
+            td{
+                text-align: left;
+                padding: 5px;
+            }
+        }
+    }
+
+    td{
+        text-align: right;
+        height:20px;
+        font-size:11px;
+
+        &:last-child{
+            padding-right: 5px;
+        }
+
+        &.batsman-name{
+            width: 26%;
+            @include BentonSansBold;
+            text-align: left;
+        }
+
+        &.td-icon-expand-collapse{
+            padding: 0;
+            width: 2%;
+            text-align: left;
+
+            img{
+                margin-top: -3px;
+            }
+        }
+
+        &.dismissal-info{
+            width: 41%;
+            text-align: left;
+        }
+
+        &.extra, &.extra-details{
+            text-align: left;
+        }
+
+        &.total{
+            @include BentonSansBold;
+            text-align: left;
+        }
+
+        &.total-details{
+            text-align: left;
+        }
+
+        &.rpo{
+            text-align: center;
+        }
+
+        &.dismissal-detail{
+            text-align: left;
+            padding: 5px;
+        }
+    }
+    .total-wrap
+    {
+        td{
+            border-bottom: 2px solid $color-aqua-shade-1;
+        }
+    }
+
+    .extra-wrap{
+        td{
+            //border-bottom: 1px solid $color-black;
+        }
+    }
+}
+
+.bowling-table {
+    margin: 10px 0px;
+
+    th{
+        @include BentonSansBold;
+        background: $color-aqua-shade-1;
+        text-align: right;
+        font-size:11px;
+
+        &.th-innings-heading{
+            text-align: left;
+        }
+
+        &.th-o, &.th-m, &.th-r{
+            width: 6%;
+        }
+
+        &.th-w{
+            width: 6%;
+        }
+
+        &.th-econ{
+            width: 8%;
+        }
+
+        &:last-child{
+            padding-right: 5px;
+        }
+    }
+
+    tr{
+
+        &.tr-heading{
+        border-bottom: none;
+        }
+        td {
+            font-size:11px;
+        }
+        &.dismissal-detail{
+            display: none;
+            background: #F7F7F7;
+
+            td{
+                text-align: left;
+                padding: 5px;
+            }
+        }
+
+        &.tr-last{
+            border-bottom: none;
+        }
+    }
+
+    td{
+        text-align: right;
+        height:20px;
+
+        &.bowler-name{
+            @include BentonSansBold;
+            text-align: left;
+            width: 26%;
+        }
+
+        &.td-icon-expand-collapse{
+            padding: 0;
+            width: 2%;
+            text-align: left;
+
+            img{
+                margin-top: -3px;
+            }
+        }
+
+        &.td-extra{
+            text-align: left;
+            padding-left: 30px;
+            width: 40%;
+        }
+
+    }
+}
+
+.match-details-block{
+    .match-information div{
+        line-height:20px;
+        font-size:12px;
+    }
+}
+
+ul.close-of-play{
+    li{
+        margin-left: 10px;
+    }
+}
+
+.match-notes-block {
+
+    .coverage-day-list{
+        text-align: left;
+    }
+
+    ul.tabs-content{
+        margin: 10px 0;
+    }
+
+    ul.notes{
+        li{
+            list-style-type: disc;
+            font-size: 12px;
+            margin-left:20px;
+        }
+    }
+
+}
+.full-scorecard-block .break-status h6 {
+    margin-bottom:-4px;
+}

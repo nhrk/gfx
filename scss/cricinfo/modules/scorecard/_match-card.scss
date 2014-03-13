@@ -1,0 +1,361 @@
+.cycle-slideshow, .cycle-slideshow * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.cycle-slideshow {min-width: 300px; max-width: 300px; margin: 10px auto; padding: 0; position: relative;background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
+ }
+
+/* slideshow images (for most of the demos, these are the actual "slides") */
+.cycle-slideshow div.scoren { 
+    /* 
+    some of these styles will be set by the plugin (by default) but setting them here
+    helps avoid flash-of-unstyled-content
+    */
+    position: absolute; top: 0; left: 0;
+    width: 100%; padding: 0; display: block;
+}
+
+/* in case script does not load */
+.cycle-slideshow div.scoren:first-child {
+    position: static; z-index: 100;
+}
+
+/* pager */
+.cycle-pager { 
+    text-align: center; width: 100%; z-index: 500; position: absolute; top: 10px; overflow: hidden;
+}
+.cycle-pager span { 
+    font-family: arial; font-size: 50px; width: 16px; height: 16px; 
+    display: inline-block; color: #ddd; cursor: pointer; 
+}
+.cycle-pager span.cycle-pager-active { color: #D69746;}
+.cycle-pager > * { cursor: pointer;}
+
+
+/* caption */
+.cycle-caption { position: absolute; color: white; bottom: 15px; right: 15px; z-index: 700; }
+
+
+/* overlay */
+.cycle-overlay { 
+    font-family: tahoma, arial;
+    position: absolute; bottom: 0; width: 100%; z-index: 600;
+    background: black; color: white; padding: 15px; opacity: .5;
+}
+
+
+/* prev / next links */
+.cycle-prev, .cycle-next { position: absolute; top: 0; width: 30%; opacity: 0; filter: alpha(opacity=0); z-index: 800; height: 100%; cursor: pointer; }
+.cycle-prev { left: 0;  background: url(http://malsup.github.com/images/left.png) 50% 50% no-repeat;}
+.cycle-next { right: 0; background: url(http://malsup.github.com/images/right.png) 50% 50% no-repeat;}
+.cycle-prev:hover, .cycle-next:hover { opacity: .7; filter: alpha(opacity=70) }
+
+.disabled { opacity: .5; filter:alpha(opacity=50); }
+
+
+/* display paused text on top of paused slideshow */
+.cycle-paused:after {
+    content: 'Paused'; color: white; background: black; padding: 10px;
+    z-index: 500; position: absolute; top: 10px; right: 10px;
+    border-radius: 10px;
+    opacity: .5; filter: alpha(opacity=50);
+}
+
+/* 
+    media queries 
+    some style overrides to make things more pleasant on mobile devices
+*/
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    .cycle-slideshow { width: 200px;}
+    .cycle-overlay { padding: 4px }
+    .cycle-caption { bottom: 4px; right: 4px }
+}
+.scorebox{width:300px;height:240px;}
+#suffleDiv li{background: url(http://i.imgci.com/espncricinfo/scorecard/match_card_ind.png) no-repeat;  height: 232px;overflow: hidden; width:100%;}
+.match-card-nav{width: 86%;height: 26px;margin-top:-3.55em;margin-left:13px;text-align:center;position: absolute;z-index: 9999;background: url(http://i.imgci.com/espncricinfo/scorecard/match_card_navblue.png) top center;}
+#match-card-prev{width: 35px;height: 26px;display:inline-block;cursor:pointer;}
+#match-card-next{width: 35px;height: 26px;display:inline-block;cursor:pointer;}
+
+/*
+ * Styles related to Match Card
+ */
+.match-card-template {
+	height:250px;
+
+	.match-card-block {
+		margin-right: 10px;
+		height:250px;
+		width:100%;
+		clear:both;
+		background:url(http://i.imgci.com/espncricinfo/scorecard/match_card_bg.png) no-repeat;
+	}	
+	/*.bg-layer {
+		background:url(http://i.imgci.com/espncricinfo/scorecard/bg-white-line2.png) repeat-y 3px 13px;
+		width:297px;
+		float:left;
+	} */
+	ul { 
+		margin-top:0px;
+		height: 232px;
+		width:100%;
+		position:relative;
+	} 
+	h1 {
+		font-size:16px;
+		text-transform:uppercase;
+		text-align:center;
+		color:$color-white;
+		margin:0;
+		
+	}
+	h1 span {
+		white-space:nowrap;
+		padding:6px 15px 6px;
+		display:inline-block;
+		background:$color-light-black-shade-1; 
+		border-radius: 1.6em 1.6em 1em 1em / 0em 0em 3em 3em;
+		-moz-box-shadow: 0px -1px 3px -2px $color-black;
+		-webkit-box-shadow: 0px -1px -2px 1px $color-black;
+		box-shadow: 0px -1px 3px -2px $color-black;	
+	}
+
+	.score {		
+		color:$color-white;
+		text-align:center;
+
+		span.gradient-bg{ 	
+ 		@include gradient($color-aqua-shade-3, $color-light-aqua-shade, $color-light-dark-aqua-shade, $color-dark-aqua-shade);
+		padding:0px 20px 0px;
+		border-radius:7px; 
+		font-size:66px;
+		}
+		.score-caption {
+			margin:10px 25px; 
+			a {
+				color: $color-aqua-shade-2;
+			}
+		}
+	}   
+	.score-caption {
+		color:$color-white;
+		font-size:13px; 
+		text-align:left; 
+		line-height:15px;
+	}   
+	.quote {		
+		color:$color-white;
+		text-align:left; 
+
+		span.gradient-bg{ 	
+			@include gradient($color-aqua-shade-3, $color-light-aqua-shade, $color-light-dark-aqua-shade, $color-dark-aqua-shade);
+			padding:5px;
+			border-radius:7px; 
+			float:left;
+			margin:10px 18px 15px;
+			width:265px;
+			height:auto;
+		}
+		.quote-text {
+			font-size:13px;
+			padding:5px 5px 0 0;
+			margin-bottom:0;
+			line-height:16px;
+		}
+		.medium-quote { font-size:16px; padding:5px; line-height:20px;margin-bottom:10px;}
+		.small-quote { font-size:14px; line-height:19px;margin-bottom:10px;padding:5px;}
+		.large-quote { font-size:18px; line-height:21px;margin-bottom:10px;padding:5px;}
+		.quote-headline {
+			font-size:18px;
+			padding:5px 5px 0 0;
+			margin-bottom:0;
+			line-height:21px;
+		}
+		.score-caption {
+			padding:0 20px;
+			font-size:11px;
+		}		
+		.plainBtn {
+			margin-left:90px;
+			text-decoration:none;
+		}
+	}   
+	
+	.player-mask {  
+		.player-img { margin:12px 15px 0px; border-radius:5px;float:left; }
+		.score-caption {
+			padding:5px 20px 0;
+		 	font-size:10px;
+		 	span{
+		 		font-size:9px;
+		 	}
+		 }
+		.video {
+			background: url(http://i.imgci.com/espncricinfo/scorecard/video-icon1.png) no-repeat;
+			position: absolute;
+			top: 30%;
+			left: 41%;
+			width: 100px;
+			height: 50px;
+			z-index: 999;
+			
+		}
+	}
+	
+	span.circle  {
+		display: inline-block;
+		width: 86px;
+		height: 86px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		-webkit-border-radius: 99em;
+		-moz-border-radius: 99em;
+		border-radius: 99em;
+		border: 3px solid $color-aqua-shade-4;
+		margin-right:6px;
+		float:left;
+		img {	opacity: 0;
+				filter: alpha(opacity=0); 
+		}
+	}
+	
+	.plainBtn {
+		background:$color-black;
+		border:0;
+		border-radius:15px;
+		padding:10px 20px;
+		text-transform:uppercase;
+		color:$color-white;
+		font-size:14px;
+	}	
+	.tooltip-tag {
+			content: "";
+			left: 10px;
+			width: 13px;
+			height: 29px;
+			border-top: 13px solid $color-dark-aqua-shade;
+			border-left: 0px solid transparent;
+			border-right: 13px solid transparent;
+			border-bottom: 0;
+			position: absolute;
+			top:139px;
+			left:10%;
+			display: none;
+	}
+	.score-table-box {
+		padding: 10px;
+		.score-stats-table {
+			font-size:10px;
+			margin-top:0;
+			text-align:right;
+			caption {
+				padding: 1px 3px 2px 3px;
+				font-size: 10px;
+				font-weight: bold;
+				text-decoration: none;
+				text-transform: uppercase;
+				color: $color-white;
+				caption-side: top;
+				text-align: center;
+				line-height:11px;	
+				height: auto;
+			}
+			th {
+				background:$color-aqua-shade-3;
+				color:$color-black;
+				text-align:right;	
+				font-size:10px;	
+				padding: 1px 2px 2px 2px;
+				line-height:11px;	
+				height: auto;
+			}
+			td {
+				color: $color-white;
+				font-size:10px;
+				padding: 1px 3px 2px 3px;
+				line-height:11px;
+				height: auto;
+			}
+			.text-left {
+				text-align:left;
+			}
+			.row-white {
+				color: $color-white;
+			}
+			.pad-left7 {
+				padding-left:7px;
+			}
+		}
+		a {
+			color:$color-aqua-shade-2;	
+		}
+		.stats-footnote {
+			margin-top: 10px;
+			font-size: 10px;
+			text-decoration: none;
+			color: $color-white;
+			text-align: center;
+			line-height:11px;
+		}
+	}
+	.table-score {
+	.gradient-bg{ 	
+			@include gradient($color-aqua-shade-3, $color-light-aqua-shade, $color-light-dark-aqua-shade, $color-dark-aqua-shade);
+			padding:5px;
+			border-radius:7px; 
+			float:left;
+			margin:10px 18px 15px;
+			width:265px;
+			height:155px;
+		}
+		.match-table {
+			margin-left:15px;
+		}
+		table 
+		{
+			tr{
+				th {
+					background:$color-white;
+					color:$color-black;
+					border-right:1px solid $color-light-yellow-shade-1;
+					border-bottom:1px solid $color-light-yellow-shade-1;
+					padding:2px 5px;
+					height:20px;
+					&:first-child {
+						background:none;
+					}
+					&:last-child {
+						border:0;						
+						border-bottom:1px solid $color-light-yellow-shade-1;
+					}
+				}
+				td{
+					border-right:1px solid $color-light-yellow-shade-1;
+					border-bottom:1px solid $color-light-yellow-shade-1;
+					padding:0 5px;
+					height:20px;
+					&:last-child {
+						border:0;						
+						border-bottom:1px solid $color-light-yellow-shade-1;
+					}
+				}
+				&:last-child {
+					td{										
+						border-bottom:0px solid $color-light-yellow-shade-1;
+					}
+				}
+			}
+		}
+	span.circle {
+		width:69px;
+		height:69px;
+		float:none;
+		margin-right:15px;
+	}
+	p{
+			text-align:left;			
+			font-size:12px;
+			line-height:15px;
+			margin:3px 0 8px;			
+		}
+	}
+}

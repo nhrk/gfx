@@ -1,0 +1,131 @@
+/*
+ * Styles related to Summary - Commentary
+ */
+
+.commentary-block{
+    padding-top:0px;
+
+    .commentary-event{
+
+        &:after{
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        &:last-child {
+            margin-bottom:5px;
+        }
+
+        p{
+            margin-bottom:10px;
+        }
+
+        .commentary-overs{
+            @include BentonSansBold;
+            display:inline-block;
+            width:9%;
+            float:left;
+            line-height:1.4;
+        }
+
+        .commentary-text{
+            display:inline-block;
+            width:91%;
+            float:left;
+        }
+
+    }
+
+    .end-of-over-info{
+
+        border-top:1px solid $color-black-shade-1;
+        border-bottom:1px solid $color-black-shade-1;
+        padding: 5px 3px 5px 8px;
+        margin:10px 0 15px 0;
+        background: $color-gray-shade-1;
+        font-size:11px!important;
+        &:first-child{
+            border-top: none;
+            margin-top: 0px;
+        }
+
+        p{
+           margin-bottom: 10px;
+           line-height: 15px;
+        }
+
+        ul.end-of-over-player-stat{
+
+            li{
+
+                padding: 0;
+
+                ul.end-of-over-batsmen{
+                    margin:0;
+                }
+
+                ul.end-of-over-bowlers{
+                    margin:0;
+                }
+            }
+
+            .eov-stat-batsmen{
+                width: 55%;
+                .columns{
+                    padding-left: 3px;
+                    padding-right: 3px;
+                }
+                .columns:first-child{
+                    padding-left: 0.57692em;
+                }
+            }
+            .eov-stat-bowlers{
+                width: 45%;
+                .columns{
+                    padding-left: 3px;
+                    padding-right: 3px;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+
+ul.commentary-main-events-links{
+    font-size:0;
+    margin-top:9px;
+
+    li{
+        border-right: 1px solid $color-dark-blue;
+
+        a{
+            font-size: $switch-font-size-tny;
+            padding: 2px 7px;
+            display: inline-block;
+            @include BentonSansBold;
+        }
+
+    }
+
+}
+
+.commentary-feedback-buttoon{
+    margin:5px 0;
+    float:right;
+    font-size:$switch-font-size-tny;
+    background: $color-dark-blue;
+}
+
+
+.commentary-block .commentary-event p {
+    margin-bottom: 4px!important;
+}
+.commentary-block .commentary-event{
+    margin-bottom: 2px!important;
+}

@@ -1,0 +1,346 @@
+/*
+ * Style related statistics - LHS
+ *
+ */
+
+.statistics-block {
+	padding-top: 10px;
+	#tabs .tabs-block li span {
+		height:30px;
+		line-height:30px;
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+		@include BentonSansBold;
+        font-size: 11px;
+        cursor:pointer;
+        color:$color-dark-blue;
+
+        &:hover{
+            background: #f1f1f1;
+            text-decoration: none;
+        }
+
+		&.selected {
+			color: $color-white;
+			background: $color-aqua-shade-3;
+		}
+	}
+	.loaderImg{
+		display:none;
+		text-align: center;
+		position: absolute;
+		top: 6em;
+		left: 50%;
+	}
+	h6 {
+		margin:5px 0;
+	}
+	table {
+		caption {
+			background:$color-aqua-shade-2;
+			text-align: left;
+			@include BentonSansBold;
+			line-height: 25px;
+			font-size: 12px;
+			padding-left: 7px;
+		}
+	}
+	.innings-sel {
+		padding-top:5px;
+			span{
+				font-size:11px;
+				padding-right: 10px;
+				line-height: 28px;
+				border-right: 1px solid $color-dark-blue;
+			}
+			div { background:$color-light-gray-shade-2; }
+			ul{
+				margin-bottom:0;
+
+				li {
+					display:inline;
+					padding-right:10px;
+
+					&:last-child a {
+						border:0;
+					}
+
+					a {
+						font-size:11px;
+						padding-right:10px;
+						line-height:28px;
+						border-right:1px solid $color-dark-blue;
+					}
+				}
+			}
+
+		.expand-list {
+			ul li {
+
+				&:last-child {
+				padding-right:0;
+				}
+
+				a {
+					border:0;
+					padding-right:0;
+					img {
+						vertical-align: text-top;
+						padding: 2px 2px 0;
+					}
+				}
+			}
+
+		}
+ 	}
+	.inningsHead {
+		cursor: pointer;
+		div {
+			background:$color-aqua-shade-1;
+			margin-top:5px;
+		}
+		h6{margin-bottom: 0px;}
+		.statsOpen {
+			background:$color-aqua-shade-1 url('http://i.imgci.com/espncricinfo/scorecard/stats_collapse_icon.png') no-repeat 99% 7px;
+			line-height: 28px;
+			padding-left: 7px;
+		}
+		.statsClose{
+			background:$color-aqua-shade-1 url('http://i.imgci.com/espncricinfo/scorecard/stats_expand_icon.png') no-repeat 99% 7px;
+			line-height: 28px;
+			padding-left: 7px;
+		}
+		a{
+			line-height:28px;
+		}
+	}
+	.innings-table {
+		margin: 5px 0;
+		border:0;
+ 		th {
+			 background:$color-light-gray-shade-2;
+			 height: 25px;
+			 text-align: right;
+			 font-weight: normal;
+
+			 &:last-child{
+			 	padding-right:7px;
+			 }
+
+			 &.th-bowler {
+			 	padding-left: 7px;
+			 	text-align: left;
+			 	width: 23%;
+			 }
+			 &.th-0s, &.th-1s, &.th-2s, &.th-3s, &.th-4s, &.th-5s, &.th-6s, &.th-7plus{
+				width: 5%;
+				text-align: right;
+			}
+			&.th-dismissal {
+				width: 12%;
+			}
+			&.th-runs{
+				width: 7%;
+			}
+			 &.th-balls{
+				width: 7%;
+			}
+			&.th-sr{
+				width: 12%;
+			}
+		}
+
+		td {
+			border-bottom: 1px solid $color-light-gray-shade-2;
+			height: 25px;
+			text-align: right;
+
+			&:last-child{
+			 	padding-right:7px;
+			}
+
+			&.bowler-name {
+				text-align: left;
+				padding-left: 7px;
+			}
+		}
+
+	}
+	.comparison-table {
+		margin-top:5px;
+		thead th{
+			background:$color-aqua-shade-2;
+		    @include BentonSansBold;
+		    line-height: 25px;
+		    font-size: 12px;
+		    text-align: center;
+		    width:22%;
+			&.th-empty {
+				width:0.8%;
+			}
+			&.last-col {
+				width:35%;
+			}
+		}
+		tbody th {
+			background:$color-light-gray-shade-2;
+			height: 25px;
+			text-align: right;
+			font-weight: normal;
+			font-size:11px;
+			text-transform:capitalize;
+			&.th-over {
+				text-align: left;
+				padding-left:4px;
+			}
+			&.th-runreq {
+				padding-right:4px;
+			}
+		}
+		td {
+			border-bottom: 1px solid $color-light-gray-shade-2;
+			height: 25px;
+			text-align: right;
+			font-size:11px;
+			&.td-over {
+				text-align:left;
+				border-right: 1px dotted $color-dark-gray-shade-1;
+				padding-left:5px;
+			}
+			&.td-runrate {
+			}
+			&.td-divider {
+				border-right: 1px dotted $color-dark-gray-shade-1;
+				padding:0 3px 0 0;
+				&:last-child {
+					border-right:0;
+				}
+			}
+			&.td-runreq {
+				padding-right:5px;
+			}
+		}
+
+	}
+	.partnership-table {
+		margin: 5px 0;
+		display: table;
+		width: 100%;
+		float: left;
+		th {
+			background:$color-light-gray-shade-2;
+			height: 25px;
+			text-align: left;
+			font-weight: normal;
+			font-size:11px;
+			text-transform:capitalize;
+			&:first-child {
+				padding-left:5px;
+			}
+			&.th-RR {
+				padding-right:20px;
+			}
+		}
+		td {
+			border-bottom: 1px solid $color-light-gray-shade-2;
+			height: 25px;
+			text-align: left;
+			font-size:11px;
+			&.td-RR {
+				padding-right:20px;
+			}
+			&:first-child {
+				padding-left:5px;
+			}
+		}
+	}
+	.careeravg-table {
+		margin: 5px 0;
+		display: table;
+		width: 100%;
+		float: left;
+
+		th {
+			background:$color-light-gray-shade-2;
+			height: 25px;
+			text-align: right;
+			font-weight: normal;
+			font-size:11px;
+			text-transform:capitalize;
+			&:first-child {
+				padding-left:3px;
+				width:17%;
+			}
+			&.th-mat{
+				width:4%;
+			}
+			&.th-zero{
+				width:4%;
+			}
+			&:last-child {
+				padding-right:3px;
+			}
+			&.th-span{
+				width:10.5%;
+			}
+			&.th-five {
+				width:3.5%;
+			}
+			&.th-ten {
+				width:3.5%;
+			}
+		}
+		td {
+			border-bottom: 1px solid $color-light-gray-shade-2;
+			height: 25px;
+			text-align: right;
+			font-size:11px;
+			a {
+				color:$color-black;
+				text-decoration:none;
+				&:hover{
+                    text-decoration: underline;
+           		 }
+			}
+			&:last-child {
+				padding-right:3px;
+			}
+			&:first-child {
+				padding-left:3px;
+			}
+		}
+	}
+	#partnership-sel,#careeravg-sel {
+		li a {
+			color:$color-dark-blue;
+		}
+		li a.active {
+			color:$color-black;
+			text-decoration: none;
+			cursor:default;
+			font-weight:bold;
+		}
+	}
+
+}
+
+#stats-tabs{
+	border-top: 1px solid $color-black-shade-1;
+	border-bottom: 1px solid $color-black-shade-1;
+
+	li{
+		background: $color-white;
+
+		span{
+			color: $color-black!important;
+		}
+		span.selected{
+			color: $color-white!important;
+		}
+		span:hover{
+			background: $color-aqua-shade-3!important;
+			color: $color-white!important;
+		}
+	}
+}

@@ -1,0 +1,48 @@
+/**
+ * Parent scss file to include all scss files (version/resets/module/device)
+ */
+
+// Import version number
+@import "cricinfo/version";
+
+//Colors
+@import "cricinfo/base/colors";
+
+// Import normalize and foundation(framework) files.
+@import "cricinfo/base/normalize";
+@import "foundation/foundation";
+
+// Import Mixins - font
+@import "cricinfo/base/mixin";
+
+// Global Styles
+@import "cricinfo/base/global";
+
+
+// Import Live scorecard application specific files
+
+// Import custom fonts
+//@import "cricinfo/base/fonts";
+
+
+
+// Include module specific files
+@import "cricinfo/modules/scorecard/masthead";                       //Masthead - Score Strip, Score Drop-down, Link Strip, Search
+@import "cricinfo/modules/scorecard/header";                         //Header - Logo, Leaderboard Ad
+@import "cricinfo/modules/scorecard/match-information-social";       //Match Information Strip, Social Share, Desktop Score
+@import "cricinfo/modules/scorecard/tabs";                           //Tabs
+@import "cricinfo/modules/scorecard/summary-scorecard";              //Summary - Match Information, Scorecard
+@import "cricinfo/modules/scorecard/summary-commentary";             //Summary - Commentary
+@import "cricinfo/modules/scorecard/thin-incontent";                 //Thin in-content block
+@import "cricinfo/modules/scorecard/match-coverage";                 //Match Coverage
+@import "cricinfo/modules/scorecard/match-card";                     //Match Card
+@import "cricinfo/modules/scorecard/full-scorecard";
+@import "cricinfo/modules/scorecard/photoes-block";                     //Photoes block
+@import "cricinfo/modules/scorecard/statistics";                     //Stats block
+@import "cricinfo/modules/scorecard/commentary";                     //commentary block
+@import "cricinfo/modules/scorecard/ads";
+@import "cricinfo/modules/scorecard/video-module";
+
+// Include media or devices specific stylesheets
+@import "cricinfo/devices/medium";
+

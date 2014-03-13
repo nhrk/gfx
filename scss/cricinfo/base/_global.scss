@@ -1,0 +1,120 @@
+/*
+ * Global layout related styles only, module related styles should
+ * not be here
+ * warning: Module header are set to h2
+ */
+
+a{
+    color: $color-dark-blue;
+
+    &:hover{
+        color: $color-dark-blue;
+        text-decoration: underline;
+    }
+}
+p{
+    line-height: 1.4;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: bold;
+}
+
+h2{
+    font-size:$h2-font-size;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+strong, b{
+    @include BentonSansBold;
+}
+
+.bold{
+    @include BentonSansBold;
+}
+
+.normal{
+    @include normal-text;
+}
+
+.cb{
+    clear: both;
+}
+
+.remove-border-right{
+    border-right: none!important;
+}
+
+.inline-list li, .inline-list dd{
+    display: inline-block;
+}
+
+hr.secondary-hr{
+    border-color: $color-light-gray-shade-2;
+}
+hr.thick-2{
+    border: 1px solid $color-black-shade-1;
+}
+
+table td{
+    line-height: 16px;
+}
+
+table td, table th{
+    height: 28px;
+    font-size: $switch-font-size-tny;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.float-right {
+    float:right;
+}
+
+.float-left {
+    float:left;
+}
+
+.head{
+    font-family: tahoma, arial;
+    font-weight: bold;
+    padding: 0 5px 0 0;
+}
+
+//for Tabs Contents
+.tabs-content{
+    clear: both;
+}
+
+ul.tabs-content > li {
+    display: none;
+}
+
+ul.tabs-content > li.active {
+    display: block;
+}
+
+.space-top-bottom-10{
+    margin: 10px 0;
+}
+
+.space-top-bottom-5{
+    margin: 5px 0;
+}
+.sponsored-outbrain {
+    border: 1px solid #e8e8e8;
+    margin-top: 8px;
+    padding:5px 9px;
+}
