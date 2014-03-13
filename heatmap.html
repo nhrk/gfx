@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	.espn-gfx{
+		float:left;
+		clear:both;
+		padding-bottom:10px;
+	}
+</style>
+<body>
+	
+	<div id="espn-heatmap" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.heatmap.js"></script>
+	
+	<script>
+
+	var interval = 4000;
+
+
+	function getRandom(){
+
+		var index,
+			ar = [
+				{runs: Math.round((Math.random() * 100)), zone : 1},
+				{runs: Math.round((Math.random() * 100)), zone : 2},
+				{runs: Math.round((Math.random() * 100)), zone : 3},
+				{runs: Math.round((Math.random() * 100)), zone : 4},
+				{runs: Math.round((Math.random() * 100)), zone : 5},
+				{runs: Math.round((Math.random() * 100)), zone : 6},
+				{runs: Math.round((Math.random() * 100)), zone : 7, wickets : 1},
+				{runs: Math.round((Math.random() * 100)), zone : 8},
+				{runs: Math.round((Math.random() * 100)), zone : 9}
+			],
+			c = 0;
+
+		for(var i=0, len = ar.length; i < len; i++){
+			if(ar[i].runs > c){
+				c = ar[i].runs;
+				index = i;
+			}
+		}
+
+		ar[index].max = true;
+		return ar;
+	}
+
+	setInterval(function(){
+		heatmap.draw(getRandom());
+	},interval);
+
+	var heatmap = d3.select("#espn-heatmap")
+	.chart("heatmap",{
+		width : 150
+	});
+
+	heatmap.draw(getRandom());
+
+	</script>
+</body>
