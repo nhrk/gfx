@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	.espn-gfx{
+		float:left;
+		clear:both;
+		padding-bottom:10px;
+	}
+</style>
+<body>
+
+	<div id="espn-dual-axis" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.dual-axis.js"></script>
+
+	<script>
+
+	var interval = 4000;
+
+	function getRandom(){
+		function random(){
+			return Math.round((Math.random() * 25))
+		}
+		return [
+			{runs : random(), balls : random(), spell : '1', overs : '1-5' },
+			{runs : random(), balls : random(), spell : '2', overs : '10-12' },
+			{runs : random(), balls : random(), spell : '3', overs : '21-22' },
+			{runs : random(), balls : random(), spell : '4', overs : '35-39' },
+			{runs : random(), balls : random(), spell : '5', overs : '48-50' }
+		];
+		return Math.floor(Math.random() * 100);
+	}
+
+	setInterval(function(){
+		dualAxis.draw(getRandom());
+	},interval);
+
+	var dualAxis = d3.select("#espn-dual-axis")
+	.chart("dual-axis",{
+		width : 350,
+		height : 150,
+		barSpacing : -13,
+		xLeftPadding : 5,
+		xAxisBottomPadding: -2,
+		colors : ['orange','limegreen']
+	});
+
+	dualAxis.draw(getRandom());
+
+	</script>
+</body>
