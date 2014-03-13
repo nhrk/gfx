@@ -57,6 +57,10 @@ d3.chart("dual-axis", {
 		this.y1 = d3.scale.linear()
 					.range([this.height() - bottomMargin, 0]);
 
+		this.xAxis = d3.svg.axis()
+			.scale(this.x)
+			.orient("bottom");			
+
 		this.yAxisLeft = d3.svg.axis()
 							.scale(this.y0)
 							.ticks(4)
@@ -179,10 +183,8 @@ d3.chart("dual-axis", {
 
 		var chart = this;
 
-		/* Setup x-axis */
-		this.xAxis = d3.svg.axis()
-			.scale(this.x)
-			.orient("bottom")
+		/* Update x-axis ticks */
+		this.xAxis
 			.tickFormat(function(d,i){
 				return (dataSrc[i] && dataSrc[i].overs) || '';
 			});
