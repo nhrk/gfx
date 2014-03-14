@@ -4,3 +4,4 @@
 node_modules/
 bower_modules/
 *.iml
+.sass-cache/
