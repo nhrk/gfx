@@ -28,44 +28,32 @@
 
 	var interval = 4000;
 
-	function getRandom(layers, length, stackLength){
+	function getRandom(dataLength, stackLength){
 
-		/* Fix Object structure and accordingly update transform in the chart */
-		// At the moment, two arrays represent the left and right axis
-
-		layers = layers || 3
 		stackLength = stackLength || 3;
-		length = length || 7;
-		
-		function getArr(){
-			var arr = [],
-				obj;
+		dataLength = dataLength || 7;
 
-			for (var i = 0; i < length; i++) {
-				obj = {"key":"Label"};
-				for(var j = 0; j <= stackLength; j++){
-					obj["stack_" + j] = random();
-				}
+		var data = [],
+			obj,
+			arr;
+
+		for (var i = 0; i < stackLength; i++) {
+			arr = [];
+			for(var j = 0; j < dataLength; j++){
+				obj = {};
+				obj.x = j;
+				obj.y = Math.floor(Math.random() * 10000);
+				obj.label = 'label';
 				arr.push(obj);
 			}
-
-			return arr;
+			data.push(arr);
 		}
-
-		function random(){
-			return Math.floor(Math.random() * 10000);
-		}
-
-		return {
-			layers : layers,
-			data : [getArr(), getArr()]
-		};
-
+		return data;
 	}
 
 	setInterval(function(){
-		stacked.draw(getRandom());
-		stacked2.draw(getRandom(2));
+		stacked.draw([getRandom(),getRandom()]);
+		stacked2.draw([getRandom(7,2),getRandom(7,2)]);
 	},interval);
 
 	var stacked = d3.select("#espn-stacked")
@@ -73,7 +61,7 @@
 		barHeight : 15
 	});
 
-	stacked.draw(getRandom());
+	stacked.draw([getRandom(),getRandom()]);
 
 	var stacked2 = d3.select("#espn-stacked2")
 	.chart("stacked",{
@@ -83,7 +71,7 @@
 		colors:['orange','limegreen']
 	});
 
-	stacked2.draw(getRandom(2));
+	stacked2.draw([getRandom(7,2),getRandom(7,2)]);
 
 	var stacked3 = d3.select("#espn-stacked3")
 	.chart("stacked",{
@@ -94,7 +82,7 @@
 		colors:['steelblue','blue']
 	});
 
-	stacked3.draw(getRandom(1,1));
+	stacked3.draw([getRandom(1,1),getRandom(1,1)]);
 
 	</script>
 </body>

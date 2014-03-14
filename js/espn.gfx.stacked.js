@@ -181,40 +181,28 @@ d3.chart("stacked", {
 
 	transform: function(dataSrc) {
 
-		/* TODO: Needs cleanups! */
-		var data = dataSrc.data,
-			layerCount = dataSrc.layers,
-			stack = d3.layout.stack(),
-			leftStack,
-			rightStack;
+		/* TODO: type checks */
+		var stack = d3.layout.stack(),
+			leftStack = dataSrc[0],
+			rightStack = dataSrc[1],
+			dataSetLength = leftStack[0].length; //assuming both data sets are equal in length
 
-		// Build stack data
-		function buildStackData(index){
-			return d3.range(layerCount).map(function(d) {
-				var arr = [];
-				for (var i = 0, len = data[index].length; i < len; ++i) {
-					arr[i] = {x: i, y: data[index][i]['stack_' + (d+1)], 'label' : data[index][i].key};
-				}
-				return arr;
-			});
-		}
+		leftStack = stack(dataSrc[0]);
 
-		leftStack = stack(buildStackData(0));
-
-		rightStack = stack(buildStackData(1));
+		rightStack = stack(dataSrc[1]);
 
 		//the largest single layer
 		this.yGroupMax = d3.max(leftStack, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
 		//the largest stack
 		this.yStackMax = d3.max(leftStack, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });            
 
-		this.y.domain(d3.range(data[0].length))
+		this.y.domain(d3.range(dataSetLength))
 			.rangeRoundBands([2, this.height()], .08);
 
 		this.x.domain([0, this.yStackMax])
 			.range([0, this.width()]);
 
-		this.color.domain([0, layerCount - 1])
+		this.color.domain([0, dataSrc[0].length - 1])
 			.range(this.colors);
 
 		return {left: leftStack, right: rightStack};
