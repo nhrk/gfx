@@ -28,30 +28,39 @@
 
 	var interval = 4000;
 
-	function getRandom(layers){
+	function getRandom(layers, length, stackLength){
 
 		/* Fix Object structure and accordingly update transform in the chart */
 		// At the moment, two arrays represent the left and right axis
+
+		layers = layers || 3
+		stackLength = stackLength || 3;
+		length = length || 7;
+		
+		function getArr(){
+			var arr = [],
+				obj;
+
+			for (var i = 0; i < length; i++) {
+				obj = {"key":"Label"};
+				for(var j = 0; j <= stackLength; j++){
+					obj["stack_" + j] = random();
+				}
+				arr.push(obj);
+			}
+
+			return arr;
+		}
+
+		function random(){
+			return Math.floor(Math.random() * 10000);
+		}
+
 		return {
-			layers : layers || 3,
-			data : [[
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":5000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":3000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":13000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":11000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":8000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":30778},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":20000}
-			],[
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":5000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":3000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":13000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":11000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":8000},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":30778},
-				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":20000}
-			]]
+			layers : layers,
+			data : [getArr(), getArr()]
 		};
+
 	}
 
 	setInterval(function(){
@@ -85,7 +94,7 @@
 		colors:['steelblue','blue']
 	});
 
-	stacked3.draw(getRandom(1));
+	stacked3.draw(getRandom(1,1));
 
 	</script>
 </body>
