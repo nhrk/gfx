@@ -93,7 +93,9 @@ d3.chart("dual-axis", {
 		}
 
 		function dataBindY0(data) {
+			console.log(data);
 		  return this.selectAll("." + chart.config.runsClass + " rect").data(data,function(d,i){
+		  	console.log(d.spell);
 		  	return d.spell;
 		  });
 		}

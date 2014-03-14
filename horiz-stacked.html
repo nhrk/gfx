@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	.espn-gfx{
+		float:left;
+		padding-bottom:10px;
+	}
+</style>
+<body>
+
+	<div id="espn-stacked" class="espn-gfx"></div>
+	<div id="espn-stacked2" class="espn-gfx"></div>
+	<div id="espn-stacked3" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.stacked.js"></script>
+
+	<script>
+
+	var interval = 4000;
+
+	function getRandom(layers){
+
+		/* Fix Object structure and accordingly update transform in the chart */
+		// At the moment, two arrays represent the left and right axis
+		return {
+			layers : layers || 3,
+			data : [[
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":5000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":3000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":13000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":11000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":8000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":30778},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":20000}
+			],[
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":5000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":3000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":13000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":11000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":8000},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":30778},
+				{"key":"Label", "stack_1":Math.floor(Math.random() * 10000), "stack_2":Math.floor(Math.random() * 10000), "stack_3":20000}
+			]]
+		};
+	}
+
+	setInterval(function(){
+		stacked.draw(getRandom());
+		stacked2.draw(getRandom(2));
+	},interval);
+
+	var stacked = d3.select("#espn-stacked")
+	.chart("stacked",{
+		barHeight : 15
+	});
+
+	stacked.draw(getRandom());
+
+	var stacked2 = d3.select("#espn-stacked2")
+	.chart("stacked",{
+		barHeight : 10,
+		height: 350,
+		width:350,
+		colors:['orange','limegreen']
+	});
+
+	stacked2.draw(getRandom(2));
+
+	var stacked3 = d3.select("#espn-stacked3")
+	.chart("stacked",{
+		barHeight : 13,
+		height: 350,
+		width:350,
+		lineY : -15,
+		colors:['steelblue','blue']
+	});
+
+	stacked3.draw(getRandom(1));
+
+	</script>
+</body>
