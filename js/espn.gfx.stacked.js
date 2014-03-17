@@ -3,10 +3,10 @@ d3.chart("stacked", {
 	config : {
 		space : 2,
 		barSpacing : 27,
-		lineHeight : 20,
-		lineY : -20,
 		colors : ["#aad", "#556"],
-		strokeColor : "rgb(6,120,155)"
+		strokeColor : "rgb(6,120,155)",
+		topMargin : 25,
+		titleHeight : 13
 	},
 
 	initialize: function(options) {
@@ -18,10 +18,10 @@ d3.chart("stacked", {
 			barHeight = options.barHeight || null,
 			hideLine = options.hideLine,
 			hideText = options.hideText,
-			lineHeight = options.lineHeight || this.config.lineHeight,
-			lineY = options.lineY || this.config.lineY,
 			strokeColor = options.strokeColor || this.config.strokeColor,
 			space = options.space || this.config.space;
+
+		this.config.topMargin = options.topMargin || this.config.topMargin;
 
 		this.base = this.base.append("svg");
 
@@ -40,109 +40,124 @@ d3.chart("stacked", {
 
 		this.color = d3.scale.linear();
 
-		/* Left */
+		/* Right */
 
-		this.layer("leftAxis", this.base.append("g"), {
+		this.layer("rightAxis", this.base.append("g").attr('class','right'), {
 			dataBind: dataBind,
 			insert: insert
 		});
 
 		function dataBind(data) {
-			data = data.left
-			var rect = this.selectAll("g")
-						.data(data,function(d,i){
-							return data.indexOf(d);
-						}).enter().append("g")
-						.attr('class',function(d,i){
-							return 'left stack_' + i;
-						})
-						.attr('style',function(d,i){
-							return 'fill:' + chart.color(i);
-						}).selectAll("rect");
-			
-			return rect.data(function (d,i){
-						return d;
-					});
+			data = data.right
+			return this.selectAll("rect")
+						.data(data, function(d,i){
+							return d.stackId;
+						});
 		}
 
 		function insert() {
-			return this.append("rect");
+			return this.insert('rect');
 		}
 
 		function onEnter(){
+
+			this.attr("y", function(d) { return chart.y(d.x); })
+				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
+				.attr('style',function(d,i){
+					return 'fill:' + chart.color(d.layer);
+				})
+				.attr("height", function(){
+					return (barHeight || chart.y.rangeBand() - barSpacing);
+				})
+				.attr("width", function(d) { return chart.x(d.y)/2; });
+
+				// TODO: Move to a new layer? & Improve solution
+				if(!hideLine || !hideText){
+					this.each(function(d,i){
+						var parent = d3.select(this.parentNode),
+							height,
+							text,
+							bbox;
+
+						if(!hideText && d.title){
+							text = parent.append('text')
+								.attr('dx',chart.width()/2)
+								.attr('dy',chart.y(d.x))
+								.text(function(){
+									return d.title;
+								});
+							bbox = text[0][0].getBBox();
+							//place text element in DOM, calculate dimensions and reassign dx dy to center text
+							text.attr('dx',chart.width()/2 - bbox.width/2)
+							text.attr('dy',chart.y(d.x) - bbox.height/2)
+						}
+
+						height = (bbox && bbox.height);
+						height = height ? height: chart.config.titleHeight;
+						barHeight  = (barHeight || chart.y.rangeBand() - barSpacing);
+
+						if(!hideLine){
+							parent.append('line')
+								.style("stroke", strokeColor)
+								.attr('x1',chart.width()/2)
+								.attr('y1',chart.y(d.x) - height)
+								.attr('x2',chart.width()/2)
+								.attr('y2',function(){
+									return (i==0) ? 0 : chart.y(d.x) - (chart.y(1) - chart.y(0) - barHeight);
+								});
+						}
+					});
+				}
+		}
+
+		function onTrans(){
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
 				.attr("height", function(){
 					return (barHeight || chart.y.rangeBand() - barSpacing);
 				})
 				.attr("width", function(d) { return chart.x(d.y)/2; });
-
-				if(!hideLine || !hideText){
-					this.each(function(d,i){
-						var parent = d3.select(this.parentNode)
-						if(!hideLine){
-							parent
-								.append('line')
-								.style("stroke", strokeColor)
-								.attr('x1',chart.width()/2)
-								.attr('y1',chart.y(d.x) + lineY)
-								.attr('x2',chart.width()/2)
-								.attr('y2',chart.y(d.x) - lineHeight + lineY);
-						}
-						if(!hideText){
-							parent.append('text')
-								.attr('dx',chart.width()/2 - 10) //add config and cacl text width to center
-								.attr('dy',chart.y(d.x) - 5)
-								.text(function(){
-									return d.label;
-								});
-						}	
-					});
-				}
 		}
 
-		function onTrans(){
-			chart.base.selectAll('.left rect').each(function(d,i){
-				d3.select(this.parentNode).remove();
-			});
+		function onExit(){
+			/* TODO: Remove nodes */
 		}
 
-		this.layer("leftAxis").on("enter", onEnter);
-		this.layer("leftAxis").on("update:transition", onTrans);
-
-		/* Right */
-
-		this.layer("rightAxis", this.base.append("g"), {
-			dataBind: dataBindRight,
-			insert: insertRight
+		this.layer("rightAxis").on("merge", function(){
+			this.selectAll('rect')
+				.attr("y", function(d) { return chart.y(d.x); })
+				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
+				.attr("height", function(){
+					return (barHeight || chart.y.rangeBand() - barSpacing);
+				})
+				.attr("width", function(d) { return chart.x(d.y)/2; });
 		});
 
-		function dataBindRight(data) {
-			data = data.right
-			var rect = this.selectAll("g")
-						.data(data,function(d,i){
-							return data.indexOf(d);
-						}).enter().append("g")
-						.attr('class',function(d,i){
-							return 'right stack_' + i;
-						})
-						.attr('style',function(d,i){
-							return 'fill:' + chart.color(i);
-						}).selectAll("rect");
-			
-			return rect.data(function (d,i){
-						return d;
-					});
+		this.layer("rightAxis").on("exit", onExit);
+		this.layer("rightAxis").on("enter", onEnter);
+		this.layer("rightAxis").on("update:transition", onTrans);
+
+		/* Left */
+
+		this.layer("leftAxis", this.base.append("g").attr('class','left'), {
+			dataBind: dataBindLeft,
+			insert: insert
+		});
+
+		function dataBindLeft(data) {
+			data = data.left
+			return this.selectAll("rect")
+						.data(data, function(d,i){
+							return d.stackId;
+						});
 		}
 
-		function insertRight() {
-			/* TODO: Improve markup, wrap rect and text in g */
-			return this.append("rect");
-		}
-
-		function onEnterRight(){
+		function onEnterLeft(){
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
+				.attr('style',function(d,i){
+					return 'fill:' + chart.color(d.layer);
+				})
 				.attr("height", function(){
 					return (barHeight || chart.y.rangeBand() - barSpacing);
 				})
@@ -150,14 +165,22 @@ d3.chart("stacked", {
 				
 		}
 
-		function onTransRight(){
-			chart.base.selectAll('.right rect').each(function(d,i){
-				d3.select(this.parentNode).remove();
-			});
+		function onTransLeft(){
+			this.attr("y", function(d) { return chart.y(d.x); })
+				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
+				.attr("height", function(){
+					return (barHeight || chart.y.rangeBand() - barSpacing);
+				})
+				.attr("width", function(d) { return chart.x(d.y)/2; });
 		}
 
-		this.layer("rightAxis").on("enter", onEnterRight);
-		this.layer("rightAxis").on("update:transition", onTransRight);
+		function onExitLeft(){
+			/* TODO: Remove nodes */
+		}
+
+		this.layer("leftAxis").on("enter", onExitLeft);
+		this.layer("leftAxis").on("enter", onEnterLeft);
+		this.layer("leftAxis").on("update:transition", onTransLeft);
 
 	},
 
@@ -184,20 +207,21 @@ d3.chart("stacked", {
 		/* TODO: type checks */
 		var stack = d3.layout.stack(),
 			leftStack = dataSrc[0],
-			rightStack = dataSrc[1],
-			dataSetLength = leftStack[0].length; //assuming both data sets are equal in length
+			rightStack = dataSrc[1];
 
-		leftStack = stack(dataSrc[0]);
+		this.length = leftStack[0].length; //assuming both data sets are equal in length
 
-		rightStack = stack(dataSrc[1]);
+		leftStack = stack(leftStack);
+
+		rightStack = stack(rightStack);
 
 		//the largest single layer
 		this.yGroupMax = d3.max(leftStack, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
 		//the largest stack
 		this.yStackMax = d3.max(leftStack, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });            
 
-		this.y.domain(d3.range(dataSetLength))
-			.rangeRoundBands([2, this.height()], .08);
+		this.y.domain(d3.range(this.length))
+			.rangeRoundBands([this.config.topMargin, this.height()], .08);
 
 		this.x.domain([0, this.yStackMax])
 			.range([0, this.width()]);
@@ -205,7 +229,8 @@ d3.chart("stacked", {
 		this.color.domain([0, dataSrc[0].length - 1])
 			.range(this.colors);
 
-		return {left: leftStack, right: rightStack};
+		// Merge nested Arrays to simplify data binding/updating
+		return {left: d3.merge(leftStack), right: d3.merge(rightStack)};
 	}
 
 });
