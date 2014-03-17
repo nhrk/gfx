@@ -10,16 +10,53 @@
 	html{
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+	body{
+		background:#f2f2f2;
+	}
 	.espn-gfx{
 		float:left;
 		clear:both;
 		padding-bottom:10px;
 	}
+	table {
+		border-collapse: collapse;
+	}
+	td, th {
+		border: solid 1px #dbdbdb;
+		padding: 10px;
+	}
 </style>
 <body>
 
 	<div id="espn-bar" class="espn-gfx"></div>
-	<div id="espn-bar2" class="espn-gfx"></div>
+	<table style="clear:both;">
+		<caption>table</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Control</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Player Name</td>
+				<td><div id="espn-bar2" class="espn-gfx"></div></td>
+			</tr>
+			<tr>
+				<td>Player Name 2</td>
+				<td><div id="espn-bar3" class="espn-gfx"></div></td>
+			</tr>
+			<tr>
+				<td>Player Name 3</td>
+				<td><div id="espn-bar4" class="espn-gfx"></div></td>
+			</tr>
+			<tr>
+				<td>Player Name 4</td>
+				<td><div id="espn-bar5" class="espn-gfx"></div></td>
+			</tr>
+		</tbody>
+	</table>
+	
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.bar.js"></script>
@@ -35,32 +72,55 @@
 	setInterval(function(){
 		bar.draw(getRandom());
 		bar2.draw(getRandom());
+		bar3.draw(getRandom());
 	},interval);
 
 	var bar = d3.select("#espn-bar")
 	.chart("bar",{
-		"title" : "Control Factor %",
-		width : 150,
-		height : 50,
+		title : "Control %",
+		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'font-style': 'italic'},
+		valAttr : {"font-size": "15px", 'font-weight':'bold'},
+		width : 85,
+		height : 28,
 		barHeight : 7,
-		hideLabel: false,
-		barPosY: 21,
-		colors : ["orangered","#eee"]
+		barPosY: 20,
+		textPosY : 13,
+		colors : ["#f8911b","#fff"]
 	});
 
 	bar.draw(getRandom());
 
-	var bar2 = d3.select('#espn-bar2')
-	.chart("bar", {
+	var options = {
 		"title": 'Control',
-		colors: ['#000', '#e5e5e5'],
-		width: 90,
-		height: 75,
-		barHeight: 12,
+		colors: ['#3e3e3e', '#fff'],
+		width: 75,
+		height: 7,
+		barPosY : 0.1,
+		barHeight: 7,
 		hideLabel: true
-	});
+	};
+
+	var bar2 = d3.select('#espn-bar2')
+	.chart("bar",options);
 
 	bar2.draw(getRandom());
+
+	var bar3 = d3.select('#espn-bar3')
+	.chart("bar", options);
+
+	bar3.draw(getRandom());
+
+	options.colors = ['#fc8e1f', '#fff'];
+
+	var bar4 = d3.select('#espn-bar4')
+	.chart("bar", options);
+
+	bar4.draw(getRandom());
+
+	var bar5 = d3.select('#espn-bar5')
+	.chart("bar", options);
+
+	bar5.draw(getRandom());
 
 	</script>
 </body>

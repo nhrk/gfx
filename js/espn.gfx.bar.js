@@ -15,11 +15,6 @@ d3.chart("bar", {
 
 	initialize: function(options) {
 
-		/*
-			TODO: Set min/max dimensions for the graph
-			...
-		 */
-
 		options = options || {};
 
 		var chart = this,
@@ -137,11 +132,13 @@ d3.chart("bar", {
 
 	transform: function(value) {
 
-		/* TODO: type checks */
-		var value = value,
-			diff = 100 - value;
+		value = (typeof value === 'number') ? value : Number(value);
 
-		return [{percent : value, label : '+'}, {percent : diff, label : '-'}];
+		if(isNaN(value)){
+			throw new Error("Invalid data! Input is not a number");
+		}
+
+		return [{percent : value, label : '+'}, {percent : (100 - value), label : '-'}];
 	}
 
 });

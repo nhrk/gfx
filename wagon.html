@@ -10,6 +10,9 @@
 	html{
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+	body{
+		background: #f1f1f1;
+	}
 	.espn-gfx{
 		float:left;
 		clear:both;
@@ -62,7 +65,7 @@
 	var wagon = d3.select("#espn-wagon")
 	.chart("wagon",{
 		diameter : 150,
-		colors : ["limegreen","orangered","white"]
+		colors : ["#7ace5c","#f88f22","white"]
 	});
 
 	wagon.draw(getRandom());
@@ -70,7 +73,7 @@
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
 		diameter : 350,
-		colors : ["limegreen","orangered","white"],
+		colors : ["#7ace5c","#f88f22","white"],
 		labelAttr : {'fill':"#000", "font-size":"16px", "font-weight": "bold"},
 		textPadding : 100,
 		shade : true

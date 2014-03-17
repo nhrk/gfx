@@ -6,6 +6,7 @@ d3.chart("wagon", {
 		padding : 10,
 		textPadding : 35,
 		labelAttr : {'fill':"#000", "font-size":"12px"},
+		maxLabelColor : '#fff',
 		animDuration : 100,
 		shadeColor : '#fff'
 	},
@@ -18,6 +19,7 @@ d3.chart("wagon", {
 			padding = options.padding || chart.config.padding,
 			textPadding = options.textPadding || chart.config.textPadding,
 			labelAttr = options.labelAttr || chart.config.labelAttr,
+			maxLabelColor = options.maxLabelColor || chart.config.maxLabelColor,
 			shade = options.shade,
 			colors = (options.colors && options.colors.length == 3) ? options.colors : chart.config.colors;
 
@@ -65,6 +67,12 @@ d3.chart("wagon", {
 				.attr("dy", ".35em")
 				.style("text-anchor", "middle")
 				.attr(labelAttr)
+				.attr('fill',function(d,i){
+					// override fill color
+					if (d.data.max){
+						return maxLabelColor;
+					}
+				})
 				.text(function(d) { return d.data.runs; });
 		}
 
