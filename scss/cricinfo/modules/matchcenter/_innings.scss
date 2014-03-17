@@ -1,3 +1,51 @@
+$color-mcr-background-1: #3D3D3D;
+$color-mcr-title-1: #B2B2B2;
+$color-mcr-data-1: #fff;
+$color-mcr-data-border: #535353;
+
 .mcr{
     border: 1px solid #3d3d3d;
 }
+
+
+.mcr-inn .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.mcr-inn-sticky{
+    background-color: $color-mcr-background-1;
+    .mcr-inn-current .row{
+        background-color: $color-mcr-data-1;
+    }
+}
+
+.mcr-inn-fours,
+.mcr-inn-sixes,
+.mcr-inn-dots,
+.mcr-inn-rr,
+.mcr-inn-control{
+    background-color: $color-mcr-background-1;
+    p{
+        // font-size: 0.9em;
+        color: $color-mcr-title-1;
+        font-style: italic;
+        margin: 2px 0 2px 0;
+        text-align: center;
+    }
+    .mcr-data{
+        font-style: normal;
+        font-weight: bold;
+        color: $color-mcr-data-1;
+    }
+    border-right: 1px solid $color-mcr-data-border;
+}
+
+.mcr-inn-score{
+    background-color: $color-mcr-data-1;
+    font-size: 16px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+
