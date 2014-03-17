@@ -99,13 +99,13 @@
 
 	setInterval(function(){
 		stacked3.draw([getRandom(1,1),getRandom(1,1)]);
-		// stacked2.draw([getRandom(10,2),getRandom(10,2)]);
+		stacked2.draw([getRandom(10,2),getRandom(10,2)]);
 	},interval);
 
 	var stacked = d3.select("#espn-stacked")
 	.chart("stacked",{
 		topMargin : 27,
-		// hideLine : true
+		key : ['Others','4s',"6s"]
 	});
 
 	var dataset = getLayers(data);
@@ -116,6 +116,8 @@
 	.chart("stacked",{
 		height: 450,
 		width:350,
+		key : true,
+		key : ['Runs','Balls'],
 		colors:['orange','limegreen']
 	});
 
@@ -125,6 +127,7 @@
 	.chart("stacked",{
 		height: 75,
 		width:350,
+		key : true,
 		colors:['steelblue','blue']
 	});
 

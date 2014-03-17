@@ -6,7 +6,15 @@ d3.chart("stacked", {
 		colors : ["#aad", "#556"],
 		strokeColor : "rgb(6,120,155)",
 		topMargin : 25,
-		titleHeight : 13
+		titleHeight : 13,
+		keySquareSize : 13,
+		keySpacing : 60,
+		keyRightMargin : 19,
+		keyBottomMargin : 11,
+		keyClass : 'key',
+		keyYPos : 0,
+		leftStackClass : 'left',
+		rightStackClass : 'right'
 	},
 
 	initialize: function(options) {
@@ -42,7 +50,7 @@ d3.chart("stacked", {
 
 		/* Right */
 
-		this.layer("rightAxis", this.base.append("g").attr('class','right'), {
+		this.layer("rightAxis", this.base.append("g").attr('class',chart.config.rightStackClass), {
 			dataBind: dataBind,
 			insert: insert
 		});
@@ -139,7 +147,7 @@ d3.chart("stacked", {
 
 		/* Left */
 
-		this.layer("leftAxis", this.base.append("g").attr('class','left'), {
+		this.layer("leftAxis", this.base.append("g").attr('class',chart.config.leftStackClass), {
 			dataBind: dataBindLeft,
 			insert: insert
 		});
@@ -182,6 +190,49 @@ d3.chart("stacked", {
 		this.layer("leftAxis").on("enter", onEnterLeft);
 		this.layer("leftAxis").on("update:transition", onTransLeft);
 
+		/* Key */
+
+		if(options.key.length){
+
+			this.layer("key", this.base.append("g").attr('class',chart.config.keyClass), {
+
+				dataBind: function(data) {
+					return this.selectAll("rect")
+						.data(options.key);
+				},
+
+				insert: function() {
+					return this.append("rect");
+				},
+
+				events: {
+					enter: function() {
+						this.attr("x", function(d,i){
+							return (chart.config.keySpacing * i);
+						})
+						.attr("y", chart.config.keyYPos)
+						.attr("height", chart.config.keySquareSize)
+						.attr("width", chart.config.keySquareSize)
+						.style("fill", function(d,i){
+							return chart.color(i);
+						}).each(function(d,i){
+							// Setting values through config, as centering text, requires to calculate its dimensions
+							chart.base.select('.' + chart.config.keyClass).append('text')
+								.attr('dx',function(){
+									return (chart.config.keySpacing * i) + (chart.config.keyRightMargin);
+								})
+								.attr('dy',function(){
+									return chart.config.keyBottomMargin;
+								})
+								.text(function(){
+									return d;
+								});
+						});
+					}
+				}
+			});
+		}
+
 	},
 
 	width: function(newWidth) {
@@ -208,6 +259,8 @@ d3.chart("stacked", {
 		var stack = d3.layout.stack(),
 			leftStack = dataSrc[0],
 			rightStack = dataSrc[1];
+
+		this.layers = leftStack.length;
 
 		this.length = leftStack[0].length; //assuming both data sets are equal in length
 
