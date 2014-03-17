@@ -1,7 +1,10 @@
 $color-mcr-background-1: #3D3D3D;
+$color-mcr-background-2: #F2F2F2;
 $color-mcr-title-1: #B2B2B2;
 $color-mcr-data-1: #fff;
 $color-mcr-data-border: #535353;
+$color-mcr-mugshot-border: #DEDEDE;
+$width-inn-mugshot: 47px;
 
 .mcr{
     border: 1px solid #3d3d3d;
@@ -46,6 +49,37 @@ $color-mcr-data-border: #535353;
     font-size: 16px;
     margin-top: 12px;
     font-weight: bold;
+}
+
+.mcr-inn-batsmen,
+.mcr-inn-bowlers{
+    background-color: $color-mcr-background-2;
+}
+
+ul.mcr-inn-batsman-list,
+ul.mcr-inn-bowler-list{
+    padding: 13px 0;
+}
+
+
+.mcr-inn-player-mugshot{
+    float: left;
+    width: $width-inn-mugshot;
+    a{
+        display: block;
+    }
+    img{
+        display: block;
+        width: $width-inn-mugshot;
+        height: $width-inn-mugshot;
+        border: 2px solid $color-mcr-mugshot-border;
+        -webkit-border-radius: 100%;
+       -moz-border-radius: 100%;
+       -ms-border-radius: 100%;
+       -o-border-radius: 100%;
+        border-radius: 100%;
+    }
+    text-align: center;
 }
 
 
