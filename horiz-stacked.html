@@ -12,7 +12,7 @@
 	}
 	.espn-gfx{
 		float:left;
-		padding-bottom:10px;
+		padding:10px;
 	}
 	body{
 		background: #f2f2f2;
@@ -91,7 +91,8 @@
 				obj = {};
 				obj.x = j;
 				obj.y = Math.floor(Math.random() * 10);
-				obj.title = (i== 0) ? 'Title' : null;
+				obj.title = (i== 0) ? Math.floor(Math.random() * 10) + '(' + Math.floor(Math.random() * 100) + ')' : null;
+				obj.label = (i== 0) ? 'Cook ' + Math.floor(Math.random() * 10) + '(' + Math.floor(Math.random() * 100) + ')' : null;
 				obj.stackId = i + '' + j;
 				obj.layer = i;
 				arr.push(obj);
@@ -102,31 +103,37 @@
 	}
 
 	setInterval(function(){
+		stacked.draw([getRandom(6),getRandom(6)]);
 		stacked3.draw([getRandom(1,1),getRandom(1,1)]);
-		stacked2.draw([getRandom(10,2),getRandom(10,2)]);
+		stacked2.draw([getRandom(10),getRandom(10)]);
 	},interval);
 
 	var stacked = d3.select("#espn-stacked")
 	.chart("stacked",{
-		topMargin : 27,
-		key : ['Others','4s',"6s"],
-		barHeight : 13
+		height: 270,
+		width:175,
+		key : ['Others','4s','6s'],
+		hideLine : true,
+		barHeight : 9,
+		topMargin : 40,
+		space : 1,
+		colors:['#7bcd61','#fd8f20','#fe6321']
 	});
 
 	var dataset = getLayers(data,'i1');
 
-	stacked.draw([dataset.p1,dataset.p2]);
+	stacked.draw([getRandom(6),getRandom(6)]);
 
 	var stacked2 = d3.select("#espn-stacked2")
 	.chart("stacked",{
 		height: 450,
 		width:350,
 		key : true,
-		key : ['Runs','Balls'],
-		colors:['#fd8f20','#7bcd61']
+		hideLabel : true,
+		key : ['Runs','Balls','Others']
 	});
 
-	stacked2.draw([getRandom(10,2),getRandom(10,2)]);
+	stacked2.draw([getRandom(10),getRandom(10)]);
 
 	var stacked3 = d3.select("#espn-stacked3")
 	.chart("stacked",{

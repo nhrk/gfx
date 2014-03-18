@@ -3,18 +3,22 @@ d3.chart("stacked", {
 	config : {
 		space : 2,
 		barSpacing : 27,
-		colors : ["#aad", "#556"],
+		colors : ["#aad", "#8080a2", "#556"],
 		strokeColor : "rgb(6,120,155)",
 		topMargin : 25,
 		titleHeight : 13,
 		keySquareSize : 13,
-		keySpacing : 60,
-		keyRightMargin : 19,
+		keySpacing : 55,
+		keyRightMargin : 16,
 		keyBottomMargin : 11,
 		keyClass : 'key',
 		keyYPos : 0,
 		leftStackClass : 'left',
-		rightStackClass : 'right'
+		rightStackClass : 'right',
+		titleAttr : {"font-weight":"bold","font-size":"1.2em"},
+		labelAttr : {"font-size":"1em"},
+		titleClass : 'title',
+		labelClass : 'label'
 	},
 
 	initialize: function(options) {
@@ -26,10 +30,13 @@ d3.chart("stacked", {
 			barHeight = options.barHeight || null,
 			hideLine = options.hideLine,
 			hideText = options.hideText,
+			hideLabel = options.hideLabel,
 			strokeColor = options.strokeColor || this.config.strokeColor,
+			titleAttr = options.titleAttr || this.config.titleAttr,
+			labelAttr = options.labelAttr || this.config.labelAttr,
 			space = options.space || this.config.space;
 
-		this.config.topMargin = options.topMargin || this.config.topMargin;
+		this.topMargin = options.topMargin || this.config.topMargin;
 
 		this.base = this.base.append("svg");
 
@@ -68,7 +75,7 @@ d3.chart("stacked", {
 		}
 
 		function insert() {
-			return this.insert('rect');
+			return this.append('g').insert('rect');
 		}
 
 		function onEnter(){
@@ -79,12 +86,13 @@ d3.chart("stacked", {
 					return 'fill:' + chart.color(d.layer);
 				})
 				.attr("height", function(){
-					return (barHeight || chart.y.rangeBand() - barSpacing);
+					var height = (barHeight || chart.y.rangeBand() - barSpacing);
+					return (height > 0) ? height : 1;
 				})
 				.attr("width", function(d) { return chart.x(d.y)/2; });
 
 				// TODO: Move to a new layer? & Improve solution
-				if(!hideLine || !hideText){
+				if(!hideLine || !hideText || !hideLabel){
 					this.each(function(d,i){
 						var parent = d3.select(this.parentNode),
 							height,
@@ -93,14 +101,31 @@ d3.chart("stacked", {
 
 						if(!hideText && d.title){
 							text = parent.append('text')
+								.attr('class',chart.config.titleClass)
 								.attr('dx',chart.width()/2)
 								.attr('dy',chart.y(d.x))
+								.attr(titleAttr)
 								.text(function(){
 									return d.title;
 								});
 							bbox = text[0][0].getBBox();
 							//place text element in DOM, calculate dimensions and reassign dx dy to center text
 							text.attr('dx',chart.width()/2 - bbox.width/2)
+							text.attr('dy',chart.y(d.x) - bbox.height/2)
+						}
+
+						if(!hideLabel && d.label){
+							text = parent.append('text')
+								.attr('class',chart.config.labelClass)
+								.attr('dx',chart.width()/2)
+								.attr('text-anchor','end')
+								.attr('dy',chart.y(d.x))
+								.attr(labelAttr)
+								.text(function(){
+									return d.label;
+								});
+							bbox = text[0][0].getBBox();
+							text.attr('dx',chart.width())
 							text.attr('dy',chart.y(d.x) - bbox.height/2)
 						}
 
@@ -126,9 +151,32 @@ d3.chart("stacked", {
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
 				.attr("height", function(){
-					return (barHeight || chart.y.rangeBand() - barSpacing);
+					var height = (barHeight || chart.y.rangeBand() - barSpacing);
+					return (height > 0) ? height : 1;
 				})
 				.attr("width", function(d) { return chart.x(d.y)/2; });
+
+			if(!hideText || !hideLabel){
+
+				this.each(function(d,i){
+					var parent = d3.select(this.parentNode);
+
+					if(!hideLabel && d.label){
+						parent.select('.' + chart.config.labelClass)
+						.text(function(){
+							return d.label;
+						});
+					}
+
+					if(!hideText && d.title){
+						parent.select('.' + chart.config.titleClass)
+						.text(function(){
+							return d.title;
+						});
+					}
+
+				});
+			}
 		}
 
 		function onExit(){
@@ -171,9 +219,29 @@ d3.chart("stacked", {
 					return 'fill:' + chart.color(d.layer);
 				})
 				.attr("height", function(){
-					return (barHeight || chart.y.rangeBand() - barSpacing);
+					var height = (barHeight || chart.y.rangeBand() - barSpacing);
+					return (height > 0) ? height : 1;
 				})
 				.attr("width", function(d) { return chart.x(d.y)/2; });
+
+				if(!hideLabel){
+					this.each(function(d,i){
+							if(d.label){
+								var parent = d3.select(this.parentNode),
+								text = parent.append('text')
+									.attr('dx',0)
+									.attr('class',chart.config.labelClass)
+									.attr('text-anchor','start')
+									.attr('dy',chart.y(d.x))
+									.attr(labelAttr)
+									.text(function(){
+										return d.label;
+									});
+								bbox = text[0][0].getBBox();
+								text.attr('dy',chart.y(d.x) - bbox.height/2)
+							}
+					});
+				}
 				
 		}
 
@@ -181,9 +249,22 @@ d3.chart("stacked", {
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
 				.attr("height", function(){
-					return (barHeight || chart.y.rangeBand() - barSpacing);
+					var height = (barHeight || chart.y.rangeBand() - barSpacing);
+					return (height > 0) ? height : 1;
 				})
 				.attr("width", function(d) { return chart.x(d.y)/2; });
+
+			if(!hideLabel){
+				this.each(function(d,i){
+					if(d.label){
+						d3.select(this.parentNode)
+						.select('.' + chart.config.labelClass)
+						.text(function(){
+							return d.label;
+						});
+					}
+				});
+			}
 		}
 
 		function onExitLeft(){
@@ -196,7 +277,7 @@ d3.chart("stacked", {
 
 		/* Key */
 
-		if(options.key.length){
+		if(options.key && options.key.length){
 
 			this.layer("key", this.base.append("g").attr('class',chart.config.keyClass), {
 
@@ -264,8 +345,6 @@ d3.chart("stacked", {
 			leftStack = dataSrc[0],
 			rightStack = dataSrc[1];
 
-		this.layers = leftStack.length;
-
 		this.length = leftStack[0].length; //assuming both data sets are equal in length
 
 		leftStack = stack(leftStack);
@@ -278,12 +357,12 @@ d3.chart("stacked", {
 		this.yStackMax = d3.max(leftStack, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });            
 
 		this.y.domain(d3.range(this.length))
-			.rangeRoundBands([this.config.topMargin, this.height()], .08);
+			.rangeRoundBands([this.topMargin, this.height()], .08);
 
 		this.x.domain([0, this.yStackMax])
 			.range([0, this.width()]);
 
-		this.color.domain([0, dataSrc[0].length - 1])
+		this.color.domain(d3.range(dataSrc[0].length))
 			.range(this.colors);
 
 		// Merge nested Arrays to simplify data binding/updating
