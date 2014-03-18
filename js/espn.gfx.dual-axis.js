@@ -1,13 +1,12 @@
 d3.chart("dual-axis", {
 
 	config : {
-		barSpacing : 0,
-		barWidth : 13,
+		barSpacing : 10,
 		colors : ['#f9901d','#7dcc5f'],
 		runsClass : 'bars1',
 		ballsClass : 'bars2',
 		xScaleValue : 'overs',
-		bottomMargin : 40,
+		bottomMargin : 45,
 		leftMargin : 20,
 		topMargin : 20,
 		rightMargin : 20,
@@ -28,7 +27,6 @@ d3.chart("dual-axis", {
 
 		var chart = this,
 			colors = options.colors || chart.config.colors,
-			barWidth = options.barWidth || chart.config.barWidth,
 			barSpacing = options.barSpacing || chart.config.barSpacing,
 			leftMargin = options.leftMargin || chart.config.leftMargin,
 			rightMargin = options.rightMargin || chart.config.rightMargin,
@@ -50,7 +48,7 @@ d3.chart("dual-axis", {
 
 		this.wrapper.append("g")
 			.attr("class", "x axis")
-			.attr("transform", "translate(" + (barWidth/2) + "," + (this.height() - bottomMargin - topMargin) + ")");
+			.attr("transform", "translate(" + (leftMargin/2) + "," + (this.height() - bottomMargin - topMargin) + ")");
 
 		this.wrapper.append("g")
 			.attr("class", "y axis axisLeft")
@@ -105,7 +103,7 @@ d3.chart("dual-axis", {
 		function onEnterY0() {
 
 			this.attr("x", function(d) { return chart.x(d[chart.config.xKey]); })
-				.attr("width", barWidth)
+				.attr("width", chart.x.rangeBand()/2 - barSpacing)
 				.attr('style', function(){
 					return 'fill:' + colors[0];
 				})
@@ -139,8 +137,8 @@ d3.chart("dual-axis", {
 		/* 2nd Y axis */
 
 		function onEnterY1(){
-			this.attr("x", function(d) { return chart.x(d[chart.config.xKey]) + chart.x.rangeBand()/2 + barSpacing; })
-				.attr("width", barWidth)
+			this.attr("x", function(d) { return chart.x(d[chart.config.xKey]) + chart.x.rangeBand()/2; })
+				.attr("width", chart.x.rangeBand()/2 - barSpacing)
 				.attr('style', function(){
 					return 'fill:' + colors[1];
 				})
