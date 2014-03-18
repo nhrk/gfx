@@ -4,7 +4,11 @@ $color-mcr-title-1: #B2B2B2;
 $color-mcr-data-1: #fff;
 $color-mcr-data-border: #535353;
 $color-mcr-mugshot-border: #DEDEDE;
+$color-mcr-mugshot-link: #006699;
+$color-mcr-mugshot-link-striker: #ff3366;
+$color-mcr-mugshot-link-nonstriker: #000;
 $width-inn-mugshot: 47px;
+
 
 .mcr{
     border: 1px solid #3d3d3d;
@@ -66,7 +70,20 @@ ul.mcr-inn-bowler-list{
     float: left;
     width: $width-inn-mugshot;
     a{
+        font-size: 13px;
         display: block;
+        color: $color-mcr-mugshot-link;
+        text-transform: uppercase;
+        &:hover{
+            text-decoration: none;
+            color: $color-mcr-mugshot-link-striker;
+        }
+    }
+    a.striker{
+        color: $color-mcr-mugshot-link-striker;
+    }
+    a.nonstriker{
+        color: $color-mcr-mugshot-link-nonstriker;
     }
     img{
         display: block;
