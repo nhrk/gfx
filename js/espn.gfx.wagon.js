@@ -3,12 +3,14 @@ d3.chart("wagon", {
 	config : {
 		colors : ["limegreen","orangered","white"],
 		diameter : 150,
-		padding : 10,
+		padding : 0,
 		textPadding : 35,
 		labelAttr : {'fill':"#000", "font-size":"12px"},
 		maxLabelColor : '#fff',
 		animDuration : 100,
-		shadeColor : '#fff'
+		shadeColor : '#fff',
+		gradientDefId : "gradient",
+		gradientColors : ["#7dcc5f","#74c24c"]
 	},
 
 	initialize: function(options) {
@@ -20,6 +22,7 @@ d3.chart("wagon", {
 			textPadding = options.textPadding || chart.config.textPadding,
 			labelAttr = options.labelAttr || chart.config.labelAttr,
 			maxLabelColor = options.maxLabelColor || chart.config.maxLabelColor,
+			gradientColors = options.gradientColors || chart.config.gradientColors,
 			shade = options.shade,
 			colors = (options.colors && options.colors.length == 3) ? options.colors : chart.config.colors;
 
@@ -40,6 +43,21 @@ d3.chart("wagon", {
 		this.wrapper = this.base.append('g')
 							.attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
+		this.gradient = this.base.append("defs")
+							.append("radialGradient")
+							.attr("id", chart.config.gradientDefId)
+							.attr("r", "65%");
+
+		this.gradient.append("stop")
+			.attr("offset", "0%")
+			.attr("stop-color", chart.config.gradientColors[0])
+			.attr("stop-opacity", "1");
+
+		this.gradient.append("stop")
+			.attr("offset", "100%")
+			.attr("stop-color", chart.config.gradientColors[1])
+			.attr("stop-opacity", "1");
+
 		if(shade){
 			this.base.append('circle')
 				.attr('cx', diameter / 2)
@@ -54,8 +72,9 @@ d3.chart("wagon", {
 			.attr("d", chart.arc)
 			.style("stroke", colors[2])
 			.style("fill", function(d,i){
-				return d.data.max ? colors[1] : colors[0];
+				return d.data.max ? colors[1] : "url(#gradient)";
 			});
+
 			this.append("text")
 				.attr("transform", function(d) {
 					var c = chart.arc.centroid(d),
@@ -68,10 +87,8 @@ d3.chart("wagon", {
 				.style("text-anchor", "middle")
 				.attr(labelAttr)
 				.attr('fill',function(d,i){
-					// override fill color
-					if (d.data.max){
-						return maxLabelColor;
-					}
+					// override fill color for the max zone
+					return (d.data.max) ? maxLabelColor : labelAttr.fill;
 				})
 				.text(function(d) { return d.data.runs; });
 		}
@@ -80,10 +97,15 @@ d3.chart("wagon", {
 			this.each(function(d,i){
 				var g = d3.select(this);
 				g.select('text')
-					.text(function() { return d.data.runs; });
-				g.select('path').style("fill", function(){
-					return d.data.max ? colors[1] : colors[0];
-				});
+					.text(function() { return d.data.runs; })
+					.attr('fill',function(d,i){
+						// override fill color
+						return (d.data.max) ? maxLabelColor : labelAttr.fill;
+					});
+				g.select('path')
+					.style("fill", function(d,i){
+						return d.data.max ? colors[1] : "url(#gradient)";
+					});
 			});
 		}
 

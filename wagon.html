@@ -23,6 +23,7 @@
 	
 	<div id="espn-wagon" class="espn-gfx"></div>
 	<div id="espn-wagon2" class="espn-gfx"></div>
+	<div id="espn-wagon3" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.wagon.js"></script>
@@ -60,11 +61,13 @@
 	setInterval(function(){
 		wagon.draw(getRandom());
 		wagon2.draw(getRandom());
+		wagon3.draw(getRandom());
 	},interval);
 
 	var wagon = d3.select("#espn-wagon")
 	.chart("wagon",{
-		diameter : 150,
+		diameter : 85,
+		textPadding : 15,
 		colors : ["#7ace5c","#f88f22","white"]
 	});
 
@@ -72,14 +75,24 @@
 
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
-		diameter : 350,
+		diameter : 225,
 		colors : ["#7ace5c","#f88f22","white"],
 		labelAttr : {'fill':"#000", "font-size":"16px", "font-weight": "bold"},
-		textPadding : 100,
+		textPadding : 60,
 		shade : true
 	});
 
 	wagon2.draw(getRandom());
+
+	var wagon3 = d3.select("#espn-wagon3")
+	.chart("wagon",{
+		diameter : 150,
+		colors : ["#7ace5c","#f88f22","white"],
+		labelAttr : {'fill':"#000", "font-size":"14px", "font-weight": "bold"},
+		textPadding : 30
+	});
+
+	wagon3.draw(getRandom());
 
 	</script>
 </body>
