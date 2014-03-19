@@ -1446,20 +1446,22 @@ ul.close-of-play li { margin-left: 10px; }
 
 .vid-module-1280 { margin-bottom: 10px; }
 
-.mcr { border: 1px solid #3d3d3d; }
+.mcr { border: 1px solid #333333; }
 
 .mcr-inn .row { margin-left: 0; margin-right: 0; }
 
 .mcr-inn-sticky { background-color: #3d3d3d; }
 .mcr-inn-sticky .mcr-inn-current .row { background-color: white; }
 
-.mcr-inn-fours, .mcr-inn-sixes, .mcr-inn-dots, .mcr-inn-rr, .mcr-inn-control { background-color: #3d3d3d; border-right: 1px solid #535353; }
-.mcr-inn-fours p, .mcr-inn-sixes p, .mcr-inn-dots p, .mcr-inn-rr p, .mcr-inn-control p { color: #b2b2b2; font-style: italic; margin: 2px 0 2px 0; text-align: center; }
-.mcr-inn-fours .mcr-data, .mcr-inn-sixes .mcr-data, .mcr-inn-dots .mcr-data, .mcr-inn-rr .mcr-data, .mcr-inn-control .mcr-data { font-style: normal; font-weight: bold; color: white; }
+.mcr-inn-fours, .mcr-inn-sixes, .mcr-inn-dots, .mcr-inn-rr, .mcr-inn-control, .mcr-inn-pname, .mcr-inn-bowler-meta { background-color: #3d3d3d; border-left: 1px solid #535353; }
+.mcr-inn-fours p, .mcr-inn-sixes p, .mcr-inn-dots p, .mcr-inn-rr p, .mcr-inn-control p, .mcr-inn-pname p, .mcr-inn-bowler-meta p { color: #b2b2b2; font-style: italic; margin: 2px 0 2px 0; text-align: center; }
+.mcr-inn-fours .mcr-data, .mcr-inn-sixes .mcr-data, .mcr-inn-dots .mcr-data, .mcr-inn-rr .mcr-data, .mcr-inn-control .mcr-data, .mcr-inn-pname .mcr-data, .mcr-inn-bowler-meta .mcr-data { font-style: normal; font-weight: bold; color: white; }
 
 .mcr-inn-score { background-color: white; font-size: 16px; margin-top: 12px; font-weight: bold; }
 
 .mcr-inn-batsmen, .mcr-inn-bowlers { background-color: #f2f2f2; }
+
+ul.mcr-inn-batsman-filters, ul.mcr-inn-bowler-filters { margin-bottom: 0; }
 
 ul.mcr-inn-batsman-list, ul.mcr-inn-bowler-list { padding: 13px 0; }
 
@@ -1469,6 +1471,38 @@ ul.mcr-inn-batsman-list, ul.mcr-inn-bowler-list { padding: 13px 0; }
 .mcr-inn-player-mugshot a.striker { color: #ff3366; }
 .mcr-inn-player-mugshot a.nonstriker { color: black; }
 .mcr-inn-player-mugshot img { display: block; width: 47px; height: 47px; border: 2px solid #dedede; -webkit-border-radius: 100%; -moz-border-radius: 100%; -ms-border-radius: 100%; -o-border-radius: 100%; border-radius: 100%; }
+
+.mcr-inn-current-players { border-right: 1px solid #666666; padding-left: 0; padding-right: 0; }
+.mcr-inn-current-players .mcr-inn-current-player { padding-left: 0; padding-right: 0; border-right: 1px solid white; }
+.mcr-inn-current-players .mcr-inn-current-player:nth-child(even) { border-right: none; }
+.mcr-inn-current-players .mcr-inn-current-player:nth-child(even) .mcr-inn-player-graphic { border-right: none; }
+.mcr-inn-current-players .mcr-inn-fours, .mcr-inn-current-players .mcr-inn-sixes, .mcr-inn-current-players .mcr-inn-bowler-meta { padding-left: 0; padding-right: 0; }
+
+.mcr-inn-player-text { background-color: #3d3d3d; }
+
+.mcr-inn-pname { border-left: none; margin: 6px 0px 6px 0px; font-size: 19px; font-weight: bold; text-align: left; }
+.mcr-inn-pname .mcr-data { text-align: left; }
+.mcr-inn-pname span.name { margin-right: 12px; }
+.mcr-inn-pname span.balls { font-size: 16px; }
+
+.mcr-inn-current-bowlers .mcr-inn-player-text, .mcr-inn-current-bowlers .mcr-inn-pname, .mcr-inn-current-bowlers .mcr-inn-bowler-meta { background-color: #3399cc; }
+.mcr-inn-current-bowlers .mcr-inn-player-text p, .mcr-inn-current-bowlers .mcr-inn-pname p, .mcr-inn-current-bowlers .mcr-inn-bowler-meta p { color: #ccccff; }
+.mcr-inn-current-bowlers .mcr-inn-player-text .mcr-data, .mcr-inn-current-bowlers .mcr-inn-pname .mcr-data, .mcr-inn-current-bowlers .mcr-inn-bowler-meta .mcr-data { color: white; }
+.mcr-inn-current-bowlers .mcr-inn-bowler-meta { border-left: 1px solid #66ccff; }
+.mcr-inn-current-bowlers .mcr-inn-player-graphic { border-right: 1px solid #006699; }
+
+.pref-shot p { font-size: 14px; color: black; font-style: italic; font-weight: bold; margin-bottom: 0px; }
+.pref-shot .shotname { font-style: normal; text-transform: uppercase; }
+
+.mcr-inn-player-graphic { color: #3399cc; border-right: 1px solid #333333; font-size: 13px; padding: 14px 7px 14px 7px; }
+.mcr-inn-player-graphic .mcr-spell-brief { margin-bottom: 10px; font-style: italic; }
+.mcr-inn-player-graphic .mcr-spell-brief span.wicket { font-weight: bold; }
+.mcr-inn-player-graphic .mcr-spell-detailed span.wicket { color: #ff3366; }
+
+.mcr-inn-partnerships { padding-left: 0; padding-right: 0; }
+.mcr-inn-partnerships h4 { text-transform: uppercase; font-size: 14px; background-color: #666666; color: white; text-align: center; margin-top: 0; padding: 5px 0px; }
+
+.mcr-inn-bowlers { border-top: 1px solid #006699; }
 
 /*
 * Styles for 1024 screen size

@@ -1,19 +1,30 @@
-$color-mcr-background-1: #3D3D3D;
-$color-mcr-background-2: #F2F2F2;
-$color-mcr-title-1: #B2B2B2;
-$color-mcr-data-1: #fff;
-$color-mcr-data-border: #535353;
-$color-mcr-mugshot-border: #DEDEDE;
-$color-mcr-mugshot-link: #006699;
-$color-mcr-mugshot-link-striker: #ff3366;
-$color-mcr-mugshot-link-nonstriker: #000;
+// Often used colors on Match Center
+$color-mcr-white: #fff;
+$color-mcr-light-gray: #F2F2F2;
+$color-mcr-light-gray-1: #DEDEDE;
+$color-mcr-dark-gray: #3D3D3D;
+$color-mcr-dark-gray-1: #B2B2B2;
+$color-mcr-dark-gray-2: #535353;
+$color-mcr-dark-gray-3: #666666;
+$color-mcr-dark-gray-4: #333333;
+$color-mcr-light-red: #ff3366;
+$color-mcr-blue-green-dark: #3399cc;
+$color-mcr-blue-green-light: #66ccff;
+$color-mcr-light-blue: #ccccff;
+$color-mcr-dark-blue: #006699;
+$color-mcr-black: #000;
+// Width of the mugshot
 $width-inn-mugshot: 47px;
 
-
-.mcr{
-    border: 1px solid #3d3d3d;
+// Overide default padding on columns
+@mixin remove-lr-padding{
+    padding-left: 0;
+    padding-right: 0;
 }
 
+.mcr{
+    border: 1px solid $color-mcr-dark-gray-4;
+}
 
 .mcr-inn .row{
     margin-left: 0;
@@ -21,9 +32,9 @@ $width-inn-mugshot: 47px;
 }
 
 .mcr-inn-sticky{
-    background-color: $color-mcr-background-1;
+    background-color: $color-mcr-dark-gray;
     .mcr-inn-current .row{
-        background-color: $color-mcr-data-1;
+        background-color: $color-mcr-white;
     }
 }
 
@@ -31,11 +42,13 @@ $width-inn-mugshot: 47px;
 .mcr-inn-sixes,
 .mcr-inn-dots,
 .mcr-inn-rr,
-.mcr-inn-control{
-    background-color: $color-mcr-background-1;
+.mcr-inn-control,
+.mcr-inn-pname,
+.mcr-inn-bowler-meta{
+    background-color: $color-mcr-dark-gray;
     p{
         // font-size: 0.9em;
-        color: $color-mcr-title-1;
+        color: $color-mcr-dark-gray-1;
         font-style: italic;
         margin: 2px 0 2px 0;
         text-align: center;
@@ -43,13 +56,13 @@ $width-inn-mugshot: 47px;
     .mcr-data{
         font-style: normal;
         font-weight: bold;
-        color: $color-mcr-data-1;
+        color: $color-mcr-white;
     }
-    border-right: 1px solid $color-mcr-data-border;
+    border-left: 1px solid $color-mcr-dark-gray-2;
 }
 
 .mcr-inn-score{
-    background-color: $color-mcr-data-1;
+    background-color: $color-mcr-white;
     font-size: 16px;
     margin-top: 12px;
     font-weight: bold;
@@ -57,7 +70,12 @@ $width-inn-mugshot: 47px;
 
 .mcr-inn-batsmen,
 .mcr-inn-bowlers{
-    background-color: $color-mcr-background-2;
+    background-color: $color-mcr-light-gray;
+}
+
+ul.mcr-inn-batsman-filters,
+ul.mcr-inn-bowler-filters{
+    margin-bottom: 0;
 }
 
 ul.mcr-inn-batsman-list,
@@ -72,24 +90,24 @@ ul.mcr-inn-bowler-list{
     a{
         font-size: 13px;
         display: block;
-        color: $color-mcr-mugshot-link;
+        color: $color-mcr-dark-blue;
         text-transform: uppercase;
         &:hover{
             text-decoration: none;
-            color: $color-mcr-mugshot-link-striker;
+            color: $color-mcr-light-red;
         }
     }
     a.striker{
-        color: $color-mcr-mugshot-link-striker;
+        color: $color-mcr-light-red;
     }
     a.nonstriker{
-        color: $color-mcr-mugshot-link-nonstriker;
+        color: $color-mcr-black;
     }
     img{
         display: block;
         width: $width-inn-mugshot;
         height: $width-inn-mugshot;
-        border: 2px solid $color-mcr-mugshot-border;
+        border: 2px solid $color-mcr-light-gray-1;
         -webkit-border-radius: 100%;
        -moz-border-radius: 100%;
        -ms-border-radius: 100%;
@@ -99,4 +117,117 @@ ul.mcr-inn-bowler-list{
     text-align: center;
 }
 
+.mcr-inn-current-players{
+    border-right: 1px solid $color-mcr-dark-gray-3;
+    @include remove-lr-padding;
+    .mcr-inn-current-player{
+        @include remove-lr-padding;
+        border-right: 1px solid $color-mcr-white;
+    }
+    .mcr-inn-current-player:nth-child(even){
+        // Second batsman/bowler should not have a right border
+        .mcr-inn-player-graphic{
+            border-right: none;
+        }
+        // Second player should not have a right border
+        border-right: none;
+    }
+    .mcr-inn-fours,
+    .mcr-inn-sixes,
+    .mcr-inn-bowler-meta{
+        @include remove-lr-padding;
+    }
+}
+
+.mcr-inn-player-text{
+    background-color: $color-mcr-dark-gray;
+}
+
+.mcr-inn-pname{
+    border-left: none;
+    margin: 6px 0px 6px 0px;
+    .mcr-data{
+        text-align: left;
+    }
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
+    span.name{
+        margin-right: 12px;
+    }
+    span.balls{
+        font-size: 16px;
+    }
+}
+
+.mcr-inn-current-bowlers{
+    .mcr-inn-player-text,
+    .mcr-inn-pname,
+    .mcr-inn-bowler-meta{
+        background-color: $color-mcr-blue-green-dark;
+        p{
+            color: $color-mcr-light-blue;
+        }
+        .mcr-data{
+            color: $color-mcr-white;
+        }
+    }
+    .mcr-inn-bowler-meta{
+        border-left: 1px solid $color-mcr-blue-green-light;
+    }
+    .mcr-inn-player-graphic{
+        border-right: 1px solid $color-mcr-dark-blue;
+    }
+}
+
+
+.pref-shot{
+    p{
+        font-size: 14px;
+        color: $color-mcr-black;
+        font-style: italic;
+        font-weight: bold;
+        margin-bottom: 0px;
+    }
+    .shotname{
+        font-style: normal;
+        text-transform: uppercase;
+    }
+}
+
+.mcr-inn-player-graphic{
+    color: $color-mcr-blue-green-dark;
+    border-right: 1px solid $color-mcr-dark-gray-4;
+    font-size: 13px;
+    padding: 14px 7px 14px 7px;
+    .mcr-spell-brief{
+        margin-bottom: 10px;
+        font-style: italic;
+        span.wicket{
+            font-weight: bold;
+        }
+    }
+    .mcr-spell-detailed{
+        span.wicket{
+            color: $color-mcr-light-red;
+        }
+    }
+}
+
+.mcr-inn-partnerships{
+    @include remove-lr-padding;
+    h4{
+        text-transform: uppercase;
+        font-size: 14px;
+        background-color: $color-mcr-dark-gray-3;
+        color: $color-mcr-white;
+        text-align: center;
+        margin-top: 0;
+        padding: 5px 0px;
+    }
+}
+
+.mcr-inn-bowlers{
+    border-top: 1px solid $color-mcr-dark-blue;
+}
 
