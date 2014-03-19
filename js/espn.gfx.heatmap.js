@@ -2,7 +2,7 @@ d3.chart("heatmap", {
 
 	config : {
 		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'style': 'color:white'},
-		gridSize : 3,
+		gridSize : 5,
 		strokeColor : '#fff',
 		textColor : '#fff',
 		wicketColor : "#f9901d",
@@ -15,7 +15,8 @@ d3.chart("heatmap", {
 
 		var chart = this,
 			labelAttr = options.labelAttr || this.config.labelAttr,
-			squareSize,
+			squareHeight,
+			squareWidth,
 			textColor = options.textColor || chart.config.textColor;
 			wicketColor = options.wicketColor || chart.config.wicketColor;
 			colorRange = options.colorRange || this.config.colorRange;;
@@ -24,9 +25,11 @@ d3.chart("heatmap", {
 
 		this.width(options.width || 200);
 
-		this.height(this.width());
+		this.height(options.height || 400);
 
-		squareSize = this.width() / chart.config.gridSize;
+		squareHeight = this.height() / 5;
+
+		squareWidth = this.width() / 5;
 
 		this.base
 			.attr("class", "chart");
@@ -46,19 +49,19 @@ d3.chart("heatmap", {
 
 		  this.attr("x", function(d,i){
 		  			var pos = getGridPosition(i+1);
-		  			return (pos.column * squareSize) - squareSize;
+		  			return (pos.column * squareWidth) - squareWidth;
 		  		})
 				.attr("y", function(d,i) { 
 					var pos = getGridPosition(i+1);
-					return (pos.row * squareSize) - squareSize;
+					return (pos.row * squareHeight) - squareHeight;
 				})
 				.attr('stroke', chart.config.strokeColor)
 				.attr('fill',function(d,i){
 					return (d.wickets) ? wicketColor : chart.colorScale(d.runs);
 				})
-				.attr("width", squareSize)
+				.attr("width", squareWidth)
 				.attr("height", function(d,i){
-						return squareSize;
+						return squareHeight;
 				})
 				.each(function(d,i){
 					var bbox,
@@ -78,11 +81,11 @@ d3.chart("heatmap", {
 					// Re set x y pos based on text elements dimensions
 					text.attr('dx',function(){
 							var pos = getGridPosition(i+1);
-							return (pos.column * squareSize) - (squareSize/2) - (bbox.width/2);
+							return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
 						})
 						.attr('dy',function() { 
 							var pos = getGridPosition(i+1);
-							return (pos.row * squareSize) - (squareSize/2) + (bbox.height/2);
+							return (pos.row * squareHeight) - (squareHeight/2) + (bbox.height/2);
 						});
 				});
 		}
@@ -99,7 +102,7 @@ d3.chart("heatmap", {
 
 					text.attr('dx',function(){
 						var pos = getGridPosition(i+1);
-						return (pos.column * squareSize) - (squareSize/2) - (bbox.width/2);
+						return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
 					});
 
 				d3.select(this).attr('fill',function(d,i){

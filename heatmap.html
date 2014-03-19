@@ -41,7 +41,23 @@
 				{runs: Math.round((Math.random() * 100)), zone : 6},
 				{runs: Math.round((Math.random() * 100)), zone : 7},
 				{runs: Math.round((Math.random() * 100)), zone : 8},
-				{runs: Math.round((Math.random() * 100)), zone : 9}
+				{runs: Math.round((Math.random() * 100)), zone : 9},
+				{runs: Math.round((Math.random() * 100)), zone : 10},
+				{runs: Math.round((Math.random() * 100)), zone : 11},
+				{runs: Math.round((Math.random() * 100)), zone : 12},
+				{runs: Math.round((Math.random() * 100)), zone : 13},
+				{runs: Math.round((Math.random() * 100)), zone : 14},
+				{runs: Math.round((Math.random() * 100)), zone : 15},
+				{runs: Math.round((Math.random() * 100)), zone : 16},
+				{runs: Math.round((Math.random() * 100)), zone : 17},
+				{runs: Math.round((Math.random() * 100)), zone : 18},
+				{runs: Math.round((Math.random() * 100)), zone : 19},
+				{runs: Math.round((Math.random() * 100)), zone : 20},
+				{runs: Math.round((Math.random() * 100)), zone : 21},
+				{runs: Math.round((Math.random() * 100)), zone : 22},
+				{runs: Math.round((Math.random() * 100)), zone : 23},
+				{runs: Math.round((Math.random() * 100)), zone : 24},
+				{runs: Math.round((Math.random() * 100)), zone : 25}
 			],
 			c = 0;
 
@@ -66,14 +82,16 @@
 
 	var heatmap = d3.select("#espn-heatmap")
 	.chart("heatmap",{
-		width : 85
+		width : 120,
+		height : 180
 	});
 
 	heatmap.draw(getRandom());
 
 	var heatmap2 = d3.select("#espn-heatmap2")
 	.chart("heatmap",{
-		width : 125
+		width : 200,
+		height : 400
 	});
 
 	heatmap2.draw(getRandom());
