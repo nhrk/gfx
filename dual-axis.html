@@ -10,10 +10,23 @@
 	html{
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+	body{
+		background: #f0f7ff;
+	}
 	.espn-gfx{
 		float:left;
 		clear:both;
 		padding-bottom:10px;
+	}
+	.espn-gfx .axis path, .espn-gfx .axis line {
+		fill: none;
+		stroke: #ced2d3;
+	}
+	.espn-gfx .axisRight line{
+		stroke : #7dcc5f;
+	}
+	.espn-gfx .axisLeft line{
+		stroke : #f9901d;
 	}
 </style>
 <body>
@@ -47,12 +60,11 @@
 
 	var dualAxis = d3.select("#espn-dual-axis")
 	.chart("dual-axis",{
-		width : 350,
-		height : 150,
-		barSpacing : -13,
-		xLeftPadding : 5,
-		xAxisBottomPadding: -2,
-		colors : ['orange','limegreen']
+		width : 290,
+		height : 185,
+		keyLeftMargin : 180, /*(use to move the location of legends/keys)*/
+		chartTitle : 'SPELLS (in overs)',
+		key : ['Runs','Balls']
 	});
 
 	dualAxis.draw(getRandom());

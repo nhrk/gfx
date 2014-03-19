@@ -19,6 +19,7 @@
 <body>
 	
 	<div id="espn-heatmap" class="espn-gfx"></div>
+	<div id="espn-heatmap2" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.heatmap.js"></script>
@@ -38,7 +39,7 @@
 				{runs: Math.round((Math.random() * 100)), zone : 4},
 				{runs: Math.round((Math.random() * 100)), zone : 5},
 				{runs: Math.round((Math.random() * 100)), zone : 6},
-				{runs: Math.round((Math.random() * 100)), zone : 7, wickets : 1},
+				{runs: Math.round((Math.random() * 100)), zone : 7},
 				{runs: Math.round((Math.random() * 100)), zone : 8},
 				{runs: Math.round((Math.random() * 100)), zone : 9}
 			],
@@ -52,19 +53,30 @@
 		}
 
 		ar[index].max = true;
+
+		var random = Math.floor(Math.random() * 8) + 1;
+		ar[random].wickets = 1;
 		return ar;
 	}
 
 	setInterval(function(){
 		heatmap.draw(getRandom());
+		heatmap2.draw(getRandom());
 	},interval);
 
 	var heatmap = d3.select("#espn-heatmap")
 	.chart("heatmap",{
-		width : 150
+		width : 85
 	});
 
 	heatmap.draw(getRandom());
+
+	var heatmap2 = d3.select("#espn-heatmap2")
+	.chart("heatmap",{
+		width : 125
+	});
+
+	heatmap2.draw(getRandom());
 
 	</script>
 </body>

@@ -5,7 +5,8 @@ d3.chart("heatmap", {
 		gridSize : 3,
 		strokeColor : '#fff',
 		textColor : '#fff',
-		colorRange : ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]
+		wicketColor : "#f9901d",
+		colorRange : ["#9bdf81","#85de63", "#7dcc5f","#62af44"]
 	},
 
 	initialize: function(options) {
@@ -16,6 +17,7 @@ d3.chart("heatmap", {
 			labelAttr = options.labelAttr || this.config.labelAttr,
 			squareSize,
 			textColor = options.textColor || chart.config.textColor;
+			wicketColor = options.wicketColor || chart.config.wicketColor;
 			colorRange = options.colorRange || this.config.colorRange;;
 
 		this.base = this.base.append("svg");
@@ -51,42 +53,57 @@ d3.chart("heatmap", {
 					return (pos.row * squareSize) - squareSize;
 				})
 				.attr('stroke', chart.config.strokeColor)
-				.attr('style',function(d,i){
-					return 'fill:' + chart.colorScale(d.runs);
+				.attr('fill',function(d,i){
+					return (d.wickets) ? wicketColor : chart.colorScale(d.runs);
 				})
 				.attr("width", squareSize)
 				.attr("height", function(d,i){
 						return squareSize;
 				})
 				.each(function(d,i){
-					d3.select(this.parentNode)
-					.append('text')
-						/* TODO: Center text by calculating getBBox */
-						.text(function(){
-							return d.runs + (d.wickets ? '(' + d.wickets + ')' : '');
-						})
-						.attr('fill',textColor)
-						.attr(labelAttr)
-						.attr('dx',function(){
+					var bbox,
+						text = d3.select(this.parentNode)
+								.append('text')
+									.text(function(){
+										return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+									})
+									.attr('fill',textColor)
+									.attr(labelAttr)
+									.attr('dx',0)
+									.attr('dy',0)
+									.attr("text-anchor",'start');
+					
+					bbox = text[0][0].getBBox();
+
+					// Re set x y pos based on text elements dimensions
+					text.attr('dx',function(){
 							var pos = getGridPosition(i+1);
-							return (pos.column * squareSize) - (squareSize/2);
+							return (pos.column * squareSize) - (squareSize/2) - (bbox.width/2);
 						})
 						.attr('dy',function() { 
 							var pos = getGridPosition(i+1);
-							return (pos.row * squareSize) - (squareSize/2);
-						})
-						.attr("text-anchor",'start');
+							return (pos.row * squareSize) - (squareSize/2) + (bbox.height/2);
+						});
 				});
 		}
 
 		function onTrans() {
 			this.each(function(d,i){
-				d3.select(this.parentNode).select('text')
-					.text(function() {
-						return d.runs + (d.wickets ? '(' + d.wickets + ')' : '');
+				var bbox,
+					text = d3.select(this.parentNode).select('text')
+						.text(function() {
+							return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+						});
+
+					bbox = text[0][0].getBBox();
+
+					text.attr('dx',function(){
+						var pos = getGridPosition(i+1);
+						return (pos.column * squareSize) - (squareSize/2) - (bbox.width/2);
 					});
-				d3.select(this).attr("style", function(){
-					return 'fill:' + chart.colorScale(d.runs);
+
+				d3.select(this).attr('fill',function(d,i){
+					return (d.wickets) ? wicketColor : chart.colorScale(d.runs);
 				});
 			});
 		}
