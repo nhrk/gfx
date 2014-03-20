@@ -42,6 +42,7 @@ d3.chart("stacked", {
 			labelAttr = options.labelAttr || this.config.labelAttr,
 			valueAttr = options.valueAttr || this.config.valueAttr,
 			labelPos = options.labelPos,
+			varyColors = options.varyColors,
 			space = options.space || this.config.space;
 
 		this.topMargin = options.topMargin || this.config.topMargin;
@@ -90,8 +91,11 @@ d3.chart("stacked", {
 
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
-				.attr('style',function(d,i){
-					return 'fill:' + chart.color(d.layer);
+				.attr('fill',function(d,i){
+					if(varyColors){
+						return chart.colors[0];
+					}
+					return chart.color(d.layer);
 				})
 				.attr("height", getBarHeight)
 				.attr("width", function(d) { return chart.x(d.y)/2; });
@@ -238,8 +242,11 @@ d3.chart("stacked", {
 		function onEnterLeft(){
 			this.attr("y", function(d) { return chart.y(d.x); })
 				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
-				.attr('style',function(d,i){
-					return 'fill:' + chart.color(d.layer);
+				.attr('fill',function(d,i){
+					if(varyColors){
+						return chart.colors[1];
+					}
+					return chart.color(d.layer);
 				})
 				.attr("height", getBarHeight)
 				.attr("width", function(d) { return chart.x(d.y)/2; });
