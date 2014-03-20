@@ -23,7 +23,6 @@ $width-inn-mugshot: 46px;
 }
 
 .mcr{
-    font-family: BentonSans,Arial,sans-serif;
     border: 1px solid $color-mcr-dark-gray-4;
 }
 
@@ -39,23 +38,16 @@ $width-inn-mugshot: 46px;
     }
 }
 
-.mcr-inn-all{
-    margin-top:9px;
-    select{
-        margin: 0;
-    }
-}
-
 .mcr-inn-fours,
 .mcr-inn-sixes,
 .mcr-inn-dots,
 .mcr-inn-rr,
 .mcr-inn-control,
-//.mcr-inn-pname,
+.mcr-inn-pname,
 .mcr-inn-bowler-meta{
     background-color: $color-mcr-dark-gray;
     p{
-        font-size: 11px;
+        // font-size: 0.9em;
         color: $color-mcr-dark-gray-1;
         font-style: italic;
         margin: 2px 0 2px 0;
@@ -63,20 +55,17 @@ $width-inn-mugshot: 46px;
     }
     .mcr-data{
         font-style: normal;
-        font-family: BentonSansBold, Arial, sans-serif;
+        font-weight: bold;
         color: $color-mcr-white;
     }
     border-left: 1px solid $color-mcr-dark-gray-2;
-    padding: 3px 0px 3px 0px;
 }
 
 .mcr-inn-score{
-    @include remove-lr-padding;
-    padding-left: 6px;
-    font-family: BentonSansBold, Arial, sans-serif;
     background-color: $color-mcr-white;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 12px;
+    font-weight: bold;
 }
 
 .mcr-inn-batsmen,
@@ -100,8 +89,7 @@ ul.mcr-inn-bowler-list{
     width: $width-inn-mugshot;
     margin: 0px 4px;
     a{
-        font-size: 10px;
-        font-family: BentonSansBold, Arial, sans-serif;
+        font-size: 13px;
         display: block;
         color: $color-mcr-dark-blue;
         text-transform: uppercase;
@@ -149,9 +137,6 @@ ul.mcr-inn-bowler-list{
     .mcr-inn-sixes,
     .mcr-inn-bowler-meta{
         @include remove-lr-padding;
-        p{
-            @include remove-lr-padding;
-        }
     }
 }
 
@@ -161,22 +146,18 @@ ul.mcr-inn-bowler-list{
 
 .mcr-inn-pname{
     border-left: none;
-    margin: 10px 0px 10px 0px;
-    font-family: BentonSansBold, Arial, sans-serif;
+    margin: 6px 0px 6px 0px;
     .mcr-data{
-        font-style: normal;
-        color: $color-mcr-white;
         text-align: left;
-        margin-bottom: 0px;
     }
-    font-size: 16px;
+    font-size: 19px;
+    font-weight: bold;
     text-align: left;
     span.name{
         margin-right: 12px;
     }
     span.balls{
-        font-family: BentonSans, Arial, sans-serif;
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
@@ -203,22 +184,19 @@ ul.mcr-inn-bowler-list{
 
 .pref-shot{
     p{
-        font-family: BentonSansMedium,Arial,sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         color: $color-mcr-black;
         font-style: italic;
+        font-weight: bold;
         margin-bottom: 0px;
     }
     .shotname{
-        font-family: BentonSansBold,Arial,sans-serif;
         font-style: normal;
         text-transform: uppercase;
-        font-size: 14px;
     }
 }
 
 .mcr-inn-player-graphic{
-    font-family: BentonSansMedium,Arial,sans-serif;
     color: $color-mcr-blue-green-dark;
     border-right: 1px solid $color-mcr-dark-gray-4;
     font-size: 13px;
@@ -227,8 +205,7 @@ ul.mcr-inn-bowler-list{
         margin-bottom: 10px;
         font-style: italic;
         span.wicket{
-            font-style: normal;
-            font-family: BentonSansBold,Arial,sans-serif;
+            font-weight: bold;
         }
     }
     .mcr-spell-detailed{
@@ -241,14 +218,13 @@ ul.mcr-inn-bowler-list{
 .mcr-inn-partnerships{
     @include remove-lr-padding;
     h4{
-        font-family: BentonSansBold,Arial,sans-serif;
-        font-size: 11px;
         text-transform: uppercase;
+        font-size: 14px;
         background-color: $color-mcr-dark-gray-3;
         color: $color-mcr-white;
         text-align: center;
         margin-top: 0;
-        padding: 6px 0px;
+        padding: 5px 0px;
     }
 }
 
