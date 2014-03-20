@@ -5,12 +5,14 @@ d3.chart("heatmap", {
 	config : {
 		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'style': 'color:white'},
 		gridSize : 5,
-		strokeColor : '#fff',
+		strokeColor : '#f1bd7f',
 		textColor : '#fff',
 		wicketColor : "#f9901d",
 		keyClass : 'key',
 		margin : 15,
+		keyTextAttr : {'fill': '#3e9fca', 'font-size': '0.9em'},
 		key : [['WO','O','S','L','WL'],['Y','F','G','S','SG']],
+		keyTextClass : 'keyTextClass', 
 		colorRange : ["#ffcb92","#ffe401", "#fdcd00","#ffba00","#ff9c00","#ff7204","#fe5400","#fd3100","#f40000"]
 	},
 
@@ -27,6 +29,7 @@ d3.chart("heatmap", {
 			textColor = options.textColor || chart.config.textColor,
 			wicketColor = options.wicketColor || chart.config.wicketColor,
 			colorRange = options.colorRange || this.config.colorRange,
+			keyTextAttr = options.keyTextAttr || this.config.keyTextAttr,
 			margin = 0;
 
 		this.base = this.base.append("svg");
@@ -42,7 +45,7 @@ d3.chart("heatmap", {
 		if(legends){
 			margin = chart.config.margin;
 			this.wrapper.attr('transform','translate(' + (margin*2) + ',' + (margin*2) + ')')
-			this.renderLegends(margin);
+			this.renderLegends(margin, keyTextAttr);
 		}
 
 		squareHeight = (this.height() - margin) / chart.config.gridSize;
@@ -171,7 +174,7 @@ d3.chart("heatmap", {
 
 	},
 
-	renderLegends: function(margin){
+	renderLegends: function(margin, keyTextAttr){
 		var chart = this,
 			key = chart.config.key,
 			keyText;
@@ -179,7 +182,9 @@ d3.chart("heatmap", {
 		/* TODO: set x y based on actual text dimensions */
 		for(var i = 0, len = key.length; i < len; i++){
 			for(var j = 0, jLen = key[i].length; j < jLen; j++){
-				keyText = chart.key.append('text').text(key[i][j]);
+				keyText = chart.key.append('text').text(key[i][j])
+							.attr('class',chart.config.keyTextClass)
+							.attr(keyTextAttr);
 				if( i === 0 ){
 					keyText.attr('dy', 10)
 						.attr('dx', (margin*1.2) + (j * chart.width()/chart.config.gridSize))

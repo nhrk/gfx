@@ -10,6 +10,9 @@
 	html{
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+	body{
+		background: #f0f7ff;
+	}
 	.espn-gfx{
 		float:left;
 		clear:both;
@@ -91,8 +94,9 @@
 
 	var heatmap2 = d3.select("#espn-heatmap2")
 	.chart("heatmap",{
-		width : 120,
-		height : 180
+		width : 140,
+		height : 190,
+		legends : true
 	});
 
 	heatmap2.draw(getRandom());
