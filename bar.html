@@ -73,6 +73,7 @@
 		bar.draw(getRandom());
 		bar2.draw(getRandom());
 		bar3.draw(getRandom());
+		bar5.draw(getRandom());
 	},interval);
 
 	var bar = d3.select("#espn-bar")
@@ -85,7 +86,8 @@
 		barHeight : 7,
 		barPosY: 20,
 		textPosY : 13,
-		colors : ["#f8911b","#fff"]
+		colorMeter : true,
+		marker : true
 	});
 
 	bar.draw(getRandom());
@@ -97,6 +99,7 @@
 		height: 7,
 		barPosY : 0.1,
 		barHeight: 7,
+		colorMeter : true,
 		hideLabel: true
 	};
 
