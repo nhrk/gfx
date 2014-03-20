@@ -9,8 +9,8 @@ d3.chart("wagon", {
 		maxLabelColor : '#fff',
 		animDuration : 100,
 		shadeColor : '#fff',
-		gradientDefId : "gradient",
-		gradientColors : ["#7dcc5f","#74c24c"]
+		gradientDefId : "radialGradient",
+		gradientColors : ["#7dcc5f","#74c24c"],
 	},
 
 	initialize: function(options) {
@@ -72,7 +72,7 @@ d3.chart("wagon", {
 			.attr("d", chart.arc)
 			.style("stroke", colors[2])
 			.style("fill", function(d,i){
-				return d.data.max ? colors[1] : "url(#gradient)";
+				return d.data.max ? colors[1] : "url(#" + chart.config.gradientDefId + ")";
 			});
 
 			this.append("text")
@@ -103,8 +103,10 @@ d3.chart("wagon", {
 						return (d.data.max) ? maxLabelColor : labelAttr.fill;
 					});
 				g.select('path')
+					.style("fill",chart.config.gradientColors[0])
+					.transition(chart.config.animDuration)
 					.style("fill", function(d,i){
-						return d.data.max ? colors[1] : "url(#gradient)";
+						return d.data.max ? colors[1] : "url(#" + chart.config.gradientDefId + ")";
 					});
 			});
 		}
