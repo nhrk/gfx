@@ -1462,6 +1462,8 @@ ul.close-of-play li { margin-left: 10px; }
 
 .mcr-inn-score { padding-left: 0; padding-right: 0; padding-left: 6px; font-family: BentonSansBold, Arial, sans-serif; background-color: white; font-size: 18px; margin-top: 12px; }
 
+.mcr-inn-control { padding: 4px 8px 8px 8px; }
+
 .mcr-inn-batsmen, .mcr-inn-bowlers { background-color: #f2f2f2; }
 
 ul.mcr-inn-batsman-filters, ul.mcr-inn-bowler-filters { margin-bottom: 0; }
@@ -1495,6 +1497,7 @@ ul.mcr-inn-batsman-list, ul.mcr-inn-bowler-list { padding: 13px 0; }
 .mcr-inn-current-bowlers .mcr-inn-bowler-meta { border-left: 1px solid #66ccff; }
 .mcr-inn-current-bowlers .mcr-inn-player-graphic { border-right: 1px solid #006699; }
 
+.pref-shot { margin-top: 20px; }
 .pref-shot p { font-family: BentonSansMedium,Arial,sans-serif; font-size: 12px; color: black; font-style: italic; margin-bottom: 0px; }
 .pref-shot .shotname { font-family: BentonSansBold,Arial,sans-serif; font-style: normal; text-transform: uppercase; font-size: 14px; }
 

@@ -79,6 +79,10 @@ $width-inn-mugshot: 46px;
     margin-top: 12px;
 }
 
+.mcr-inn-control{
+    padding: 4px 8px 8px 8px;
+}
+
 .mcr-inn-batsmen,
 .mcr-inn-bowlers{
     background-color: $color-mcr-light-gray;
@@ -202,6 +206,7 @@ ul.mcr-inn-bowler-list{
 
 
 .pref-shot{
+    margin-top: 20px;
     p{
         font-family: BentonSansMedium,Arial,sans-serif;
         font-size: 12px;

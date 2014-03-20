@@ -55,8 +55,6 @@
                                 <p class="mcr-data">4.60</p>
                             </div>
                             <div class="mcr-inn-control large-8 columns">
-                                <p>Control %</p>
-                                <p class="mcr-data">47.82</p>
                             </div>
                         </div>
                     </div>
@@ -173,6 +171,9 @@
 
                                 <div class="row mcr-inn-player-graphic">
                                     <div class="large-10 columns">
+                                        <div class="mcr-inn-bat1-control">
+
+                                        </div>
                                         <div class="pref-shot">
                                             <p>Pref shot</p>
                                             <p class="shotname">SQ Drv</p>
@@ -208,6 +209,9 @@
 
                                 <div class="row mcr-inn-player-graphic">
                                     <div class="large-10 columns">
+                                        <div class="mcr-inn-bat2-control">
+
+                                        </div>
                                         <div class="pref-shot">
                                             <p>Pref shot</p>
                                             <p class="shotname">SQ Drv</p>
@@ -393,27 +397,89 @@
     <script src="./bower_components/d3/d3.js"></script>
     <script src="./bower_components/d3.chart/d3.chart.js"></script>
     <script src="./js/espn.gfx.wagon.js"></script>
+    <script src="./js/espn.gfx.bar.js"></script>
     <script src="./js/espn.gfx.random.js"></script>
 
     <script>
+
+        var fontBentonBold = 'BentonSansBold, Arial, sans-serif';
+
         var options = {
-            diameter : 85,
-            textPadding : 15,
-            colors : ["#7ace5c","#f88f22","white"]
+            wagon: {
+                diameter: 85,
+                textPadding: 15,
+                colors: ["#7ace5c", "#f88f22", "white"]
+            },
+            bar: {
+                title: "Control %",
+                labelAttr: {
+                    "font-size": "12px",
+                    'text-anchor': 'start',
+                    'font-style': 'italic'
+                },
+                valAttr: {
+                    "font-size": "14px",
+                    "font-family" : fontBentonBold
+                },
+                width: 90,
+                height: 28,
+                barHeight: 7,
+                barPosY: 20,
+                textPosY: 13,
+                colorMeter: true,
+                marker: true
+            },
+            control: {
+                title: "Control %",
+                labelAttr: {
+                    "font-size": "11px",
+                    'text-anchor': 'start',
+                    'font-style': 'italic',
+                    'fill': '#B2B2B2'
+                },
+                valAttr: {
+                    "font-size": "11px",
+                    "font-family" : fontBentonBold,
+                    'fill': 'white'
+                },
+                width: 90,
+                height: 28,
+                barHeight: 7,
+                barPosY: 20,
+                textPosY: 13,
+                colorMeter: true,
+                marker: true
+            }
         };
 
         var interval = 4000;
 
-        var wagon1 = d3.select(".mcr-inn-bat1-wagon").chart("wagon", options);
-        var wagon2 = d3.select(".mcr-inn-bat2-wagon").chart("wagon", options);
+        var wagon1 = d3.select(".mcr-inn-bat1-wagon")
+                        .chart("wagon", options.wagon);
+        var wagon2 = d3.select(".mcr-inn-bat2-wagon")
+                        .chart("wagon", options.wagon);
 
-        wagon1.draw(espn.gfx.random.wagon());
-        wagon2.draw(espn.gfx.random.wagon());
+        var bar1 = d3.select(".mcr-inn-bat1-control")
+                        .chart("bar", options.bar);
 
-        setInterval(function(){
+        var bar2 = d3.select(".mcr-inn-bat2-control")
+                        .chart("bar", options.bar);
+
+        var bar3 = d3.select(".mcr-inn-control")
+                        .chart("bar", options.control);
+
+
+        function drawInningCardCharts(){
             wagon1.draw(espn.gfx.random.wagon());
             wagon2.draw(espn.gfx.random.wagon());
-        },interval);
+            bar1.draw(espn.gfx.random.bar());
+            bar2.draw(espn.gfx.random.bar());
+            bar3.draw(espn.gfx.random.bar());
+        }
+
+        drawInningCardCharts();
+
+        setInterval(drawInningCardCharts,interval);
 
     </script>
 </body>

@@ -39,6 +39,11 @@ espn.gfx.random = (function(){
         return ar;
     };
 
+
+    api.bar = function(){
+        return Math.floor(Math.random() * 100);
+    };
+
     return api;
 
 }());
