@@ -1,3 +1,5 @@
+"use strict";
+
 d3.chart("heatmap", {
 
 	config : {
@@ -6,7 +8,10 @@ d3.chart("heatmap", {
 		strokeColor : '#fff',
 		textColor : '#fff',
 		wicketColor : "#f9901d",
-		colorRange : ["#9bdf81","#85de63", "#7dcc5f","#62af44"]
+		keyClass : 'key',
+		margin : 15,
+		key : [['WO','O','S','L','WL'],['Y','F','G','S','SG']],
+		colorRange : ["#ffcb92","#ffe401", "#fdcd00","#ffba00","#ff9c00","#ff7204","#fe5400","#fd3100","#f40000"]
 	},
 
 	initialize: function(options) {
@@ -17,22 +22,32 @@ d3.chart("heatmap", {
 			labelAttr = options.labelAttr || this.config.labelAttr,
 			squareHeight,
 			squareWidth,
-			textColor = options.textColor || chart.config.textColor;
-			wicketColor = options.wicketColor || chart.config.wicketColor;
-			colorRange = options.colorRange || this.config.colorRange;;
+			legends = options.legends,
+			showValues = options.showValues,
+			textColor = options.textColor || chart.config.textColor,
+			wicketColor = options.wicketColor || chart.config.wicketColor,
+			colorRange = options.colorRange || this.config.colorRange,
+			margin = 0;
 
 		this.base = this.base.append("svg");
+
+		this.wrapper = this.base.append('g');
+
+		this.key = this.base.append('g').attr('class',chart.config.keyClass);
 
 		this.width(options.width || 200);
 
 		this.height(options.height || 400);
 
-		squareHeight = this.height() / 5;
+		if(legends){
+			margin = chart.config.margin;
+			this.wrapper.attr('transform','translate(' + (margin*2) + ',' + (margin*2) + ')')
+			this.renderLegends(margin);
+		}
 
-		squareWidth = this.width() / 5;
+		squareHeight = (this.height() - margin) / chart.config.gridSize;
 
-		this.base
-			.attr("class", "chart");
+		squareWidth = (this.width() - margin) / chart.config.gridSize;
 
 		this.colorScale = d3.scale.quantile()
 			.domain([0, 7, 100])
@@ -49,66 +64,92 @@ d3.chart("heatmap", {
 
 		  this.attr("x", function(d,i){
 		  			var pos = getGridPosition(i+1);
-		  			return (pos.column * squareWidth) - squareWidth;
+		  			return (pos.column * squareWidth) - squareWidth - margin;
 		  		})
 				.attr("y", function(d,i) { 
 					var pos = getGridPosition(i+1);
-					return (pos.row * squareHeight) - squareHeight;
+					return (pos.row * squareHeight) - squareHeight - margin;
 				})
 				.attr('stroke', chart.config.strokeColor)
-				.attr('fill',function(d,i){
-					return (d.wickets) ? wicketColor : chart.colorScale(d.runs);
-				})
+				.attr('fill', getColorCode)
 				.attr("width", squareWidth)
 				.attr("height", function(d,i){
 						return squareHeight;
-				})
-				.each(function(d,i){
-					var bbox,
-						text = d3.select(this.parentNode)
-								.append('text')
-									.text(function(){
-										return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
-									})
-									.attr('fill',textColor)
-									.attr(labelAttr)
-									.attr('dx',0)
-									.attr('dy',0)
-									.attr("text-anchor",'start');
-					
-					bbox = text[0][0].getBBox();
-
-					// Re set x y pos based on text elements dimensions
-					text.attr('dx',function(){
-							var pos = getGridPosition(i+1);
-							return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
-						})
-						.attr('dy',function() { 
-							var pos = getGridPosition(i+1);
-							return (pos.row * squareHeight) - (squareHeight/2) + (bbox.height/2);
-						});
 				});
+
+				if(showValues){
+					this.each(function(d,i){
+						var bbox,
+							text = d3.select(this.parentNode)
+									.append('text')
+										.text(function(){
+											return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+										})
+										.attr('fill',textColor)
+										.attr(labelAttr)
+										.attr('dx',0)
+										.attr('dy',0)
+										.attr("text-anchor",'start');
+						
+						bbox = text[0][0].getBBox();
+
+						// Re set x y pos based on text elements dimensions
+						text.attr('dx',function(){
+								var pos = getGridPosition(i+1);
+								return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
+							})
+							.attr('dy',function() { 
+								var pos = getGridPosition(i+1);
+								return (pos.row * squareHeight) - (squareHeight/2) + (bbox.height/2);
+							});
+					});
+				}
 		}
 
 		function onTrans() {
-			this.each(function(d,i){
-				var bbox,
-					text = d3.select(this.parentNode).select('text')
-						.text(function() {
-							return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
-						});
 
-					bbox = text[0][0].getBBox();
+			if(showValues){
+				this.each(function(d,i){
 
-					text.attr('dx',function(){
-						var pos = getGridPosition(i+1);
-						return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
+					var bbox,
+						text = d3.select(this.parentNode).select('text')
+							.text(function() {
+								return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+							});
+
+						bbox = text[0][0].getBBox();
+
+						text.attr('dx',function(){
+							var pos = getGridPosition(i+1);
+							return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
 					});
-
-				d3.select(this).attr('fill',function(d,i){
-					return (d.wickets) ? wicketColor : chart.colorScale(d.runs);
 				});
-			});
+			}
+
+			this.attr('fill',getColorCode);
+		}
+
+		function getColorCode(d,i){
+			// Switched from the colorScale to manual computation based on request
+			var code;
+			if(d.runs >= 0 && d.runs < 10){
+				code = 0;
+			}else if(d.runs >= 10 && d.runs < 20){
+				code = 1;
+			}else if(d.runs >= 20 && d.runs < 30){
+				code = 3;
+			}else if(d.runs >= 30 && d.runs < 40){
+				code = 4;
+			}else if(d.runs >= 40 && d.runs < 60){
+				code = 5;
+			}else if(d.runs >= 60 && d.runs < 70){
+				code = 6;
+			}else if(d.runs >= 70 && d.runs < 85){
+				code = 7;
+			}else if(d.runs >= 85){
+				code = 8;
+			}
+			return colorRange[code];
 		}
 
 		function dataBind(data) {
@@ -120,7 +161,7 @@ d3.chart("heatmap", {
 		  return this.append('g').insert("rect", "line");
 		}
 
-		var zones = this.layer("zones", this.base, {
+		var zones = this.layer("zones", this.wrapper, {
 		  dataBind: dataBind,
 		  insert: insert
 		});
@@ -128,6 +169,27 @@ d3.chart("heatmap", {
 		zones.on("enter", onEnter);
 		zones.on("update:transition", onTrans);
 
+	},
+
+	renderLegends: function(margin){
+		var chart = this,
+			key = chart.config.key,
+			keyText;
+
+		/* TODO: set x y based on actual text dimensions */
+		for(var i = 0, len = key.length; i < len; i++){
+			for(var j = 0, jLen = key[i].length; j < jLen; j++){
+				keyText = chart.key.append('text').text(key[i][j]);
+				if( i === 0 ){
+					keyText.attr('dy', 10)
+						.attr('dx', (margin*1.2) + (j * chart.width()/chart.config.gridSize))
+						.attr('text-anchor','middle');
+				}else if(i === 1){
+					keyText.attr('dy', (margin*1.5) + (j * chart.height()/chart.config.gridSize))
+						.attr('dx', 1);
+				}					
+			}
+		}
 	},
 
 	width: function(newWidth) {
