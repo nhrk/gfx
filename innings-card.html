@@ -178,7 +178,7 @@
                                             <p class="shotname">SQ Drv</p>
                                         </div>
                                     </div>
-                                    <div class="large-10 columns">
+                                    <div class="large-10 columns mcr-inn-bat1-wagon">
 
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                             <p class="shotname">SQ Drv</p>
                                         </div>
                                     </div>
-                                    <div class="large-10 columns">
+                                    <div class="large-10 columns mcr-inn-bat2-wagon">
 
                                     </div>
                                 </div>
@@ -390,5 +390,31 @@
         <!-- END RHS Content -->
     </div>
 </div>
+    <script src="./bower_components/d3/d3.js"></script>
+    <script src="./bower_components/d3.chart/d3.chart.js"></script>
+    <script src="./js/espn.gfx.wagon.js"></script>
+    <script src="./js/espn.gfx.random.js"></script>
+
+    <script>
+        var options = {
+            diameter : 85,
+            textPadding : 15,
+            colors : ["#7ace5c","#f88f22","white"]
+        };
+
+        var interval = 4000;
+
+        var wagon1 = d3.select(".mcr-inn-bat1-wagon").chart("wagon", options);
+        var wagon2 = d3.select(".mcr-inn-bat2-wagon").chart("wagon", options);
+
+        wagon1.draw(espn.gfx.random.wagon());
+        wagon2.draw(espn.gfx.random.wagon());
+
+        setInterval(function(){
+            wagon1.draw(espn.gfx.random.wagon());
+            wagon2.draw(espn.gfx.random.wagon());
+        },interval);
+
+    </script>
 </body>
 </html>
