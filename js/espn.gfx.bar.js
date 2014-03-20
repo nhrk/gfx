@@ -14,7 +14,8 @@ d3.chart("bar", {
 		linearGradient : 'linearGradient',
 		labelAttr : {"font-size": "14px", 'text-anchor': 'start', 'font-style': 'italic'},
 		valAttr : {"font-size": "16px", 'font-weight':'bold'},
-		markerClass : 'markerClass'
+		markerClass : 'markerClass',
+		gradientId : 'linearGradient'
 	},
 
 	initialize: function(options) {
@@ -149,7 +150,7 @@ d3.chart("bar", {
 
 		this.gradient = this.base.append("svg:defs")
 			.append("svg:linearGradient")
-			.attr("id", "gradient")
+			.attr("id", this.config.gradientId)
 			.attr("x1", "0%")
 			.attr("y1", "0%")
 			.attr("x2", "100%")
@@ -176,7 +177,7 @@ d3.chart("bar", {
 			.attr('y',this.barPosY)
 			.attr('height',this.barHeight)
 			.attr('width',this.width())
-			.style("fill", "url(#gradient)");
+			.style("fill", "url(#" + this.config.gradientId + ")");
 	},
 
 	width: function(newWidth) {
