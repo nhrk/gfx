@@ -3,10 +3,10 @@
 d3.chart("heatmap", {
 
 	config : {
-		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'style': 'color:white'},
+		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'style': 'color:#000'},
 		gridSize : 5,
 		strokeColor : '#f1bd7f',
-		textColor : '#fff',
+		textColor : '#000',
 		wicketColor : "#f9901d",
 		keyClass : 'key',
 		margin : 15,
@@ -86,7 +86,7 @@ d3.chart("heatmap", {
 							text = d3.select(this.parentNode)
 									.append('text')
 										.text(function(){
-											return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+											return d.wickets ? d.wickets + 'w' : '';
 										})
 										.attr('fill',textColor)
 										.attr(labelAttr)
@@ -99,11 +99,11 @@ d3.chart("heatmap", {
 						// Re set x y pos based on text elements dimensions
 						text.attr('dx',function(){
 								var pos = getGridPosition(i+1);
-								return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
+								return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2) - margin;
 							})
 							.attr('dy',function() { 
 								var pos = getGridPosition(i+1);
-								return (pos.row * squareHeight) - (squareHeight/2) + (bbox.height/2);
+								return (pos.row * squareHeight) - (squareHeight/2) + (bbox.height/2) - margin;
 							});
 					});
 				}
@@ -117,14 +117,14 @@ d3.chart("heatmap", {
 					var bbox,
 						text = d3.select(this.parentNode).select('text')
 							.text(function() {
-								return d.runs + (d.wickets ? '(' + d.wickets + 'w)' : '');
+								return d.wickets ? d.wickets + 'w' : '';
 							});
 
 						bbox = text[0][0].getBBox();
 
 						text.attr('dx',function(){
 							var pos = getGridPosition(i+1);
-							return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2);
+							return (pos.column * squareWidth) - (squareWidth/2) - (bbox.width/2) - margin;
 					});
 				});
 			}
