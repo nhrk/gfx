@@ -338,7 +338,7 @@
                             <h4>Partnerships</h4>
                         </div>
                         <div class="row mcr-inn-partnerships-chart">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -457,7 +457,7 @@
             },
             partnerships: {
                 height: 300,
-                width:175,
+                width:170,
                 hideLine : true,
                 barHeight : 10,
                 colors:['#7bcd61','#fd8f20'],
@@ -471,7 +471,7 @@
                 }
             },
             heatmap: {
-                width: 100,
+                width: 90,
                 height: 125,
                 legends: true,
                 keyTextAttr: {
@@ -496,7 +496,7 @@
 
         var bar3 = d3.select(".mcr-inn-control")
                         .chart("bar", options.control);
-        
+
         var partnerships = d3.select(".mcr-inn-partnerships-chart")
                         .chart("stacked",options.partnerships);
 
@@ -504,7 +504,7 @@
                         .chart("heatmap", options.heatmap);
 
         var heatmap2 = d3.select(".mcr-inn-bowler2-heatmap")
-                        .chart("heatmap", options.heatmap);                        
+                        .chart("heatmap", options.heatmap);
 
         function drawInningCardCharts(){
             wagon1.draw(espn.gfx.random.wagon());
@@ -522,17 +522,5 @@
         setInterval(drawInningCardCharts,interval);
 
     </script>
-    <style type="text/css">
-        svg {
-            shape-rendering: crispEdges;
-        }
-
-        svg path{
-            shape-rendering: auto;
-        }
-        svg circle{
-            shape-rendering: auto;
-        }
-    </style>
 </body>
 </html>

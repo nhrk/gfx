@@ -42,6 +42,9 @@
 @import "cricinfo/modules/scorecard/commentary";                     //commentary block
 @import "cricinfo/modules/scorecard/ads";
 @import "cricinfo/modules/scorecard/video-module";
+
+// Include match center specific styles
+@import "cricinfo/modules/matchcenter/svg";
 @import "cricinfo/modules/matchcenter/innings";
 
 // Include media or devices specific stylesheets

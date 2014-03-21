@@ -1,0 +1,12 @@
+/* Styles related for SVG rendering */
+
+svg {
+    shape-rendering: crispEdges;
+}
+
+svg path{
+    shape-rendering: auto;
+}
+svg circle{
+    shape-rendering: auto;
+}

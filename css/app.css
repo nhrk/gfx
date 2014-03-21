@@ -1446,6 +1446,13 @@ ul.close-of-play li { margin-left: 10px; }
 
 .vid-module-1280 { margin-bottom: 10px; }
 
+/* Styles related for SVG rendering */
+svg { shape-rendering: crispEdges; }
+
+svg path { shape-rendering: auto; }
+
+svg circle { shape-rendering: auto; }
+
 .mcr { font-family: BentonSans,Arial,sans-serif; border: 1px solid #333333; }
 
 .mcr-inn .row { margin-left: 0; margin-right: 0; }
@@ -1506,8 +1513,17 @@ ul.mcr-inn-batsman-list, ul.mcr-inn-bowler-list { padding: 13px 0; }
 .mcr-inn-player-graphic .mcr-spell-brief span.wicket { font-style: normal; font-family: BentonSansBold,Arial,sans-serif; }
 .mcr-inn-player-graphic .mcr-spell-detailed span.wicket { color: #ff3366; }
 
+.mcr-inn-bowler1-heatmap, .mcr-inn-bowler2-heatmap { padding-left: 0; padding-right: 0; }
+
+/*
+.mcr-inn-bat1-wagon,
+.mcr-inn-bat2-wagon{ padding-left: 1em; padding-right: 0;
+}
+*/
 .mcr-inn-partnerships { padding-left: 0; padding-right: 0; }
 .mcr-inn-partnerships h4 { font-family: BentonSansBold,Arial,sans-serif; font-size: 11px; text-transform: uppercase; background-color: #666666; color: white; text-align: center; margin-top: 0; padding: 6px 0px; }
+
+.mcr-inn-partnerships-chart { padding-left: 8px; }
 
 .mcr-inn-bowlers { border-top: 1px solid #006699; }
 

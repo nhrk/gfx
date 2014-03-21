@@ -243,6 +243,20 @@ ul.mcr-inn-bowler-list{
     }
 }
 
+
+.mcr-inn-bowler1-heatmap,
+.mcr-inn-bowler2-heatmap{
+    @include remove-lr-padding;
+}
+
+/*
+.mcr-inn-bat1-wagon,
+.mcr-inn-bat2-wagon{
+    padding-left: 1em;
+    padding-right: 0;
+}
+*/
+
 .mcr-inn-partnerships{
     @include remove-lr-padding;
     h4{
@@ -255,6 +269,10 @@ ul.mcr-inn-bowler-list{
         margin-top: 0;
         padding: 6px 0px;
     }
+}
+
+.mcr-inn-partnerships-chart{
+    padding-left: 8px;
 }
 
 .mcr-inn-bowlers{
