@@ -26,42 +26,17 @@
 	<div id="espn-wagon3" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.wagon.js"></script>
 	
 	<script>
 
 	var interval = 4000;
 
-	function getRandom(){
-
-		var index,
-			ar = [
-				{runs: Math.round((Math.random() * 100)), zone : 1},
-				{runs: Math.round((Math.random() * 100)), zone : 2},
-				{runs: Math.round((Math.random() * 100)), zone : 3},
-				{runs: Math.round((Math.random() * 100)), zone : 4},
-				{runs: Math.round((Math.random() * 100)), zone : 5},
-				{runs: Math.round((Math.random() * 100)), zone : 6},
-				{runs: Math.round((Math.random() * 100)), zone : 7},
-				{runs: Math.round((Math.random() * 100)), zone : 8}
-			],
-			c = 0;
-
-		for(var i=0, len = ar.length; i < len; i++){
-			if(ar[i].runs > c){
-				c = ar[i].runs;
-				index = i;
-			}
-		}
-
-		ar[index].max = true;
-		return ar;
-	}
-
 	setInterval(function(){
-		wagon.draw(getRandom());
-		wagon2.draw(getRandom());
-		wagon3.draw(getRandom());
+		wagon.draw(espn.gfx.random.spikes());
+		wagon2.draw(espn.gfx.random.spikes());
+		wagon3.draw(espn.gfx.random.spikes());
 	},interval);
 
 	var wagon = d3.select("#espn-wagon")
@@ -71,7 +46,7 @@
 		colors : ["#7ace5c","#f88f22","white"]
 	});
 
-	wagon.draw(getRandom());
+	wagon.draw(espn.gfx.random.spikes());
 
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
@@ -82,7 +57,7 @@
 		shade : true
 	});
 
-	wagon2.draw(getRandom());
+	wagon2.draw(espn.gfx.random.spikes());
 
 	var wagon3 = d3.select("#espn-wagon3")
 	.chart("wagon",{
@@ -92,7 +67,7 @@
 		textPadding : 30
 	});
 
-	wagon3.draw(getRandom());
+	wagon3.draw(espn.gfx.random.spikes());
 
 	</script>
 </body>

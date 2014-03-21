@@ -27,6 +27,7 @@
 	<div id="espn-stacked5" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.stacked.js"></script>
 
 	<script>
@@ -78,38 +79,12 @@
 
 	var interval = 4000;
 
-	function getRandom(dataLength, stackLength, title, label){
-
-		stackLength = stackLength || 3;
-		dataLength = dataLength || 7;
-
-		var data = [],
-			obj,
-			arr;
-
-		for (var i = 0; i < stackLength; i++) {
-			arr = [];
-			for(var j = 0; j < dataLength; j++){
-				obj = {};
-				obj.x = j;
-				obj.y = Math.floor(Math.random() * 10);
-				obj.title = (i== 0) ? title || Math.floor(Math.random() * 10) + '(' + Math.floor(Math.random() * 100) + ')' : null;
-				obj.label = (i== 0) ? label || 'Cook ' + Math.floor(Math.random() * 10) + '(' + Math.floor(Math.random() * 100) + ')' : null;
-				obj.stackId = i + '' + j;
-				obj.layer = i;
-				arr.push(obj);
-			}
-			data.push(arr);
-		}
-		return data;
-	}
-
 	setInterval(function(){
-		stacked.draw([getRandom(6),getRandom(6)]);
-		stacked2.draw([getRandom(5,2,'POWERPLAY'),getRandom(5,2,'POWERPLAY')]);
-		stacked3.draw([getRandom(2,1,'CONTROL %'),getRandom(2,1,'CONTROL %')]);
-		stacked4.draw([getRandom(1,1,'RUNS FROM PREF SHOT','Sq Drive'),getRandom(1,1,'RUNS FROM PREF SHOT','Sq Drive')]);
-		stacked5.draw([getRandom(7,1),getRandom(7,1)]);
+		stacked.draw([espn.gfx.random.partnerships(6),espn.gfx.random.partnerships(6)]);
+		stacked2.draw([espn.gfx.random.partnerships(5,2,'POWERPLAY'),espn.gfx.random.partnerships(5,2,'POWERPLAY')]);
+		stacked3.draw([espn.gfx.random.partnerships(2,1,'CONTROL %'),espn.gfx.random.partnerships(2,1,'CONTROL %')]);
+		stacked4.draw([espn.gfx.random.partnerships(1,1,'RUNS FROM PREF SHOT','Sq Drive'),espn.gfx.random.partnerships(1,1,'RUNS FROM PREF SHOT','Sq Drive')]);
+		stacked5.draw([espn.gfx.random.partnerships(7,1),espn.gfx.random.partnerships(7,1)]);
 	},interval);
 
 	var stacked = d3.select("#espn-stacked")
@@ -125,7 +100,7 @@
 
 	var dataset = getLayers(data,'i1');
 
-	stacked.draw([getRandom(6),getRandom(6)]);
+	stacked.draw([espn.gfx.random.partnerships(6),espn.gfx.random.partnerships(6)]);
 
 	var stacked2 = d3.select("#espn-stacked2")
 	.chart("stacked",{
@@ -140,7 +115,7 @@
 		colors:['#fd8f20','#7bcd61']
 	});
 
-	stacked2.draw([getRandom(5,2,'POWERPLAY'),getRandom(5,2,'POWERPLAY')]);
+	stacked2.draw([espn.gfx.random.partnerships(5,2,'POWERPLAY'),espn.gfx.random.partnerships(5,2,'POWERPLAY')]);
 
 	var stacked3 = d3.select("#espn-stacked3")
 	.chart("stacked",{
@@ -153,7 +128,7 @@
 		valueAttr : {'fill' : '#fff'}
 	});
 
-	stacked3.draw([getRandom(2,1,'CONTROL %'),getRandom(2,1,'CONTROL %')]);
+	stacked3.draw([espn.gfx.random.partnerships(2,1,'CONTROL %'),espn.gfx.random.partnerships(2,1,'CONTROL %')]);
 
 	var stacked4 = d3.select("#espn-stacked4")
 	.chart("stacked",{
@@ -166,7 +141,7 @@
 		colors:['#f9901d','#f9901d']
 	});
 
-	stacked4.draw([getRandom(1,1,'RUNS FROM PREF SHOT','Sq Drive'),getRandom(1,1,'RUNS FROM PREF SHOT','Sq Drive')]);
+	stacked4.draw([espn.gfx.random.partnerships(1,1,'RUNS FROM PREF SHOT','Sq Drive'),espn.gfx.random.partnerships(1,1,'RUNS FROM PREF SHOT','Sq Drive')]);
 
 
 	var stacked5 = d3.select("#espn-stacked5")
@@ -179,7 +154,7 @@
 		varyColors: true // find me a better property name :)
 	});
 
-	stacked5.draw([getRandom(7,1),getRandom(7,1)]);
+	stacked5.draw([espn.gfx.random.partnerships(7,1),espn.gfx.random.partnerships(7,1)]);
 
 	</script>
 </body>

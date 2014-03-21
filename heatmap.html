@@ -25,62 +25,16 @@
 	<div id="espn-heatmap2" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.heatmap.js"></script>
 	
 	<script>
 
 	var interval = 4000;
 
-
-	function getRandom(){
-
-		var index,
-			ar = [
-				{runs: Math.round((Math.random() * 10)), zone : 1},
-				{runs: Math.round((Math.random() * 10)), zone : 2},
-				{runs: Math.round((Math.random() * 10)), zone : 3},
-				{runs: Math.round((Math.random() * 10)), zone : 4},
-				{runs: Math.round((Math.random() * 10)), zone : 5},
-				{runs: Math.round((Math.random() * 10)), zone : 6},
-				{runs: Math.round((Math.random() * 100)), zone : 7},
-				{runs: Math.round((Math.random() * 100)), zone : 8},
-				{runs: Math.round((Math.random() * 100)), zone : 9},
-				{runs: Math.round((Math.random() * 10)), zone : 10},
-				{runs: Math.round((Math.random() * 100)), zone : 11},
-				{runs: Math.round((Math.random() * 100)), zone : 12},
-				{runs: Math.round((Math.random() * 100)), zone : 13},
-				{runs: Math.round((Math.random() * 100)), zone : 14},
-				{runs: Math.round((Math.random() * 100)), zone : 15},
-				{runs: Math.round((Math.random() * 10)), zone : 16},
-				{runs: Math.round((Math.random() * 100)), zone : 17},
-				{runs: Math.round((Math.random() * 100)), zone : 18},
-				{runs: Math.round((Math.random() * 100)), zone : 19},
-				{runs: Math.round((Math.random() * 10)), zone : 20},
-				{runs: Math.round((Math.random() * 10)), zone : 21},
-				{runs: Math.round((Math.random() * 10)), zone : 22},
-				{runs: Math.round((Math.random() * 10)), zone : 23},
-				{runs: Math.round((Math.random() * 10)), zone : 24},
-				{runs: Math.round((Math.random() * 10)), zone : 25}
-			],
-			c = 0;
-
-		for(var i=0, len = ar.length; i < len; i++){
-			if(ar[i].runs > c){
-				c = ar[i].runs;
-				index = i;
-			}
-		}
-
-		ar[index].max = true;
-
-		var random = Math.floor(Math.random() * 8) + 1;
-		ar[random].wickets = 1;
-		return ar;
-	}
-
 	setInterval(function(){
-		heatmap.draw(getRandom());
-		heatmap2.draw(getRandom());
+		heatmap.draw(espn.gfx.random.heatmap());
+		heatmap2.draw(espn.gfx.random.heatmap());
 	},interval);
 
 	var heatmap = d3.select("#espn-heatmap")
@@ -90,7 +44,7 @@
 		legends : true
 	});
 
-	heatmap.draw(getRandom());
+	heatmap.draw(espn.gfx.random.heatmap());
 
 	var heatmap2 = d3.select("#espn-heatmap2")
 	.chart("heatmap",{
@@ -100,7 +54,7 @@
 		showValues : true
 	});
 
-	heatmap2.draw(getRandom());
+	heatmap2.draw(espn.gfx.random.heatmap());
 
 	</script>
 </body>

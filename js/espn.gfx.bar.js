@@ -1,3 +1,5 @@
+"use strict";
+
 d3.chart("bar", {
 
 	config : {

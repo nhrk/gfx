@@ -34,28 +34,15 @@
 	<div id="espn-dual-axis" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.dual-axis.js"></script>
 
 	<script>
 
 	var interval = 4000;
 
-	function getRandom(){
-		function random(){
-			return Math.round((Math.random() * 25))
-		}
-		return [
-			{runs : random(), balls : random(), spell : '1', overs : '1-5' },
-			{runs : random(), balls : random(), spell : '2', overs : '10-12' },
-			{runs : random(), balls : random(), spell : '3', overs : '21-22' },
-			{runs : random(), balls : random(), spell : '4', overs : '35-39' },
-			{runs : random(), balls : random(), spell : '5', overs : '48-50' }
-		];
-		return Math.floor(Math.random() * 100);
-	}
-
 	setInterval(function(){
-		dualAxis.draw(getRandom());
+		dualAxis.draw(espn.gfx.random.dualAxis());
 	},interval);
 
 	var dualAxis = d3.select("#espn-dual-axis")
@@ -67,7 +54,7 @@
 		key : ['Runs','Balls']
 	});
 
-	dualAxis.draw(getRandom());
+	dualAxis.draw(espn.gfx.random.dualAxis());
 
 	</script>
 </body>

@@ -65,15 +65,11 @@
 
 	var interval = 4000;
 
-	function getRandom(){
-		return Math.floor(Math.random() * 100);
-	}
-
 	setInterval(function(){
-		bar.draw(getRandom());
-		bar2.draw(getRandom());
-		bar3.draw(getRandom());
-		bar5.draw(getRandom());
+		bar.draw(espn.gfx.random.bar());
+		bar2.draw(espn.gfx.random.bar());
+		bar3.draw(espn.gfx.random.bar());
+		bar5.draw(espn.gfx.random.bar());
 	},interval);
 
 	var bar = d3.select("#espn-bar")
@@ -90,7 +86,7 @@
 		marker : true
 	});
 
-	bar.draw(getRandom());
+	bar.draw(espn.gfx.random.bar());
 
 	var options = {
 		"title": 'Control',
@@ -106,24 +102,24 @@
 	var bar2 = d3.select('#espn-bar2')
 	.chart("bar",options);
 
-	bar2.draw(getRandom());
+	bar2.draw(espn.gfx.random.bar());
 
 	var bar3 = d3.select('#espn-bar3')
 	.chart("bar", options);
 
-	bar3.draw(getRandom());
+	bar3.draw(espn.gfx.random.bar());
 
 	options.colors = ['#fc8e1f', '#fff'];
 
 	var bar4 = d3.select('#espn-bar4')
 	.chart("bar", options);
 
-	bar4.draw(getRandom());
+	bar4.draw(espn.gfx.random.bar());
 
 	var bar5 = d3.select('#espn-bar5')
 	.chart("bar", options);
 
-	bar5.draw(getRandom());
+	bar5.draw(espn.gfx.random.bar());
 
 	</script>
 </body>

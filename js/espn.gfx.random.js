@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @fileOverview Generate random data for charts
  */
@@ -114,6 +116,39 @@ espn.gfx.random = (function(){
         var random = Math.floor(Math.random() * 8) + 1;
         ar[random].wickets = 1;
         return ar;
+    }
+
+    api.spikes = function(dia,len){
+
+        len = len || 25;
+        dia = dia || 225;
+
+        var ar = [];
+
+            for (var i = 0; i < len; i++) {
+                ar.push({
+                    runs: Math.floor(Math.random() * 6) + 1,
+                    x : Math.floor(Math.random() * dia) + 1,
+                    y : Math.floor(Math.random() * dia) + 1,
+                    comms: "Hey there! - " + i
+                });
+            }
+
+        return ar;
+    }
+
+    api.dualAxis = function(){
+        function random(){
+            return Math.round((Math.random() * 25))
+        }
+        return [
+            {runs : random(), balls : random(), spell : '1', overs : '1-5' },
+            {runs : random(), balls : random(), spell : '2', overs : '10-12' },
+            {runs : random(), balls : random(), spell : '3', overs : '21-22' },
+            {runs : random(), balls : random(), spell : '4', overs : '35-39' },
+            {runs : random(), balls : random(), spell : '5', overs : '48-50' }
+        ];
+        return Math.floor(Math.random() * 100);
     }
 
     return api;

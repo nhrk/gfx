@@ -24,33 +24,15 @@
 	<div id="espn-spikes" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.spikes.js"></script>
 	
 	<script>
 
 	var interval = 4000;
 
-	function getRandom(dia,len){
-
-		len = len || 25;
-		dia = dia || 225;
-
-		var	ar = [];
-
-			for (var i = 0; i < len; i++) {
-				ar.push({
-					runs: Math.floor(Math.random() * 6) + 1,
-					x : Math.floor(Math.random() * dia) + 1,
-					y : Math.floor(Math.random() * dia) + 1,
-					comms: "Hey there! - " + i
-				});
-			}
-
-		return ar;
-	}
-
 	setInterval(function(){
-		spikes.draw(getRandom());
+		spikes.draw(espn.gfx.random.spikes());
 	},interval);
 
 	var spikes = d3.select("#espn-spikes")
@@ -60,7 +42,7 @@
 		colors : ["#7ace5c","#f88f22","#7ace5c"]
 	});
 
-	spikes.draw(getRandom());
+	spikes.draw(espn.gfx.random.spikes());
 
 	</script>
 </body>
