@@ -32,7 +32,7 @@ $width-inn-mugshot: 46px;
     margin-right: 0;
 }
 
-.mcr-inn-sticky{
+.mcr-overview{
     background-color: $color-mcr-dark-gray;
     .mcr-inn-current .row{
         background-color: $color-mcr-white;
@@ -83,8 +83,8 @@ $width-inn-mugshot: 46px;
     padding: 4px 8px 8px 8px;
 }
 
-.mcr-inn-batsmen,
-.mcr-inn-bowlers{
+.mcr-batsmen,
+.mcr-bowlers{
     background-color: $color-mcr-light-gray;
 }
 
@@ -275,7 +275,7 @@ ul.mcr-inn-bowler-list{
     padding-left: 8px;
 }
 
-.mcr-inn-bowlers{
+.mcr-bowlers{
     border-top: 1px solid $color-mcr-dark-blue;
 }
 

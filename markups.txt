@@ -4,7 +4,7 @@ Innings card
 
 div.mcr
     div.mcr-inn
-        div.mcr-inn-sticky
+        div.mcr-overview
             div.mcr-inn-all
             div.mcr-inn-current
                 div.mcr-inn-score
@@ -13,14 +13,15 @@ div.mcr
                 div.mcr-inn-dots
                 div.mcr-inn-rr
                 div.mcr-inn-control
-        div.mcr-inn-batsmen
+        div.mcr-batsmen
             ul.mcr-inn-batsman-filters
             ul.mcr-inn-batsman-list
-        div.mcr-inn-current-players
-            ul.mcr-inn-current-batsmen
-            ul.mcr-inn-current-bowlers
-        ul.mcr-inn-partnerships
-        div.mcr-inn-bowlers
+        div.mcr-vis
+            div.mcr-inn-current-players
+                ul.mcr-inn-current-batsmen
+                ul.mcr-inn-current-bowlers
+            ul.mcr-inn-partnerships
+        div.mcr-bowlers
             ul.mcr-inn-bowler-filters
             ul.mcr-inn-bowler-list
 

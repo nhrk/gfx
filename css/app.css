@@ -1457,8 +1457,8 @@ svg circle { shape-rendering: auto; }
 
 .mcr-inn .row { margin-left: 0; margin-right: 0; }
 
-.mcr-inn-sticky { background-color: #3d3d3d; }
-.mcr-inn-sticky .mcr-inn-current .row { background-color: white; }
+.mcr-overview { background-color: #3d3d3d; }
+.mcr-overview .mcr-inn-current .row { background-color: white; }
 
 .mcr-inn-all { margin-top: 9px; }
 .mcr-inn-all select { margin: 0; }
@@ -1471,7 +1471,7 @@ svg circle { shape-rendering: auto; }
 
 .mcr-inn-control { padding: 4px 8px 8px 8px; }
 
-.mcr-inn-batsmen, .mcr-inn-bowlers { background-color: #f2f2f2; }
+.mcr-batsmen, .mcr-bowlers { background-color: #f2f2f2; }
 
 ul.mcr-inn-batsman-filters, ul.mcr-inn-bowler-filters { margin-bottom: 0; }
 
@@ -1525,7 +1525,7 @@ ul.mcr-inn-batsman-list, ul.mcr-inn-bowler-list { padding: 13px 0; }
 
 .mcr-inn-partnerships-chart { padding-left: 8px; }
 
-.mcr-inn-bowlers { border-top: 1px solid #006699; }
+.mcr-bowlers { border-top: 1px solid #006699; }
 
 /*
 * Styles for 1024 screen size
