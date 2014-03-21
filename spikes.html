@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	body{
+		background: #f1f1f1;
+	}
+	.espn-gfx{
+		float:left;
+		clear:both;
+		padding-bottom:10px;
+	}
+	svg{
+		shape-rendering: crispEdges;
+	}
+</style>
+<body>
+	
+	<div id="espn-spikes" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.spikes.js"></script>
+	
+	<script>
+
+	var interval = 4000;
+
+	function getRandom(dia,len){
+
+		len = len || 25;
+		dia = dia || 225;
+
+		var	ar = [];
+
+			for (var i = 0; i < len; i++) {
+				ar.push({
+					runs: Math.floor(Math.random() * 6) + 1,
+					x : Math.floor(Math.random() * dia) + 1,
+					y : Math.floor(Math.random() * dia) + 1,
+					comms: "Hey there! - " + i
+				});
+			}
+
+		return ar;
+	}
+
+	setInterval(function(){
+		spikes.draw(getRandom());
+	},interval);
+
+	var spikes = d3.select("#espn-spikes")
+	.chart("spikes",{
+		diameter : 225,
+		textPadding : 15,
+		colors : ["#7ace5c","#f88f22","#7ace5c"]
+	});
+
+	spikes.draw(getRandom());
+
+	</script>
+</body>
