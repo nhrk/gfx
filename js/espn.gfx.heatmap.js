@@ -177,22 +177,33 @@ d3.chart("heatmap", {
 	renderLegends: function(margin, keyTextAttr){
 		var chart = this,
 			key = chart.config.key,
-			keyText;
+			keyText,
+			bbox;
 
-		/* TODO: set x y based on actual text dimensions */
 		for(var i = 0, len = key.length; i < len; i++){
+
 			for(var j = 0, jLen = key[i].length; j < jLen; j++){
+				
 				keyText = chart.key.append('text').text(key[i][j])
 							.attr('class',chart.config.keyTextClass)
 							.attr(keyTextAttr);
+
 				if( i === 0 ){
 					keyText.attr('dy', 10)
-						.attr('dx', (margin*1.2) + (j * chart.width()/chart.config.gridSize))
-						.attr('text-anchor','middle');
+						.attr('dx', 0)
+						.attr('text-anchor','start');
+						
+					bbox = keyText[0][0].getBBox();
+					keyText.attr('dx',margin + (j * chart.width()/chart.config.gridSize) - (bbox.width/2))
+
 				}else if(i === 1){
-					keyText.attr('dy', (margin*1.5) + (j * chart.height()/chart.config.gridSize))
-						.attr('dx', 1);
-				}					
+					keyText.attr('dy', 0)
+						.attr('text-anchor','middle')
+						.attr('dx', 7);
+
+					bbox = keyText[0][0].getBBox();
+					keyText.attr('dy',margin + (j * chart.height()/chart.config.gridSize) + (bbox.height))
+				}
 			}
 		}
 	},
