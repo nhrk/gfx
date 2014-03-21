@@ -274,7 +274,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="large-10 columns">
+                                    <div class="large-10 columns mcr-inn-bowler1-heatmap">
                                     </div>
                                 </div>
                             </li>
@@ -326,7 +326,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="large-10 columns">
+                                    <div class="large-10 columns mcr-inn-bowler2-heatmap">
                                     </div>
                                 </div>
                             </li>
@@ -336,6 +336,9 @@
                     <div class="mcr-inn-partnerships large-6 columns">
                         <div class="row">
                             <h4>Partnerships</h4>
+                        </div>
+                        <div class="row mcr-inn-partnerships-chart">
+                            
                         </div>
                     </div>
                 </div>
@@ -398,6 +401,8 @@
     <script src="./bower_components/d3.chart/d3.chart.js"></script>
     <script src="./js/espn.gfx.wagon.js"></script>
     <script src="./js/espn.gfx.bar.js"></script>
+    <script src="./js/espn.gfx.stacked.js"></script>
+    <script src="./js/espn.gfx.heatmap.js"></script>
     <script src="./js/espn.gfx.random.js"></script>
 
     <script>
@@ -449,6 +454,30 @@
                 textPosY: 13,
                 colorMeter: true,
                 marker: true
+            },
+            partnerships: {
+                height: 300,
+                width:175,
+                hideLine : true,
+                barHeight : 10,
+                colors:['#7bcd61','#fd8f20'],
+                varyColors: true,
+                labelAttr : {
+                    "font-size": "0.8em"
+                },
+                titleAttr : {
+                    "font-size": "0.9em",
+                    "font-family": fontBentonBold
+                }
+            },
+            heatmap: {
+                width: 100,
+                height: 125,
+                legends: true,
+                keyTextAttr: {
+                    "font-size": "0.7em",
+                    "fill": "#3e9fca"
+                }
             }
         };
 
@@ -467,7 +496,15 @@
 
         var bar3 = d3.select(".mcr-inn-control")
                         .chart("bar", options.control);
+        
+        var partnerships = d3.select(".mcr-inn-partnerships-chart")
+                        .chart("stacked",options.partnerships);
 
+        var heatmap1 = d3.select(".mcr-inn-bowler1-heatmap")
+                        .chart("heatmap", options.heatmap);
+
+        var heatmap2 = d3.select(".mcr-inn-bowler2-heatmap")
+                        .chart("heatmap", options.heatmap);                        
 
         function drawInningCardCharts(){
             wagon1.draw(espn.gfx.random.wagon());
@@ -475,6 +512,9 @@
             bar1.draw(espn.gfx.random.bar());
             bar2.draw(espn.gfx.random.bar());
             bar3.draw(espn.gfx.random.bar());
+            partnerships.draw([espn.gfx.random.partnerships(),espn.gfx.random.partnerships()]);
+            heatmap1.draw(espn.gfx.random.heatmap())
+            heatmap2.draw(espn.gfx.random.heatmap())
         }
 
         drawInningCardCharts();
@@ -482,5 +522,17 @@
         setInterval(drawInningCardCharts,interval);
 
     </script>
+    <style type="text/css">
+        svg {
+            shape-rendering: crispEdges;
+        }
+
+        svg path{
+            shape-rendering: auto;
+        }
+        svg circle{
+            shape-rendering: auto;
+        }
+    </style>
 </body>
 </html>
