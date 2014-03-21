@@ -194,7 +194,8 @@ d3.chart("heatmap", {
 						.attr('text-anchor','start');
 						
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dx',margin + (j * chart.width()/chart.config.gridSize) - (bbox.width/2))
+					keyText.attr('dx',(j * (chart.width() - margin)/chart.config.gridSize) - (bbox.width/2))
+						.attr('transform','translate(' + margin + ',0)');
 
 				}else if(i === 1){
 					keyText.attr('dy', 0)
@@ -202,7 +203,8 @@ d3.chart("heatmap", {
 						.attr('dx', 7);
 
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dy',margin + (j * chart.height()/chart.config.gridSize) + (bbox.height))
+					keyText.attr('dy',(j * (chart.height() - margin)/chart.config.gridSize) + (bbox.height))
+						.attr('transform','translate(0,' + margin + ')');
 				}
 			}
 		}
