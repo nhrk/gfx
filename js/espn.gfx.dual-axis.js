@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-d3.chart("dual-axis", {
+d3.chart('dual-axis', {
 
 	config : {
 		barSpacing : 10,
@@ -19,6 +19,9 @@ d3.chart("dual-axis", {
 		keyTextBottomMargin : 11,
 		keyClass : 'key',
 		wrapperClass : 'wrapperClass',
+		xClass : 'x axis',
+		y1Class : 'y axis axisLeft',
+		y2Class : 'y axis axisRight',
 		y1Key : 'runs',
 		y2Key : 'balls',
 		xKey : 'spell',
@@ -38,7 +41,7 @@ d3.chart("dual-axis", {
 			titleAttrs = options.titleAttrs || chart.config.titleAttrs,
 			chartTitle = options.chartTitle || null;
 
-		this.base = this.base.append("svg");
+		this.base = this.base.append('svg');
 
 		this.width(options.width || 400);
 
@@ -48,17 +51,17 @@ d3.chart("dual-axis", {
 			.attr('class',chart.config.wrapperClass)
 			.attr('transform','translate(0,' + (topMargin) + ')');
 
-		this.wrapper.append("g")
-			.attr("class", "x axis")
-			.attr("transform", "translate(" + (leftMargin/2) + "," + (this.height() - bottomMargin - topMargin) + ")");
+		this.wrapper.append('g')
+			.attr('class', chart.config.xClass)
+			.attr('transform', 'translate(' + (leftMargin/2) + ',' + (this.height() - bottomMargin - topMargin) + ')');
 
-		this.wrapper.append("g")
-			.attr("class", "y axis axisLeft")
-			.attr("transform", "translate(" + leftMargin + ",0)");
+		this.wrapper.append('g')
+			.attr('class', chart.config.y1Class)
+			.attr('transform', 'translate(' + leftMargin + ',0)');
 
-		this.wrapper.append("g")
-			.attr("class", "y axis axisRight")
-			.attr("transform", "translate(" + (this.width() - rightMargin) + ",0)");
+		this.wrapper.append('g')
+			.attr('class', chart.config.y2Class)
+			.attr('transform', 'translate(' + (this.width() - rightMargin) + ',0)');
 
 		if(chartTitle){
 			chartTitle = this.wrapper.append('text')
@@ -84,19 +87,19 @@ d3.chart("dual-axis", {
 
 		this.xAxis = d3.svg.axis()
 			.scale(this.x)
-			.orient("bottom");			
+			.orient('bottom');			
 
 		this.yAxisLeft = d3.svg.axis()
 							.scale(this.y0)
 							.ticks(4)
 							.tickSize(-chart.width() + rightMargin + leftMargin)
-							.orient("left");
+							.orient('left');
 
 		this.yAxisRight = d3.svg.axis()
 							.scale(this.y1)
 							.ticks(4)
 							.tickSize(-chart.width() + rightMargin + leftMargin)
-							.orient("right");
+							.orient('right');
 
 		options = options || {};
 
@@ -104,97 +107,97 @@ d3.chart("dual-axis", {
 
 		function onEnterY0() {
 
-			this.attr("x", function(d) { return chart.x(d[chart.config.xKey]); })
-				.attr("width", chart.x.rangeBand()/2 - barSpacing)
+			this.attr('x', function(d) { return chart.x(d[chart.config.xKey]); })
+				.attr('width', chart.x.rangeBand()/2 - barSpacing)
 				.attr('style', function(){
 					return 'fill:' + colors[0];
 				})
-				.attr("y", function(d) { return chart.y0(d[chart.config.y1Key]); })
-				.attr("height", function(d,i,j) { return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin; }); 
+				.attr('y', function(d) { return chart.y0(d[chart.config.y1Key]); })
+				.attr('height', function(d,i,j) { return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin; }); 
 		}
 
 		function onTransY0() {
-			this.attr("height", function(d,i,j) { return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin; })
-				.attr("y", function(d) { return chart.y0(d[chart.config.y1Key]); })
+			this.attr('height', function(d,i,j) { return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin; })
+				.attr('y', function(d) { return chart.y0(d[chart.config.y1Key]); })
 		}
 
 		function dataBindY0(data) {
-		  return this.selectAll("." + chart.config.runsClass + " rect").data(data,function(d,i){
+		  return this.selectAll('.' + chart.config.runsClass + ' rect').data(data,function(d,i){
 		  	return d[chart.config.xKey];
 		  });
 		}
 
 		function insertY0() {
-			return this.insert("rect");
+			return this.insert('rect');
 		}
 
-		var runs = this.layer(chart.config.runsClass, this.wrapper.append("g").attr("class", chart.config.runsClass).attr("transform", "translate(" + leftMargin/2 + ",0)"), {
+		var runs = this.layer(chart.config.runsClass, this.wrapper.append('g').attr('class', chart.config.runsClass).attr('transform', 'translate(' + leftMargin/2 + ',0)'), {
 		  dataBind: dataBindY0,
 		  insert: insertY0
 		});
 
-		runs.on("enter", onEnterY0);
-		runs.on("update:transition", onTransY0);
+		runs.on('enter', onEnterY0);
+		runs.on('update:transition', onTransY0);
 
 		/* 2nd Y axis */
 
 		function onEnterY1(){
-			this.attr("x", function(d) { return chart.x(d[chart.config.xKey]) + chart.x.rangeBand()/2; })
-				.attr("width", chart.x.rangeBand()/2 - barSpacing)
+			this.attr('x', function(d) { return chart.x(d[chart.config.xKey]) + chart.x.rangeBand()/2; })
+				.attr('width', chart.x.rangeBand()/2 - barSpacing)
 				.attr('style', function(){
 					return 'fill:' + colors[1];
 				})
-				.attr("y", function(d) { return chart.y1(d[chart.config.y2Key]); })
-				.attr("height", function(d,i,j) { return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin; }); 
+				.attr('y', function(d) { return chart.y1(d[chart.config.y2Key]); })
+				.attr('height', function(d,i,j) { return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin; }); 
 		}
 
 		function onTransY1(){
-			this.attr("height", function(d,i,j) { return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin; })
-				.attr("y", function(d) { return chart.y1(d[chart.config.y2Key]); })
+			this.attr('height', function(d,i,j) { return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin; })
+				.attr('y', function(d) { return chart.y1(d[chart.config.y2Key]); })
 		}
 
 		function dataBindY1(data){
-		  	return this.selectAll("." + chart.config.ballsClass + " rect").data(data,function(d,i){
+		  	return this.selectAll('.' + chart.config.ballsClass + ' rect').data(data,function(d,i){
 			  	return d[chart.config.xKey];
 			  });
 		  }
 
 		function insertY1(){
-			return this.insert("rect");
+			return this.insert('rect');
 		}
 
-		var balls = this.layer(chart.config.ballsClass, this.wrapper.append("g").attr("class", chart.config.ballsClass).attr("transform", "translate(" + leftMargin/2 + ",0)"), {
+		var balls = this.layer(chart.config.ballsClass, this.wrapper.append('g').attr('class', chart.config.ballsClass).attr('transform', 'translate(' + leftMargin/2 + ',0)'), {
 			dataBind: dataBindY1,
 			insert: insertY1
 		});
 
-		balls.on("enter", onEnterY1);
-		balls.on("update:transition", onTransY1);
+		balls.on('enter', onEnterY1);
+		balls.on('update:transition', onTransY1);
 
 		/* TODO: Use as a mixin, Key is same as stacked chart */
 
 		if(options.key && options.key.length){
 
-			this.layer("key", this.base.append("g").attr('class',chart.config.keyClass), {
+			this.layer('key', this.base.append('g').attr('class',chart.config.keyClass), {
 
 				dataBind: function(data) {
-					return this.selectAll("rect")
+					return this.selectAll('rect')
 						.data(options.key);
 				},
 
 				insert: function() {
-					return this.append("rect");
+					return this.append('rect');
 				},
 
 				events: {
 					enter: function() {
-						this.attr("x", function(d,i){
+						this.attr('x', function(d,i){
 							return (chart.config.keySpacing * i) + (keyLeftMargin);
 						})
-						.attr("y", chart.config.keyYPos)
-						.attr("height", chart.config.keySquareSize)
-						.attr("width", chart.config.keySquareSize)
-						.style("fill", function(d,i){
+						.attr('y', chart.config.keyYPos)
+						.attr('height', chart.config.keySquareSize)
+						.attr('width', chart.config.keySquareSize)
+						.style('fill', function(d,i){
 							return colors[i];
 						}).each(function(d,i){
 							chart.base.select('.' + chart.config.keyClass).append('text')
@@ -220,7 +223,7 @@ d3.chart("dual-axis", {
 			return this._width;
 		}
 		this._width = newWidth;
-		this.base.attr("width", this._width);
+		this.base.attr('width', this._width);
 		return this;
 	},
 
@@ -229,7 +232,7 @@ d3.chart("dual-axis", {
 			return this._height;
 		}
 		this._height = newHeight;
-		this.base.attr("height", this._height);
+		this.base.attr('height', this._height);
 		return this;
 	},
 

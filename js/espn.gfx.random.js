@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @fileOverview Generate random data for charts
@@ -130,7 +130,7 @@ espn.gfx.random = (function(){
                     runs: Math.floor(Math.random() * 6) + 1,
                     x : Math.floor(Math.random() * dia) + 1,
                     y : Math.floor(Math.random() * dia) + 1,
-                    comms: "Hey there! - " + i
+                    comms: 'Hey there! - ' + i
                 });
             }
 

@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
-d3.chart("spikes", {
+d3.chart('spikes', {
 
 	config : {
 		diameter : 150,
 		maxLabelColor : '#fff',
 		shadeColor : '#fff',
-		gradientDefId : "radialGradient",
-		gradientColors : ["#7dcc5f","#7ac85b"],
+		gradientDefId : 'radialGradient',
+		gradientColors : ['#7dcc5f','#7ac85b'],
 		colorMap : {
-			"1" : "#8a17a7",
-			"2" : "#642c01",
-			"3" : "#f0d900",
-			"4" : "#e0e0e0",
-			"5" : "#034466",
-			"6" : "#fa280c"
+			'1' : '#8a17a7',
+			'2' : '#642c01',
+			'3' : '#f0d900',
+			'4' : '#e0e0e0',
+			'5' : '#034466',
+			'6' : '#fa280c'
 		},
 		offset : 17,
 		strokeWidth : 2,
@@ -52,7 +52,7 @@ d3.chart("spikes", {
 			offset = options.offset || chart.config.offset,
 			colorMap = options.colorMap || chart.config.colorMap;
 
-		this.base = this.base.append("svg");
+		this.base = this.base.append('svg');
 
 		this.width(diameter);
 
@@ -66,7 +66,7 @@ d3.chart("spikes", {
 			.attr('r', radius)
 			.attr('stroke-width','5')
 			.attr('stroke', chart.config.ground.stroke)
-			.attr('fill', "url(#" + chart.config.gradientDefId + ")");
+			.attr('fill', 'url(#' + chart.config.gradientDefId + ')');
 
 		// Append Pitch
 		this.base.append('rect')
@@ -92,20 +92,20 @@ d3.chart("spikes", {
 		this.wrapper = this.base.append('g');
 
 		// Gradient
-		this.gradient = this.base.append("defs")
-							.append("radialGradient")
-							.attr("id", chart.config.gradientDefId)
-							.attr("r", "65%");
+		this.gradient = this.base.append('defs')
+							.append('radialGradient')
+							.attr('id', chart.config.gradientDefId)
+							.attr('r', '65%');
 
-		this.gradient.append("stop")
-			.attr("offset", "0%")
-			.attr("stop-color", chart.config.gradientColors[0])
-			.attr("stop-opacity", "1");
+		this.gradient.append('stop')
+			.attr('offset', '0%')
+			.attr('stop-color', chart.config.gradientColors[0])
+			.attr('stop-opacity', '1');
 
-		this.gradient.append("stop")
-			.attr("offset", "100%")
-			.attr("stop-color", chart.config.gradientColors[1])
-			.attr("stop-opacity", "1");
+		this.gradient.append('stop')
+			.attr('offset', '100%')
+			.attr('stop-color', chart.config.gradientColors[1])
+			.attr('stop-opacity', '1');
 
 		// Striker Position marker	
 		this.base.append('circle')
@@ -141,21 +141,21 @@ d3.chart("spikes", {
 		}
 
 		function dataBind(data) {
-			return chart.wrapper.selectAll("." + chart.config.spikesClass)
+			return chart.wrapper.selectAll('.' + chart.config.spikesClass)
 				.data(data);
 		}
 
 		function insert() {
-			return this.append('path').attr("class",chart.config.spikesClass);
+			return this.append('path').attr('class',chart.config.spikesClass);
 		}
 
-		var spikes = this.layer("spikes", this.wrapper, {
+		var spikes = this.layer('spikes', this.wrapper, {
 		  dataBind: dataBind,
 		  insert: insert
 		});
 
-		spikes.on("enter", onEnter);
-		spikes.on("update:transition", onTrans);
+		spikes.on('enter', onEnter);
+		spikes.on('update:transition', onTrans);
 
 	},
 
@@ -164,7 +164,7 @@ d3.chart("spikes", {
 			return this._width;
 		}
 		this._width = newWidth;
-		this.base.attr("width", this._width);
+		this.base.attr('width', this._width);
 		return this;
 	},
 
@@ -173,7 +173,7 @@ d3.chart("spikes", {
 			return this._height;
 		}
 		this._height = newHeight;
-		this.base.attr("height", this._height);
+		this.base.attr('height', this._height);
 		return this;
 	},
 

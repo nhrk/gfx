@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-d3.chart("stacked", {
+d3.chart('stacked', {
 
 	config : {
 		space : 1,
 		barSpacing : 27,
-		colors : ["#aad", "#8080a2", "#556"],
-		strokeColor : "rgb(6,120,155)",
+		colors : ['#aad', '#8080a2', '#556'],
+		strokeColor : 'rgb(6,120,155)',
 		topMargin : 25,
 		titleHeight : 13,
 		keySquareSize : 13,
@@ -17,9 +17,9 @@ d3.chart("stacked", {
 		keyClass : 'key',
 		leftStackClass : 'left',
 		rightStackClass : 'right',
-		titleAttr : {"font-weight":"bold","font-size":"1.2em"},
-		labelAttr : {"font-size":"1em"},
-		valueAttr : {"font-size":"1.1em"},
+		titleAttr : {'font-weight':'bold','font-size':'1.2em'},
+		labelAttr : {'font-size':'1em'},
+		valueAttr : {'font-size':'1.1em'},
 		titleClass : 'title',
 		labelClass : 'label',
 		valueClass : 'value'
@@ -47,7 +47,7 @@ d3.chart("stacked", {
 
 		this.topMargin = options.topMargin || this.config.topMargin;
 
-		this.base = this.base.append("svg");
+		this.base = this.base.append('svg');
 
 		this.height(options.height || 400);
 
@@ -55,12 +55,12 @@ d3.chart("stacked", {
 
 		this.colors = options.colors || chart.config.colors;
 
-		this.base.attr("width", chart.width())
-			.attr("height", chart.height());
+		this.base.attr('width', chart.width())
+			.attr('height', chart.height());
 
-		this.leftWrapper = this.base.append("g").attr('class',chart.config.leftStackClass);
+		this.leftWrapper = this.base.append('g').attr('class',chart.config.leftStackClass);
 
-		this.rightWrapper = this.base.append("g").attr('class',chart.config.rightStackClass);
+		this.rightWrapper = this.base.append('g').attr('class',chart.config.rightStackClass);
 
 		this.y = d3.scale.ordinal();
 
@@ -70,14 +70,14 @@ d3.chart("stacked", {
 
 		/* Right */
 
-		this.layer("rightAxis", this.rightWrapper, {
+		this.layer('rightAxis', this.rightWrapper, {
 			dataBind: dataBind,
 			insert: insert
 		});
 
 		function dataBind(data) {
 			data = data.right
-			return this.selectAll("rect")
+			return this.selectAll('rect')
 						.data(data, function(d,i){
 							return d.stackId;
 						});
@@ -89,16 +89,16 @@ d3.chart("stacked", {
 
 		function onEnter(){
 
-			this.attr("y", function(d) { return chart.y(d.x); })
-				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
+			this.attr('y', function(d) { return chart.y(d.x); })
+				.attr('x', function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
 				.attr('fill',function(d,i){
 					if(varyColors){
 						return chart.colors[0];
 					}
 					return chart.color(d.layer);
 				})
-				.attr("height", getBarHeight)
-				.attr("width", function(d) { return chart.x(d.y)/2; });
+				.attr('height', getBarHeight)
+				.attr('width', function(d) { return chart.x(d.y)/2; });
 
 				// TODO: Move to a new layer? & Improve solution for adding/updating text
 				if(!hideLine || !hideText || !hideLabel || showValue){
@@ -152,7 +152,7 @@ d3.chart("stacked", {
 
 						if(!hideLine){
 							parent.append('line')
-								.style("stroke", strokeColor)
+								.style('stroke', strokeColor)
 								.attr('x1', chart.width()/2)
 								.attr('y1', chart.y(d.x) - height)
 								.attr('x2', chart.width()/2)
@@ -179,10 +179,10 @@ d3.chart("stacked", {
 		}
 
 		function onTrans(){
-			this.attr("y", function(d) { return chart.y(d.x); })
-				.attr("x", function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
-				.attr("height", getBarHeight)
-				.attr("width", function(d) { return chart.x(d.y)/2; });
+			this.attr('y', function(d) { return chart.y(d.x); })
+				.attr('x', function(d) { return (chart.x(d.y0)/2 + chart.width()/2) + space/2; })
+				.attr('height', getBarHeight)
+				.attr('width', function(d) { return chart.x(d.y)/2; });
 
 			if(!hideText || !hideLabel || showValue){
 
@@ -220,36 +220,36 @@ d3.chart("stacked", {
 			/* TODO: Remove nodes */
 		}
 
-		this.layer("rightAxis").on("exit", onExit);
-		this.layer("rightAxis").on("enter", onEnter);
-		this.layer("rightAxis").on("update:transition", onTrans);
+		this.layer('rightAxis').on('exit', onExit);
+		this.layer('rightAxis').on('enter', onEnter);
+		this.layer('rightAxis').on('update:transition', onTrans);
 
 		/* Left */
 
-		this.layer("leftAxis", this.leftWrapper, {
+		this.layer('leftAxis', this.leftWrapper, {
 			dataBind: dataBindLeft,
 			insert: insert
 		});
 
 		function dataBindLeft(data) {
 			data = data.left
-			return this.selectAll("rect")
+			return this.selectAll('rect')
 						.data(data, function(d,i){
 							return d.stackId;
 						});
 		}
 
 		function onEnterLeft(){
-			this.attr("y", function(d) { return chart.y(d.x); })
-				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
+			this.attr('y', function(d) { return chart.y(d.x); })
+				.attr('x', function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
 				.attr('fill',function(d,i){
 					if(varyColors){
 						return chart.colors[1];
 					}
 					return chart.color(d.layer);
 				})
-				.attr("height", getBarHeight)
-				.attr("width", function(d) { return chart.x(d.y)/2; });
+				.attr('height', getBarHeight)
+				.attr('width', function(d) { return chart.x(d.y)/2; });
 
 				if(!hideLabel || showValue){
 
@@ -296,10 +296,10 @@ d3.chart("stacked", {
 		}
 
 		function onTransLeft(){
-			this.attr("y", function(d) { return chart.y(d.x); })
-				.attr("x", function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
-				.attr("height", getBarHeight)
-				.attr("width", function(d) { return chart.x(d.y)/2; });
+			this.attr('y', function(d) { return chart.y(d.x); })
+				.attr('x', function(d) { return (chart.width() - chart.x(d.y) - chart.x(d.y0))/2 - space/2; })
+				.attr('height', getBarHeight)
+				.attr('width', function(d) { return chart.x(d.y)/2; });
 
 			if(!hideLabel || showValue){
 
@@ -338,34 +338,34 @@ d3.chart("stacked", {
 			/* TODO: Remove nodes */
 		}
 
-		this.layer("leftAxis").on("enter", onExitLeft);
-		this.layer("leftAxis").on("enter", onEnterLeft);
-		this.layer("leftAxis").on("update:transition", onTransLeft);
+		this.layer('leftAxis').on('enter', onExitLeft);
+		this.layer('leftAxis').on('enter', onEnterLeft);
+		this.layer('leftAxis').on('update:transition', onTransLeft);
 
 		/* Key */
 
 		if(options.key && options.key.length){
 
-			this.layer("key", this.base.append("g").attr('class',chart.config.keyClass), {
+			this.layer('key', this.base.append('g').attr('class',chart.config.keyClass), {
 
 				dataBind: function(data) {
-					return this.selectAll("rect")
+					return this.selectAll('rect')
 						.data(options.key);
 				},
 
 				insert: function() {
-					return this.append("rect");
+					return this.append('rect');
 				},
 
 				events: {
 					enter: function() {
-						this.attr("x", function(d,i){
+						this.attr('x', function(d,i){
 							return (chart.config.keySpacing * i) + (keyLeftMargin);
 						})
-						.attr("y", chart.config.keyYPos)
-						.attr("height", chart.config.keySquareSize)
-						.attr("width", chart.config.keySquareSize)
-						.style("fill", function(d,i){
+						.attr('y', chart.config.keyYPos)
+						.attr('height', chart.config.keySquareSize)
+						.attr('width', chart.config.keySquareSize)
+						.style('fill', function(d,i){
 							return chart.color(i);
 						}).each(function(d,i){
 							chart.base.select('.' + chart.config.keyClass).append('text')
@@ -391,7 +391,7 @@ d3.chart("stacked", {
 			return this._width;
 		}
 		this._width = newWidth;
-		this.base.attr("width", this._width);
+		this.base.attr('width', this._width);
 		return this;
 	},
 
@@ -400,7 +400,7 @@ d3.chart("stacked", {
 			return this._height;
 		}
 		this._height = newHeight;
-		this.base.attr("height", this._height);
+		this.base.attr('height', this._height);
 		return this;
 	},
 

@@ -34,9 +34,9 @@
 	var interval = 4000;
 
 	setInterval(function(){
-		wagon.draw(espn.gfx.random.spikes());
-		wagon2.draw(espn.gfx.random.spikes());
-		wagon3.draw(espn.gfx.random.spikes());
+		wagon.draw(espn.gfx.random.wagon());
+		wagon2.draw(espn.gfx.random.wagon());
+		wagon3.draw(espn.gfx.random.wagon());
 	},interval);
 
 	var wagon = d3.select("#espn-wagon")
@@ -46,7 +46,7 @@
 		colors : ["#7ace5c","#f88f22","white"]
 	});
 
-	wagon.draw(espn.gfx.random.spikes());
+	wagon.draw(espn.gfx.random.wagon());
 
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
@@ -57,7 +57,7 @@
 		shade : true
 	});
 
-	wagon2.draw(espn.gfx.random.spikes());
+	wagon2.draw(espn.gfx.random.wagon());
 
 	var wagon3 = d3.select("#espn-wagon3")
 	.chart("wagon",{
@@ -67,7 +67,7 @@
 		textPadding : 30
 	});
 
-	wagon3.draw(espn.gfx.random.spikes());
+	wagon3.draw(espn.gfx.random.wagon());
 
 	</script>
 </body>
