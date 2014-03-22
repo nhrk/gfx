@@ -2,43 +2,43 @@
 
 d3.chart('spikes', {
 
-	config : {
-		diameter : 150,
-		maxLabelColor : '#fff',
-		shadeColor : '#fff',
-		gradientDefId : 'radialGradient',
-		gradientColors : ['#7dcc5f','#7ac85b'],
-		colorMap : {
-			'1' : '#8a17a7',
-			'2' : '#642c01',
-			'3' : '#f0d900',
-			'4' : '#e0e0e0',
-			'5' : '#034466',
-			'6' : '#fa280c'
+	config: {
+		diameter: 150,
+		maxLabelColor: '#fff',
+		shadeColor: '#fff',
+		gradientDefId: 'radialGradient',
+		gradientColors: ['#7dcc5f', '#7ac85b'],
+		colorMap: {
+			'1': '#8a17a7',
+			'2': '#642c01',
+			'3': '#f0d900',
+			'4': '#e0e0e0',
+			'5': '#034466',
+			'6': '#fa280c'
 		},
-		offset : 17,
-		strokeWidth : 2,
-		spikesClass : 'spikesClass',
-		pitch : {
-			width : 22,
-			height : 52,
-			radius : 3,
-			fill : '#ffcb92'
+		offset: 17,
+		strokeWidth: 2,
+		spikesClass: 'spikesClass',
+		pitch: {
+			width: 22,
+			height: 52,
+			radius: 3,
+			fill: '#ffcb92'
 		},
-		ring : {
-			width : 95,
-			height : 125,
-			radius : 45, 
-			fill : '#fff',
-			opacity : 0.15
+		ring: {
+			width: 95,
+			height: 125,
+			radius: 45,
+			fill: '#fff',
+			opacity: 0.15
 		},
-		ground : {
-			stroke : '#fef4b7'
+		ground: {
+			stroke: '#fef4b7'
 		},
-		strikerPos : {
-			fill : '#fff',
-			radius : 3,
-			stroke : '#000'
+		strikerPos: {
+			fill: '#fff',
+			radius: 3,
+			stroke: '#000'
 		}
 	},
 
@@ -46,7 +46,7 @@ d3.chart('spikes', {
 
 		var chart = this,
 			diameter = options.diameter || chart.config.diameter,
-			radius = diameter/2,
+			radius = diameter / 2,
 			gradientColors = options.gradientColors || chart.config.gradientColors,
 			shade = options.shade,
 			offset = options.offset || chart.config.offset,
@@ -64,25 +64,25 @@ d3.chart('spikes', {
 			.attr('cx', this.center)
 			.attr('cy', this.center)
 			.attr('r', radius)
-			.attr('stroke-width','5')
+			.attr('stroke-width', '5')
 			.attr('stroke', chart.config.ground.stroke)
 			.attr('fill', 'url(#' + chart.config.gradientDefId + ')');
 
 		// Append Pitch
 		this.base.append('rect')
-			.attr('x', this.center - chart.config.pitch.width/2)
+			.attr('x', this.center - chart.config.pitch.width / 2)
 			.attr('rx', chart.config.pitch.radius)
-			.attr('y', this.center - chart.config.pitch.height/2)
+			.attr('y', this.center - chart.config.pitch.height / 2)
 			.attr('ry', chart.config.pitch.radius)
 			.attr('width', chart.config.pitch.width)
-			.attr('height',chart.config.pitch.height)
-			.attr('fill',chart.config.pitch.fill);
+			.attr('height', chart.config.pitch.height)
+			.attr('fill', chart.config.pitch.fill);
 
 		// Append 30 yards circle
 		this.base.append('rect')
-			.attr('x', this.center - chart.config.ring.width/2)
+			.attr('x', this.center - chart.config.ring.width / 2)
 			.attr('rx', chart.config.ring.radius)
-			.attr('y', this.center - chart.config.ring.height/2)
+			.attr('y', this.center - chart.config.ring.height / 2)
 			.attr('ry', chart.config.ring.radius)
 			.attr('width', chart.config.ring.width)
 			.attr('height', chart.config.ring.height)
@@ -93,9 +93,9 @@ d3.chart('spikes', {
 
 		// Gradient
 		this.gradient = this.base.append('defs')
-							.append('radialGradient')
-							.attr('id', chart.config.gradientDefId)
-							.attr('r', '65%');
+			.append('radialGradient')
+			.attr('id', chart.config.gradientDefId)
+			.attr('r', '65%');
 
 		this.gradient.append('stop')
 			.attr('offset', '0%')
@@ -117,25 +117,25 @@ d3.chart('spikes', {
 
 		function onEnter() {
 
-			this.attr('d',function(d,i){
-					return 'M' + chart.center + ',' + (chart.center - offset) + 'L' + d.x + ',' + d.y;
-				})
-				.attr('stroke',function(d,i){
+			this.attr('d', function(d, i) {
+				return 'M' + chart.center + ',' + (chart.center - offset) + 'L' + d.x + ',' + d.y;
+			})
+				.attr('stroke', function(d, i) {
 					return colorMap[d.runs] || '#fff';
 				})
-				.attr('stroke-width',chart.config.strokeWidth)
-				.on('mouseover',function(d,i){
+				.attr('stroke-width', chart.config.strokeWidth)
+				.on('mouseover', function(d, i) {
 					var bbox = this.getBBox();
-					console.log('comms:',d.comms,'x:',bbox.x,'y:',bbox.y,'runs:',d.runs);
+					console.log('comms:', d.comms, 'x:', bbox.x, 'y:', bbox.y, 'runs:', d.runs);
 				});
 		}
 
 		function onTrans() {
-			
-			this.attr('d',function(d,i){
-					return 'M' + chart.center + ',' + (chart.center - offset) + 'L' + d.x + ',' + d.y;
-				})
-				.attr('stroke',function(d,i){
+
+			this.attr('d', function(d, i) {
+				return 'M' + chart.center + ',' + (chart.center - offset) + 'L' + d.x + ',' + d.y;
+			})
+				.attr('stroke', function(d, i) {
 					return colorMap[d.runs] || '#fff';
 				});
 		}
@@ -146,12 +146,12 @@ d3.chart('spikes', {
 		}
 
 		function insert() {
-			return this.append('path').attr('class',chart.config.spikesClass);
+			return this.append('path').attr('class', chart.config.spikesClass);
 		}
 
 		var spikes = this.layer('spikes', this.wrapper, {
-		  dataBind: dataBind,
-		  insert: insert
+			dataBind: dataBind,
+			insert: insert
 		});
 
 		spikes.on('enter', onEnter);
