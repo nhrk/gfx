@@ -3,7 +3,7 @@
 d3.chart('wagon', {
 
 	config: {
-		colors: ['limegreen', 'orangered', 'white'],
+		colors: ['#7dcc5f', '#f88f22', '#fff'],
 		diameter: 150,
 		padding: 0,
 		textPadding: 35,
@@ -30,7 +30,12 @@ d3.chart('wagon', {
 			maxLabelColor = options.maxLabelColor || chart.config.maxLabelColor,
 			gradientColors = options.gradientColors || chart.config.gradientColors,
 			shade = options.shade,
+			filterZone,
 			colors = (options.colors && options.colors.length == 3) ? options.colors : chart.config.colors;
+
+		if (options.type === 'filter') {
+			this.filter = true;
+		}
 
 		this.arc = d3.svg.arc()
 			.outerRadius(radius - padding)
@@ -83,6 +88,10 @@ d3.chart('wagon', {
 					return d.data.max ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
 				});
 
+			if (chart.filter) {
+				this.on('click', filterZone.toggle);
+			}
+
 			this.append('text')
 				.attr('transform', function(d) {
 					var c = chart.arc.centroid(d),
@@ -99,8 +108,70 @@ d3.chart('wagon', {
 					return (d.data.max) ? maxLabelColor : labelAttr.fill;
 				})
 				.text(function(d) {
-					return d.data.runs;
+					return (chart.filter) ? '' : d.data.runs;
 				});
+		}
+
+		if (chart.filter) {
+
+			filterZone = {
+				toggle: function(d) {
+
+					d = d || [];
+
+					d = (Object.prototype.toString.call(d) == '[object Array]') ? d : [d.data.zone];
+
+					chart.selectedZones = chart.selectedZones || {};
+
+					for (var i = d.length - 1; i >= 0; i--) {
+						if (!chart.selectedZones[d[i]]) {
+							chart.selectedZones[d[i]] = true;
+						} else {
+							chart.selectedZones[d[i]] = false;
+						}
+					}
+
+					chart.wrapper.selectAll('.' + chart.config.arcClass + ' path')
+						.each(function(d, i) {
+							d3.select(this).style('fill', function() {
+								return (chart.selectedZones[d.data.zone]) ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
+							});
+						});
+
+					console.log('zones :', getSelectedZones());
+					return getSelectedZones();
+				},
+				all: function() {
+					chart.selectedZones = {
+						"1": 1,
+						"2": 1,
+						"3": 1,
+						"4": 1,
+						"5": 1,
+						"6": 1,
+						"7": 1,
+						"8": 1
+					};
+					filterZone.toggle();
+				},
+				none: function() {
+					chart.selectedZones = {};
+					filterZone.toggle();
+				}
+			}
+
+			// Make this api public
+			this.filterZone = filterZone;
+		}
+
+		function getSelectedZones() {
+			var arr = [];
+			for (var z in chart.selectedZones) {
+				if ( !! chart.selectedZones[z]) {
+					arr.push(z);
+				}
+			}
+			return arr;
 		}
 
 		function onTrans() {
@@ -108,7 +179,7 @@ d3.chart('wagon', {
 				var g = d3.select(this);
 				g.select('text')
 					.text(function() {
-						return d.data.runs;
+						return (chart.filter) ? '' : d.data.runs;
 					})
 					.attr('fill', function(d, i) {
 						// override fill color
@@ -161,6 +232,21 @@ d3.chart('wagon', {
 	},
 
 	transform: function(dataSrc) {
+		if (this.filter) {
+			return this.getObject();
+		}
 		return dataSrc;
+	},
+
+	getObject: function() {
+		// returns a dummy object to create a zone filter
+		var arr = [];
+		for (var i = 1; i <= 8; i++) {
+			arr.push({
+				runs: 1,
+				zone: i
+			})
+		}
+		return arr;
 	}
 });

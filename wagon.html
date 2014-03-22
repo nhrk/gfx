@@ -24,6 +24,7 @@
 	<div id="espn-wagon" class="espn-gfx"></div>
 	<div id="espn-wagon2" class="espn-gfx"></div>
 	<div id="espn-wagon3" class="espn-gfx"></div>
+	<div id="espn-wagon4" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.random.js"></script>
@@ -51,7 +52,7 @@
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
 		diameter : 225,
-		colors : ["#7ace5c","#f88f22","white"],
+		colors : ["#7ace5c","#f88f22","#fff"],
 		labelAttr : {'fill':"#000", "font-size":"16px", "font-weight": "bold"},
 		textPadding : 60,
 		shade : true
@@ -68,6 +69,14 @@
 	});
 
 	wagon3.draw(espn.gfx.random.wagon());
+
+	var wagon4 = d3.select("#espn-wagon4")
+	.chart("wagon",{
+		diameter : 47,
+		type : 'filter'
+	});
+
+	wagon4.draw();
 
 	</script>
 </body>
