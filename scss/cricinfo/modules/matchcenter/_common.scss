@@ -15,16 +15,24 @@ $color-mcr-blue-green-light: #66ccff;
 $color-mcr-light-blue: #ccccff;
 $color-mcr-dark-blue: #006699;
 $color-mcr-black: #000;
+$color-mcr-orange: #fd8f20;
 // Width of the mugshot
 $width-inn-mugshot: 46px;
 $hmargin-inn-mugshot: 4px;
-$width-batbowl-mugshot: $width-inn-mugshot - 3;
-$hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 1;
+$width-batbowl-mugshot: $width-inn-mugshot;
+$hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 3;
 
 // Overide default padding on columns
 @mixin remove-lr-padding{
     padding-left: 0;
     padding-right: 0;
+}
+
+@mixin bat-bowl-mugshots-box{
+    width: $width-batbowl-mugshot;
+    margin: 0px;
+    padding-left:2px;
+    padding-right:2px;
 }
 
 #mcr{
@@ -97,13 +105,13 @@ $hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 1;
     border-top: 1px solid $color-mcr-dark-blue;
 }
 
-ul.mcr-all-batsmen,
-ul.mcr-all-bowlers{
-    padding: 13px 0;
+.mcr-filters{
+    @include remove-lr-padding;
 }
 
 ul.mcr-all-batsman-filters,
 ul.mcr-all-bowler-filters{
+    text-align: center;
     margin-bottom: 0;
 }
 
@@ -111,6 +119,7 @@ ul.mcr-all-bowler-filters{
     float: left;
     width: $width-inn-mugshot;
     margin: 0px $hmargin-inn-mugshot;
+    padding: 13px 0;
     a{
         font-size: 10px;
         font-family: BentonSansBold, Arial, sans-serif;
@@ -140,4 +149,22 @@ ul.mcr-all-bowler-filters{
         border-radius: 100%;
     }
     text-align: center;
+}
+
+.mcr-selected-player{
+    background-color: $color-mcr-orange;
+    a{
+        color: $color-mcr-white;
+        &:hover{
+            text-decoration: none;
+            color: $color-mcr-white;
+        }
+    }
+}
+
+// @todo - remove later
+p.dummy{
+    padding: 20px;
+    font-size: 18px;
+    margin-bottom: 0;
 }

@@ -1476,16 +1476,22 @@ svg circle { shape-rendering: auto; }
 
 .mcr-bowlers { border-top: 1px solid #006699; }
 
-ul.mcr-all-batsmen, ul.mcr-all-bowlers { padding: 13px 0; }
+.mcr-filters { padding-left: 0; padding-right: 0; }
 
-ul.mcr-all-batsman-filters, ul.mcr-all-bowler-filters { margin-bottom: 0; }
+ul.mcr-all-batsman-filters, ul.mcr-all-bowler-filters { text-align: center; margin-bottom: 0; }
 
-.mcr-all-player-mugshot { float: left; width: 46px; margin: 0px 4px; text-align: center; }
+.mcr-all-player-mugshot { float: left; width: 46px; margin: 0px 4px; padding: 13px 0; text-align: center; }
 .mcr-all-player-mugshot a { font-size: 10px; font-family: BentonSansBold, Arial, sans-serif; display: block; color: #006699; text-transform: uppercase; }
 .mcr-all-player-mugshot a:hover { text-decoration: none; color: #ff3366; }
 .mcr-all-player-mugshot a.striker { color: #ff3366; }
 .mcr-all-player-mugshot a.nonstriker { color: black; }
 .mcr-all-player-mugshot img { display: block; width: 46px; height: 46px; border: 2px solid #dedede; -webkit-border-radius: 100%; -moz-border-radius: 100%; -ms-border-radius: 100%; -o-border-radius: 100%; border-radius: 100%; }
+
+.mcr-selected-player { background-color: #fd8f20; }
+.mcr-selected-player a { color: white; }
+.mcr-selected-player a:hover { text-decoration: none; color: white; }
+
+p.dummy { padding: 20px; font-size: 18px; margin-bottom: 0; }
 
 /* Innings card styles */
 .mcr-inn-current-players { border-right: 1px solid #666666; padding-left: 0; padding-right: 0; }
@@ -1529,11 +1535,13 @@ ul.mcr-all-batsman-filters, ul.mcr-all-bowler-filters { margin-bottom: 0; }
 
 .mcr-inn-partnerships-chart { padding-left: 8px; }
 
-/* Batsman card styles */
-.mcr-bat .mcr-all-player-mugshot { width: 43px; margin: 0px 3px; }
+.mcr-inn .mcr-filters { display: none; }
 
 /* Batsman card styles */
-.mcr-bowl .mcr-all-player-mugshot { width: 43px; margin: 0px 3px; }
+.mcr-bat .mcr-all-player-mugshot { width: 46px; margin: 0px; padding-left: 2px; padding-right: 2px; }
+
+/* Batsman card styles */
+.mcr-bowl .mcr-all-player-mugshot { width: 46px; margin: 0px; padding-left: 2px; padding-right: 2px; }
 
 /*
 * Styles for 1024 screen size

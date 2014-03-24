@@ -1,5 +1,4 @@
 /* Batsman card styles */
 .mcr-bat .mcr-all-player-mugshot{
-    width: $width-batbowl-mugshot;
-    margin: 0px $hmargin-batbowl-mugshot;
+    @include bat-bowl-mugshots-box;
 }
