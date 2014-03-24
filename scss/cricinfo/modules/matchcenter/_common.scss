@@ -1,0 +1,145 @@
+/* Match Center styles which are common to all cards */
+
+// Often used colors on Match Center
+$color-mcr-white: #fff;
+$color-mcr-light-gray: #F2F2F2;
+$color-mcr-light-gray-1: #DEDEDE;
+$color-mcr-dark-gray: #3D3D3D;
+$color-mcr-dark-gray-1: #B2B2B2;
+$color-mcr-dark-gray-2: #535353;
+$color-mcr-dark-gray-3: #666666;
+$color-mcr-dark-gray-4: #333333;
+$color-mcr-light-red: #ff3366;
+$color-mcr-blue-green-dark: #3399cc;
+$color-mcr-blue-green-light: #66ccff;
+$color-mcr-light-blue: #ccccff;
+$color-mcr-dark-blue: #006699;
+$color-mcr-black: #000;
+// Width of the mugshot
+$width-inn-mugshot: 46px;
+$hmargin-inn-mugshot: 4px;
+$width-batbowl-mugshot: $width-inn-mugshot - 3;
+$hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 1;
+
+// Overide default padding on columns
+@mixin remove-lr-padding{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.mcr{
+    font-family: BentonSans,Arial,sans-serif;
+    border: 1px solid $color-mcr-dark-gray-4;
+}
+
+.mcr-inn .row,
+.mcr-bat .row,
+.mcr-bowl .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.mcr-overview{
+    background-color: $color-mcr-dark-gray;
+    .mcr-all-current-inning .row{
+        background-color: $color-mcr-white;
+    }
+}
+
+.mcr-all-innings{
+    margin-top:9px;
+    select{
+        margin: 0;
+    }
+}
+
+.mcr-all-fours,
+.mcr-all-sixes,
+.mcr-all-dots,
+.mcr-all-rr,
+.mcr-all-control,
+//.mcr-inn-pname,
+.mcr-all-bowler-meta{
+    background-color: $color-mcr-dark-gray;
+    p{
+        font-size: 11px;
+        color: $color-mcr-dark-gray-1;
+        font-style: italic;
+        margin: 2px 0 2px 0;
+        text-align: center;
+    }
+    .mcr-data{
+        font-style: normal;
+        font-family: BentonSansBold, Arial, sans-serif;
+        color: $color-mcr-white;
+    }
+    border-left: 1px solid $color-mcr-dark-gray-2;
+    padding: 3px 0px 3px 0px;
+}
+
+.mcr-all-score{
+    @include remove-lr-padding;
+    padding-left: 6px;
+    font-family: BentonSansBold, Arial, sans-serif;
+    background-color: $color-mcr-white;
+    font-size: 18px;
+    margin-top: 12px;
+}
+
+.mcr-all-control{
+    padding: 4px 8px 8px 8px;
+}
+
+.mcr-batsmen,
+.mcr-bowlers{
+    background-color: $color-mcr-light-gray;
+}
+
+.mcr-bowlers{
+    border-top: 1px solid $color-mcr-dark-blue;
+}
+
+ul.mcr-all-batsmen,
+ul.mcr-all-bowlers{
+    padding: 13px 0;
+}
+
+ul.mcr-all-batsman-filters,
+ul.mcr-all-bowler-filters{
+    margin-bottom: 0;
+}
+
+.mcr-all-player-mugshot{
+    float: left;
+    width: $width-inn-mugshot;
+    margin: 0px $hmargin-inn-mugshot;
+    a{
+        font-size: 10px;
+        font-family: BentonSansBold, Arial, sans-serif;
+        display: block;
+        color: $color-mcr-dark-blue;
+        text-transform: uppercase;
+        &:hover{
+            text-decoration: none;
+            color: $color-mcr-light-red;
+        }
+    }
+    a.striker{
+        color: $color-mcr-light-red;
+    }
+    a.nonstriker{
+        color: $color-mcr-black;
+    }
+    img{
+        display: block;
+        width: $width-inn-mugshot;
+        height: $width-inn-mugshot;
+        border: 2px solid $color-mcr-light-gray-1;
+        -webkit-border-radius: 100%;
+       -moz-border-radius: 100%;
+       -ms-border-radius: 100%;
+       -o-border-radius: 100%;
+        border-radius: 100%;
+    }
+    text-align: center;
+}

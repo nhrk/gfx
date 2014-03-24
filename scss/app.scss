@@ -45,7 +45,10 @@
 
 // Include match center specific styles
 @import "cricinfo/modules/matchcenter/svg";
+@import "cricinfo/modules/matchcenter/common";
 @import "cricinfo/modules/matchcenter/innings";
+@import "cricinfo/modules/matchcenter/batsman";
+@import "cricinfo/modules/matchcenter/bowler";
 
 // Include media or devices specific stylesheets
 @import "cricinfo/devices/medium";
