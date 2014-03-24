@@ -34,23 +34,23 @@ $width-inn-mugshot: 46px;
 
 .mcr-overview{
     background-color: $color-mcr-dark-gray;
-    .mcr-inn-current .row{
+    .mcr-all-current-inning .row{
         background-color: $color-mcr-white;
     }
 }
 
-.mcr-inn-all{
+.mcr-all-innings{
     margin-top:9px;
     select{
         margin: 0;
     }
 }
 
-.mcr-inn-fours,
-.mcr-inn-sixes,
-.mcr-inn-dots,
-.mcr-inn-rr,
-.mcr-inn-control,
+.mcr-all-fours,
+.mcr-all-sixes,
+.mcr-all-dots,
+.mcr-all-rr,
+.mcr-all-control,
 //.mcr-inn-pname,
 .mcr-inn-bowler-meta{
     background-color: $color-mcr-dark-gray;
@@ -70,7 +70,7 @@ $width-inn-mugshot: 46px;
     padding: 3px 0px 3px 0px;
 }
 
-.mcr-inn-score{
+.mcr-all-score{
     @include remove-lr-padding;
     padding-left: 6px;
     font-family: BentonSansBold, Arial, sans-serif;
@@ -79,7 +79,7 @@ $width-inn-mugshot: 46px;
     margin-top: 12px;
 }
 
-.mcr-inn-control{
+.mcr-all-control{
     padding: 4px 8px 8px 8px;
 }
 
@@ -93,13 +93,13 @@ ul.mcr-inn-bowler-filters{
     margin-bottom: 0;
 }
 
-ul.mcr-inn-batsman-list,
-ul.mcr-inn-bowler-list{
+ul.mcr-all-batsmen,
+ul.mcr-all-bowlers{
     padding: 13px 0;
 }
 
 
-.mcr-inn-player-mugshot{
+.mcr-all-player-mugshot{
     float: left;
     width: $width-inn-mugshot;
     margin: 0px 4px;
@@ -149,8 +149,8 @@ ul.mcr-inn-bowler-list{
         // Second player should not have a right border
         border-right: none;
     }
-    .mcr-inn-fours,
-    .mcr-inn-sixes,
+    .mcr-all-fours,
+    .mcr-all-sixes,
     .mcr-inn-bowler-meta{
         @include remove-lr-padding;
         p{
