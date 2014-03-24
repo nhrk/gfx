@@ -25,6 +25,13 @@
 	<div id="espn-wagon2" class="espn-gfx"></div>
 	<div id="espn-wagon3" class="espn-gfx"></div>
 	<div id="espn-wagon4" class="espn-gfx"></div>
+	<fieldset style='float:left;clear:both;'>
+		<legend>Filter Zones</legend>
+		Click on any zone to select or
+		<input type="button" name="all" value="Select All">
+		<input type="button" name="none" value="Select None">
+		<input type="button" name="toggle" value="Toggle(1,7)">
+	</fieldset>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.random.js"></script>
@@ -77,6 +84,19 @@
 	});
 
 	wagon4.draw();
+
+	d3.select('input[name=all]').on('click',function(){
+		wagon4.filterZone.all();
+	});
+
+	d3.select('input[name=none]').on('click',function(){
+		wagon4.filterZone.none();
+	});
+
+	d3.select('input[name=toggle]').on('click',function(){
+		// Pass an array with zone numbers to toggle slection 
+		wagon4.filterZone.toggle([1,7]);
+	});
 
 	</script>
 </body>
