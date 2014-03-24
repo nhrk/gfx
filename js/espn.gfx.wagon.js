@@ -31,17 +31,21 @@ d3.chart('wagon', {
 			gradientColors = options.gradientColors || chart.config.gradientColors,
 			shade = options.shade,
 			filterZone,
-			colors = (options.colors && options.colors.length == 3) ? options.colors : chart.config.colors;
+			colors = (options.colors && options.colors.length == 3) ? options.colors : chart.config.colors,
+			wrapper,
+			arc,
+			pie,
+			gradient;
 
 		if (options.type === 'filter') {
-			this.filter = true;
+			this.filterZone = true;
 		}
 
-		this.arc = d3.svg.arc()
+		arc = d3.svg.arc()
 			.outerRadius(radius - padding)
 			.innerRadius(0);
 
-		this.pie = d3.layout.pie()
+		pie = d3.layout.pie()
 			.sort(null)
 			.value(function(d) {
 				return 1;
@@ -53,20 +57,20 @@ d3.chart('wagon', {
 
 		this.height(diameter);
 
-		this.wrapper = this.base.append('g')
+		wrapper = this.base.append('g')
 			.attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
 
-		this.gradient = this.base.append('defs')
+		gradient = this.base.append('defs')
 			.append('radialGradient')
 			.attr('id', chart.config.gradientDefId)
 			.attr('r', '65%');
 
-		this.gradient.append('stop')
+		gradient.append('stop')
 			.attr('offset', '0%')
 			.attr('stop-color', chart.config.gradientColors[0])
 			.attr('stop-opacity', '1');
 
-		this.gradient.append('stop')
+		gradient.append('stop')
 			.attr('offset', '100%')
 			.attr('stop-color', chart.config.gradientColors[1])
 			.attr('stop-opacity', '1');
@@ -82,19 +86,19 @@ d3.chart('wagon', {
 
 		function onEnter() {
 			this.append('path')
-				.attr('d', chart.arc)
+				.attr('d', arc)
 				.style('stroke', colors[2])
 				.style('fill', function(d, i) {
 					return d.data.max ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
 				});
 
-			if (chart.filter) {
+			if (chart.filterZone) {
 				this.on('click', filterZone.toggle);
 			}
 
 			this.append('text')
 				.attr('transform', function(d) {
-					var c = chart.arc.centroid(d),
+					var c = arc.centroid(d),
 						x = c[0],
 						y = c[1],
 						h = Math.sqrt(x * x + y * y);
@@ -108,11 +112,11 @@ d3.chart('wagon', {
 					return (d.data.max) ? maxLabelColor : labelAttr.fill;
 				})
 				.text(function(d) {
-					return (chart.filter) ? '' : d.data.runs;
+					return (chart.filterZone) ? '' : d.data.runs;
 				});
 		}
 
-		if (chart.filter) {
+		if (chart.filterZone) {
 
 			filterZone = {
 				toggle: function(d) {
@@ -131,7 +135,7 @@ d3.chart('wagon', {
 						}
 					}
 
-					chart.wrapper.selectAll('.' + chart.config.arcClass + ' path')
+					wrapper.selectAll('.' + chart.config.arcClass + ' path')
 						.each(function(d, i) {
 							d3.select(this).style('fill', function() {
 								return (chart.selectedZones[d.data.zone]) ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
@@ -179,7 +183,7 @@ d3.chart('wagon', {
 				var g = d3.select(this);
 				g.select('text')
 					.text(function() {
-						return (chart.filter) ? '' : d.data.runs;
+						return (chart.filterZone) ? '' : d.data.runs;
 					})
 					.attr('fill', function(d, i) {
 						// override fill color
@@ -195,15 +199,15 @@ d3.chart('wagon', {
 		}
 
 		function dataBind(data) {
-			return chart.wrapper.selectAll('.' + chart.config.arcClass)
-				.data(chart.pie(data));
+			return wrapper.selectAll('.' + chart.config.arcClass)
+				.data(pie(data));
 		}
 
 		function insert() {
 			return this.append('g').attr('class', chart.config.arcClass);
 		}
 
-		var wagon = this.layer('wagon', this.wrapper, {
+		var wagon = this.layer('wagon', wrapper, {
 			dataBind: dataBind,
 			insert: insert
 		});
@@ -232,7 +236,7 @@ d3.chart('wagon', {
 	},
 
 	transform: function(dataSrc) {
-		if (this.filter) {
+		if (this.filterZone) {
 			return this.getObject();
 		}
 		return dataSrc;
