@@ -23,7 +23,8 @@ d3.chart('bar', {
 			'font-weight': 'bold'
 		},
 		markerClass: 'markerClass',
-		gradientId: 'linearGradient'
+		gradientId: 'linearGradient',
+		count: 0
 	},
 
 	initialize: function(options) {
@@ -167,9 +168,11 @@ d3.chart('bar', {
 
 	appendGradient: function(barHeight, barPosY) {
 
+		this.config.count++;
+
 		var gradient = this.base.append('svg:defs')
 			.append('svg:linearGradient')
-			.attr('id', this.config.gradientId)
+			.attr('id', this.config.gradientId + '_' + this.config.count)
 			.attr('x1', '0%')
 			.attr('y1', '0%')
 			.attr('x2', '100%')
@@ -196,7 +199,7 @@ d3.chart('bar', {
 			.attr('y', barPosY)
 			.attr('height', barHeight)
 			.attr('width', this.width())
-			.style('fill', 'url(#' + this.config.gradientId + ')');
+			.style('fill', 'url(#' + this.config.gradientId + '_' + this.config.count + ')');
 	},
 
 	width: function(newWidth) {
