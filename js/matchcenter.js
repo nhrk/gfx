@@ -34,10 +34,16 @@ espn.matchcenter = (function($) {
         var playerType = $this.data('ptype');
         var playerId = $this.data('pid');
         var playerName = $.trim($this.text());
+
+        // Return if necessary data attributes are missing
+        if (typeof playerType == 'undefined' || typeof playerId == 'undefined') {
+            return false;
+        }
+
         //console.log('handlePlayerCard', playerType, playerId, playerName);
 
         // Remove previous classes and add desired card type class
-        $mcr.removeClass().addClass('mcr-'+playerType);
+        $mcr.removeClass().addClass('mcr-' + playerType);
         // Make player list 18 column to accomodate filters
         $mcr.find('.mcr-playerlist')
             .removeClass('large-20')
@@ -45,11 +51,11 @@ espn.matchcenter = (function($) {
 
         // @tod - dummy data, remove later
         var lookup = {
-            bat : 'Batsman',
+            bat: 'Batsman',
             bowl: 'Bowler'
         };
         var content = '<p class="dummy">' + lookup[playerType] +
-                        ' Card for ' + playerName + '</p>';
+            ' Card for ' + playerName + '</p>';
 
         // Update visualization content
         $mcr.children('.mcr-vis').html(content);
@@ -60,7 +66,6 @@ espn.matchcenter = (function($) {
         $mcr.find('.mcr-all-player-mugshot').removeClass('mcr-selected-player');
         // Add highlighter classes
         $this.parent().addClass('mcr-selected-player');
-        $this.addClass('selectedPlayer');
 
         return false;
     }
