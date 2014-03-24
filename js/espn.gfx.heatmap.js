@@ -40,13 +40,15 @@ d3.chart("heatmap", {
 			wicketColor = options.wicketColor || chart.config.wicketColor,
 			colorRange = options.colorRange || this.config.colorRange,
 			keyTextAttr = options.keyTextAttr || this.config.keyTextAttr,
-			margin = 0;
+			margin = 0,
+			key,
+			wrapper;
 
 		this.base = this.base.append("svg");
 
-		this.wrapper = this.base.append('g');
+		wrapper = this.base.append('g');
 
-		this.key = this.base.append('g').attr('class', chart.config.keyClass);
+		key = this.base.append('g').attr('class', chart.config.keyClass);
 
 		this.width(options.width || 200);
 
@@ -54,8 +56,8 @@ d3.chart("heatmap", {
 
 		if (legends) {
 			margin = chart.config.margin;
-			this.wrapper.attr('transform', 'translate(' + (margin * 2) + ',' + (margin * 2) + ')')
-			this.renderLegends(margin, keyTextAttr);
+			wrapper.attr('transform', 'translate(' + (margin * 2) + ',' + (margin * 2) + ')')
+			this.renderLegends(key, keyTextAttr, margin);
 		}
 
 		squareHeight = (this.height() - margin) / chart.config.gridSize;
@@ -176,7 +178,7 @@ d3.chart("heatmap", {
 			return this.append('g').insert("rect", "line");
 		}
 
-		var zones = this.layer("zones", this.wrapper, {
+		var zones = this.layer("zones", wrapper, {
 			dataBind: dataBind,
 			insert: insert
 		});
@@ -186,7 +188,7 @@ d3.chart("heatmap", {
 
 	},
 
-	renderLegends: function(margin, keyTextAttr) {
+	renderLegends: function(keyEl, keyTextAttr, margin) {
 		var chart = this,
 			key = chart.config.key,
 			keyText,
@@ -196,7 +198,7 @@ d3.chart("heatmap", {
 
 			for (var j = 0, jLen = key[i].length; j < jLen; j++) {
 
-				keyText = chart.key.append('text').text(key[i][j])
+				keyText = keyEl.append('text').text(key[i][j])
 					.attr('class', chart.config.keyTextClass)
 					.attr(keyTextAttr);
 

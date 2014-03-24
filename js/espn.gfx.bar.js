@@ -35,13 +35,18 @@ d3.chart('bar', {
 			valAttr = options.valAttr || this.config.valAttr,
 			textPosY = options.textPosY || this.config.textPosY,
 			textPosX = options.textPosX || this.config.textPosX,
-			hideLabel = (!options.hideLabel),
+			showLabel = (!options.hideLabel),
 			colorMeter = options.colorMeter,
-			colors = options.colors || this.config.colors;
+			colors = options.colors || this.config.colors,
+			label,
+			showMarker,
+			barHeight,
+			barPosY,
+			wrapper;
 
-		chart.barPosY = options.barPosY || this.config.barPosY;
+		barPosY = options.barPosY || this.config.barPosY;
 
-		chart.barHeight = options.barHeight || this.config.barHeight;
+		barHeight = options.barHeight || this.config.barHeight;
 
 		this.base = this.base.append('svg');
 
@@ -49,17 +54,17 @@ d3.chart('bar', {
 
 		this.height(options.height || 80);
 
-		this.showMarker = ( !! options.marker);
+		showMarker = ( !! options.marker);
 
 		if (colorMeter) {
 			this.base.append('rect').attr('class', chart.config.linearGradient);
-			this.generateGradient();
+			this.appendGradient(barHeight, barPosY);
 		}
 
-		this.wrapper = this.base.append('g');
+		wrapper = this.base.append('g');
 
-		if (hideLabel) {
-			this.label = chart.base.append('text')
+		if (showLabel) {
+			label = chart.base.append('text')
 				.text(options.title || 'Percentage')
 				.attr('dx', textPosX)
 				.attr('dy', textPosY)
@@ -71,13 +76,13 @@ d3.chart('bar', {
 			var length = this.chart().length;
 
 			this.attr('x', function(d, i) {
-				return (i == 0) ? 0 : chart.width() - chart.width() * d.percent / 100;
+				return (i === 0) ? 0 : chart.width() - chart.width() * d.percent / 100;
 			})
-				.attr('y', chart.barPosY)
+				.attr('y', barPosY)
 				.attr('width', function(d, i) {
 					return chart.width() * d.percent / 100
 				})
-				.attr('height', chart.barHeight)
+				.attr('height', barHeight)
 				.attr('fill', function(d, i) {
 					if (colorMeter && i === 0) {
 						return 'transparent';
@@ -90,14 +95,14 @@ d3.chart('bar', {
 
 					var parent = d3.select(this.parentNode);
 
-					if (hideLabel && i === 0) {
+					if (showLabel && i === 0) {
 						parent
 							.append('text')
 							.text(function() {
 								return d.percent;
 							})
 							.attr('dx', function() {
-								var bbox = chart.label[0][0].getBBox();
+								var bbox = label[0][0].getBBox();
 								return bbox.width + chart.config.textPaddingLeft;
 							})
 							.attr('dy', textPosY)
@@ -105,11 +110,11 @@ d3.chart('bar', {
 							.attr('text-anchor', 'start');
 					}
 
-					if (chart.showMarker && i === 1) {
+					if (showMarker && i === 1) {
 						parent.append('path')
 							.attr('class', chart.config.markerClass)
 							.attr('d', d3.svg.symbol().type('triangle-up'))
-							.attr('transform', 'translate(' + (chart.width() - chart.width() * d.percent / 100) + ',' + (chart.barPosY + 4) + '),scale(0.7,0.7)');
+							.attr('transform', 'translate(' + (chart.width() - chart.width() * d.percent / 100) + ',' + (barPosY + 4) + '),scale(0.7,0.7)');
 					}
 				});
 		}
@@ -134,7 +139,7 @@ d3.chart('bar', {
 					});
 
 				chart.base.select('.' + chart.config.markerClass).transition(350)
-					.attr('transform', 'translate(' + (chart.width() - chart.width() * d.percent / 100) + ',' + (chart.barPosY + 4) + '),scale(0.7,0.7)');
+					.attr('transform', 'translate(' + (chart.width() - chart.width() * d.percent / 100) + ',' + (barPosY + 4) + '),scale(0.7,0.7)');
 			})
 
 		}
@@ -150,7 +155,7 @@ d3.chart('bar', {
 			return this.append('g').insert('rect', 'line');
 		}
 
-		var bars = this.layer('bars', this.wrapper, {
+		var bars = this.layer('bars', wrapper, {
 			dataBind: dataBind,
 			insert: insert
 		});
@@ -160,9 +165,9 @@ d3.chart('bar', {
 
 	},
 
-	generateGradient: function() {
+	appendGradient: function(barHeight, barPosY) {
 
-		this.gradient = this.base.append('svg:defs')
+		var gradient = this.base.append('svg:defs')
 			.append('svg:linearGradient')
 			.attr('id', this.config.gradientId)
 			.attr('x1', '0%')
@@ -171,25 +176,25 @@ d3.chart('bar', {
 			.attr('y2', '0%')
 			.attr('spreadMethod', 'pad');
 
-		this.gradient.append('svg:stop')
+		gradient.append('svg:stop')
 			.attr('offset', '0%')
 			.attr('stop-color', 'rgb(255,0,0)')
 			.attr('stop-opacity', 1);
 
-		this.gradient.append('svg:stop')
+		gradient.append('svg:stop')
 			.attr('offset', '70%')
 			.attr('stop-color', 'rgb(255,255,0)')
 			.attr('stop-opacity', 1);
 
-		this.gradient.append('svg:stop')
+		gradient.append('svg:stop')
 			.attr('offset', '100%')
 			.attr('stop-color', 'green')
 			.attr('stop-opacity', 1);
 
 		this.base
 			.select('.' + this.config.linearGradient)
-			.attr('y', this.barPosY)
-			.attr('height', this.barHeight)
+			.attr('y', barPosY)
+			.attr('height', barHeight)
 			.attr('width', this.width())
 			.style('fill', 'url(#' + this.config.gradientId + ')');
 	},

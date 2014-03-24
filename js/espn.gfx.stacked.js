@@ -50,7 +50,9 @@ d3.chart('stacked', {
 			valueAttr = options.valueAttr || this.config.valueAttr,
 			labelPos = options.labelPos,
 			varyColors = options.varyColors,
-			space = options.space || this.config.space;
+			space = options.space || this.config.space,
+			leftWrapper,
+			rightWrapper;
 
 		this.topMargin = options.topMargin || this.config.topMargin;
 
@@ -65,9 +67,9 @@ d3.chart('stacked', {
 		this.base.attr('width', chart.width())
 			.attr('height', chart.height());
 
-		this.leftWrapper = this.base.append('g').attr('class', chart.config.leftStackClass);
+		leftWrapper = this.base.append('g').attr('class', chart.config.leftStackClass);
 
-		this.rightWrapper = this.base.append('g').attr('class', chart.config.rightStackClass);
+		rightWrapper = this.base.append('g').attr('class', chart.config.rightStackClass);
 
 		this.y = d3.scale.ordinal();
 
@@ -77,7 +79,7 @@ d3.chart('stacked', {
 
 		/* Right */
 
-		this.layer('rightAxis', this.rightWrapper, {
+		this.layer('rightAxis', rightWrapper, {
 			dataBind: dataBind,
 			insert: insert
 		});
@@ -245,7 +247,7 @@ d3.chart('stacked', {
 
 		/* Left */
 
-		this.layer('leftAxis', this.leftWrapper, {
+		this.layer('leftAxis', leftWrapper, {
 			dataBind: dataBindLeft,
 			insert: insert
 		});
