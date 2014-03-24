@@ -27,14 +27,12 @@ $hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 1;
     padding-right: 0;
 }
 
-.mcr{
+#mcr{
     font-family: BentonSans,Arial,sans-serif;
     border: 1px solid $color-mcr-dark-gray-4;
 }
 
-.mcr-inn .row,
-.mcr-bat .row,
-.mcr-bowl .row{
+#mcr .row{
     margin-left: 0;
     margin-right: 0;
 }

@@ -1454,9 +1454,9 @@ svg path { shape-rendering: auto; }
 svg circle { shape-rendering: auto; }
 
 /* Match Center styles which are common to all cards */
-.mcr { font-family: BentonSans,Arial,sans-serif; border: 1px solid #333333; }
+#mcr { font-family: BentonSans,Arial,sans-serif; border: 1px solid #333333; }
 
-.mcr-inn .row, .mcr-bat .row, .mcr-bowl .row { margin-left: 0; margin-right: 0; }
+#mcr .row { margin-left: 0; margin-right: 0; }
 
 .mcr-overview { background-color: #3d3d3d; }
 .mcr-overview .mcr-all-current-inning .row { background-color: white; }
