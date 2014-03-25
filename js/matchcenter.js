@@ -18,8 +18,8 @@ espn.matchcenter = (function($) {
      * Add all necessary event handlers
      */
     function addEvents() {
-        $('#mcr').on('click', '.mcr-all-player-mugshot a', handlePlayerCard);
-        $('#mcr').on('click', '.mcr-filters a', filterPlayersByCategory);
+        $mcr.on('click', '.mcr-all-player-mugshot a', handlePlayerCard);
+        $mcr.on('click', '.mcr-filters a', filterPlayersByCategory);
     }
 
     /**
@@ -72,7 +72,7 @@ espn.matchcenter = (function($) {
     /**
      * Filter batsman/bowler mugshot list based on the selected filter
      */
-    function filterPlayersByCategory(){
+    function filterPlayersByCategory() {
         // Cache this jquery object
         var $this = $(this);
 
@@ -103,7 +103,7 @@ espn.matchcenter = (function($) {
         $members.hide()
             .filter(function() {
                 // return true since for all players need to be shown
-                if (playerCategory === 'all'){
+                if (playerCategory === 'all') {
                     return true;
                 }
                 // If category data attribute is missing, exclude player
@@ -113,13 +113,13 @@ espn.matchcenter = (function($) {
                 // Get category which this player belongs to
                 var categories = $(this).data('category');
                 // Return true if selected category exists in player's category
-                if (categories.indexOf(playerCategory) > -1){
+                if (categories.indexOf(playerCategory) > -1) {
                     return true;
                 }
                 // No match found, hence exclude this player from filtered list
                 return false;
             })
-            .show();
+            .slideDown(300, 'linear');
         return false;
     }
 
