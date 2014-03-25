@@ -1476,9 +1476,13 @@ svg circle { shape-rendering: auto; }
 
 .mcr-bowlers { border-top: 1px solid #006699; }
 
-.mcr-filters { padding-left: 0; padding-right: 0; }
+.mcr-filters { padding-left: 0; padding-right: 0; font-family: BentonSansBold, Arial, sans-serif; font-size: 11px; background-color: white; }
 
 ul.mcr-all-batsman-filters, ul.mcr-all-bowler-filters { text-align: center; margin-bottom: 0; }
+ul.mcr-all-batsman-filters li, ul.mcr-all-bowler-filters li { border-bottom: 1px solid #f2f2f2; }
+ul.mcr-all-batsman-filters a, ul.mcr-all-bowler-filters a { color: black; }
+ul.mcr-all-batsman-filters a:hover, ul.mcr-all-bowler-filters a:hover { text-decoration: none; color: #ff3366; }
+ul.mcr-all-batsman-filters a.mcr-active-filter, ul.mcr-all-bowler-filters a.mcr-active-filter { color: #ff3366; }
 
 .mcr-all-player-mugshot { float: left; width: 46px; margin: 0px 4px; padding: 13px 0; text-align: center; }
 .mcr-all-player-mugshot a { font-size: 10px; font-family: BentonSansBold, Arial, sans-serif; display: block; color: #006699; text-transform: uppercase; }

@@ -82,6 +82,12 @@ espn.matchcenter = (function($) {
             bowl: '.mcr-all-bowlers'
         };
 
+        // Lookup filters for batsmen and bowlers
+        var lookupFilter = {
+            bat: '.mcr-all-batsman-filters a',
+            bowl: '.mcr-all-bowler-filters a'
+        };
+
         // List of valid values for a player type
         var validkeys = _.keys(lookupDiv);
 
@@ -120,6 +126,11 @@ espn.matchcenter = (function($) {
                 return false;
             })
             .slideDown(300, 'linear');
+
+        // Remove class on previously selected filter and add on current one
+        $mcr.find(lookupFilter[playerType]).removeClass('mcr-active-filter');
+        $(this).addClass('mcr-active-filter');
+
         return false;
     }
 

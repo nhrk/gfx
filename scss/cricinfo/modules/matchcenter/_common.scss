@@ -101,18 +101,38 @@ $hmargin-batbowl-mugshot: $hmargin-inn-mugshot - 3;
     background-color: $color-mcr-light-gray;
 }
 
+.mcr-batsmen{
+    // border-bottom: 1px solid $color-mcr-dark-gray;
+}
+
 .mcr-bowlers{
     border-top: 1px solid $color-mcr-dark-blue;
 }
 
 .mcr-filters{
     @include remove-lr-padding;
+    font-family: BentonSansBold, Arial, sans-serif;
+    font-size: 11px;
+    background-color: $color-mcr-white;
 }
 
 ul.mcr-all-batsman-filters,
 ul.mcr-all-bowler-filters{
     text-align: center;
     margin-bottom: 0;
+    li{
+        border-bottom: 1px solid $color-mcr-light-gray;
+    }
+    a{
+        color: $color-mcr-black;
+        &:hover{
+            text-decoration: none;
+            color: $color-mcr-light-red;
+        }
+    }
+    a.mcr-active-filter{
+        color: $color-mcr-light-red;
+    }
 }
 
 .mcr-all-player-mugshot{
