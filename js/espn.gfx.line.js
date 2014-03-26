@@ -96,6 +96,22 @@ d3.chart('line', {
 			.tickSize(-chart.width() + rightMargin + leftMargin)
 			.orient('left');
 
+		if (this.comparison) {
+
+			this.wrapper.append('g')
+				.attr('class', chart.config.y2Class)
+				.attr('transform', 'translate(' + (this.width() - rightMargin - (leftMargin / 2)) + ',0)');
+
+			this.y_2 = d3.scale.linear()
+				.range([this.height() - bottomMargin - topMargin, 0]);
+
+			this.yAxisRight = d3.svg.axis()
+				.scale(this.y_2)
+				.ticks(4)
+				.tickSize(-chart.width() + rightMargin + leftMargin)
+				.orient('right');
+		}
+
 		/* 1st Y axis */
 
 		var line1 = d3.svg.area()
@@ -130,19 +146,6 @@ d3.chart('line', {
 		});
 
 		if (this.comparison) {
-
-			this.wrapper.append('g')
-				.attr('class', chart.config.y2Class)
-				.attr('transform', 'translate(' + (this.width() - rightMargin - (leftMargin / 2)) + ',0)');
-
-			this.y_2 = d3.scale.linear()
-				.range([this.height() - bottomMargin - topMargin, 0]);
-
-			this.yAxisRight = d3.svg.axis()
-				.scale(this.y_2)
-				.ticks(4)
-				.tickSize(-chart.width() + rightMargin + leftMargin)
-				.orient('right');
 
 			/* 2nd Y axis */
 
