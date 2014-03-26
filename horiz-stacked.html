@@ -46,7 +46,7 @@
 				p2 = partnership.player[1];
 
 			left.push({
-				label : p1.popular_name + ' ' + p1.runs + '(x)',
+				label : p1.popular_name + ' ' + p1.runs + '(' + (p1.balls || 0) + ')',
 				layer : 1, // Single layer, hence hardcoding 1
 				stackId : i.toString() + 1, // unique Id - i + layer #
 				x : i,
@@ -54,12 +54,12 @@
 			});
 
 			right.push({
-				label : p2.popular_name + ' ' + p2.runs + '(x)',
+				label : p2.popular_name + ' ' + p2.runs + '(' + (p2.balls || 0) + ')',
 				layer : 1,
 				stackId : i.toString() + 1,
 				x : i,
 				y : p2.runs,
-				title : partnership.runs
+				title : partnership.runs + (partnership.notout ? '*' : '') + ' (' + (partnership.balls || 0) + ')'
 			});
 		}
 		// The data structure is maintainted mainly in accordance with requirements for d3's stack fn
