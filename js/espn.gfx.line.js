@@ -1,0 +1,289 @@
+'use strict';
+
+d3.chart('line', {
+
+	config: {
+		colors: ['#f9901d', '#7dcc5f'],
+		runsClass: 'line1',
+		srClass: 'line2',
+		bottomMargin: 45,
+		leftMargin: 20,
+		topMargin: 20,
+		rightMargin: 20,
+		keySquareSize: 13,
+		keySpacing: 55,
+		keyLeftMargin: 16,
+		keyTextRightMargin: 16,
+		keyTextBottomMargin: 11,
+		keyClass: 'key',
+		wrapperClass: 'wrapperClass',
+		xClass: 'x axis',
+		y1Class: 'y axis axisLeft',
+		y2Class: 'y axis axisRight',
+		y1Key: 'runs',
+		y2Key: 'rate',
+		xKey: 'over',
+		lineInterpolation: 'monotone',
+		titleAttrs: {
+			'font-weight': 'bold',
+			'font-size': '1.3em'
+		}
+	},
+
+	initialize: function(options) {
+
+		var chart = this,
+			colors = options.colors || chart.config.colors,
+			leftMargin = options.leftMargin || chart.config.leftMargin,
+			rightMargin = options.rightMargin || chart.config.rightMargin,
+			topMargin = options.topMargin || chart.config.topMargin,
+			bottomMargin = options.bottomMargin || chart.config.bottomMargin,
+			keyLeftMargin = options.keyLeftMargin || chart.config.keyLeftMargin,
+			lineInterpolation = options.lineInterpolation || chart.config.lineInterpolation,
+			titleAttrs = options.titleAttrs || chart.config.titleAttrs,
+			chartTitle = options.chartTitle || null;
+
+		this.base = this.base.append('svg');
+
+		this.width(options.width || 400);
+
+		this.height(options.height || 250);
+
+		this.wrapper = this.base.append('g')
+			.attr('class', chart.config.wrapperClass)
+			.attr('transform', 'translate(0,' + (topMargin) + ')');
+
+		this.wrapper.append('g')
+			.attr('class', chart.config.xClass)
+			.attr('transform', 'translate(' + (leftMargin / 2) + ',' + (this.height() - bottomMargin - topMargin) + ')');
+
+		this.wrapper.append('g')
+			.attr('class', chart.config.y1Class)
+			.attr('transform', 'translate(' + leftMargin + ',0)');
+
+		this.wrapper.append('g')
+			.attr('class', chart.config.y2Class)
+			.attr('transform', 'translate(' + (this.width() - rightMargin - (leftMargin / 2)) + ',0)');
+
+		if (chartTitle) {
+			chartTitle = this.wrapper.append('text')
+				.text(chartTitle)
+				.attr(titleAttrs)
+				.attr('dx', 0)
+				.attr('dy', 0);
+
+			var bbox = chartTitle[0][0].getBBox();
+
+			chartTitle.attr('dx', (chart.width() / 2) - (bbox.width / 2))
+				.attr('dy', chart.height() - (bbox.height * 2));
+		}
+
+		this.x = d3.scale.linear()
+			.range([leftMargin / 2, (this.width() - rightMargin - leftMargin)]);
+
+		this.y_1 = d3.scale.linear()
+			.range([this.height() - bottomMargin - topMargin, 0]);
+
+		this.y_2 = d3.scale.linear()
+			.range([this.height() - bottomMargin - topMargin, 0]);
+
+		this.xAxis = d3.svg.axis()
+			.scale(this.x)
+			.orient('bottom');
+
+		this.yAxisLeft = d3.svg.axis()
+			.scale(this.y_1)
+			.ticks(4)
+			.tickSize(-chart.width() + rightMargin + leftMargin)
+			.orient('left');
+
+		this.yAxisRight = d3.svg.axis()
+			.scale(this.y_2)
+			.ticks(4)
+			.tickSize(-chart.width() + rightMargin + leftMargin)
+			.orient('right');
+
+		options = options || {};
+
+		/* 1st Y axis */
+
+		var line1 = d3.svg.area()
+			.interpolate(lineInterpolation)
+			.x(function(d, i) {
+				return chart.x(d[chart.config.xKey]);
+			})
+			.y(function(d) {
+				return chart.y_1(d[chart.config.y1Key]);
+			});
+
+		function onEnterY1() {
+
+			this.attr('d', line1)
+				.attr('stroke-width', 2)
+				.attr('fill', 'transparent')
+				.attr('stroke', colors[0]);
+		}
+
+		function onTransY1() {
+
+			this.attr('d', line1);
+		}
+
+		function dataBindY1(data) {
+
+			return this.selectAll('.' + chart.config.runsClass + ' path').data([data]);
+		}
+
+		function insert() {
+			return this.insert('path');
+		}
+
+		var runs = this.layer(chart.config.runsClass, this.wrapper.append('g').attr('class', chart.config.runsClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
+			dataBind: dataBindY1,
+			insert: insert
+		});
+
+		runs.on('enter', onEnterY1);
+		runs.on('update:transition', onTransY1);
+
+
+		/* 2nd Y axis */
+
+		var line2 = d3.svg.area()
+			.interpolate(lineInterpolation)
+			.x(function(d, i) {
+				return chart.x(d[chart.config.xKey]);
+			})
+			.y(function(d) {
+				return chart.y_2(d[chart.config.y2Key]);
+			});
+
+		function onEnterY2() {
+
+			this.attr('d', line2)
+				.attr('stroke-width', 2)
+				.attr('fill', 'transparent')
+				.attr('stroke', colors[1]);
+		}
+
+		function onTransY2() {
+
+			this.attr('d', line2);
+		}
+
+		function dataBindY2(data) {
+			return this.selectAll('.' + chart.config.srClass + ' path').data([data]);
+		}
+
+		var balls = this.layer(chart.config.srClass, this.wrapper.append('g').attr('class', chart.config.srClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
+			dataBind: dataBindY2,
+			insert: insert
+		});
+
+		balls.on('enter', onEnterY2);
+		balls.on('update:transition', onTransY2);
+
+		/* TODO: Use as a mixin, Key is same as stacked chart */
+
+		if (options.key && options.key.length) {
+
+			this.layer('key', this.base.append('g').attr('class', chart.config.keyClass), {
+
+				dataBind: function(data) {
+					return this.selectAll('rect')
+						.data(options.key);
+				},
+
+				insert: function() {
+					return this.append('rect');
+				},
+
+				events: {
+					enter: function() {
+						this.attr('x', function(d, i) {
+							return (chart.config.keySpacing * i) + (keyLeftMargin);
+						})
+							.attr('y', chart.config.keyYPos)
+							.attr('height', chart.config.keySquareSize)
+							.attr('width', chart.config.keySquareSize)
+							.style('fill', function(d, i) {
+								return colors[i];
+							}).each(function(d, i) {
+								chart.base.select('.' + chart.config.keyClass).append('text')
+									.attr('dx', function() {
+										return (chart.config.keySpacing * i) + (keyLeftMargin + chart.config.keyTextRightMargin);
+									})
+									.attr('dy', function() {
+										return chart.config.keyTextBottomMargin;
+									})
+									.text(function() {
+										return d;
+									});
+							});
+					}
+				}
+			});
+		}
+
+	},
+
+	width: function(newWidth) {
+		if (!arguments.length) {
+			return this._width;
+		}
+		this._width = newWidth;
+		this.base.attr('width', this._width);
+		return this;
+	},
+
+	height: function(newHeight) {
+		if (!arguments.length) {
+			return this._height;
+		}
+		this._height = newHeight;
+		this.base.attr('height', this._height);
+		return this;
+	},
+
+	transform: function(dataSrc) {
+
+		var chart = this;
+
+		this.x.domain([d3.min(dataSrc, function(d, i) {
+			return d[chart.config.xKey];
+		}), d3.max(dataSrc, function(d, i) {
+			return d[chart.config.xKey];
+		})]);
+
+		this.y_1.domain([d3.min(dataSrc, function(d, i) {
+			return d[chart.config.y1Key];
+		}), d3.max(dataSrc, function(d, i) {
+			return d[chart.config.y1Key];
+		})]);
+
+		this.y_2.domain([d3.min(dataSrc, function(d, i) {
+			return d[chart.config.y2Key];
+		}), d3.max(dataSrc, function(d, i) {
+			return d[chart.config.y2Key];
+		})]);
+
+		this.onTransform(dataSrc);
+		return dataSrc;
+	},
+
+	onTransform: function(dataSrc) {
+
+		this.xAxis.ticks(dataSrc.length - 1)
+
+		/* Rescale/update axes on data update */
+		this.wrapper.select('.x.axis')
+			.call(this.xAxis);
+
+		this.wrapper.select('.y.axisLeft')
+			.call(this.yAxisLeft);
+
+		this.wrapper.select('.y.axisRight')
+			.call(this.yAxisRight);
+	}
+
+});

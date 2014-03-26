@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	body{
+		background: #f2f2f2;
+	}
+	.espn-gfx{
+		float:left;
+		padding-bottom:10px;
+	}
+	.espn-gfx .axis path, .espn-gfx .axis line {
+		fill: none;
+		stroke: #ced2d3;
+	}
+</style>
+<body>
+
+	<div id="espn-line2" class="espn-gfx"></div>
+	<div id="espn-line3" class="espn-gfx"></div>
+	<div id="espn-line" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
+	<script src="./js/espn.gfx.line.js"></script>
+
+	<script>
+
+	var interval = 4000;
+
+	setInterval(function(){
+		line.draw(espn.gfx.random.line(1,7));
+		line2.draw(espn.gfx.random.line(1,2));
+		line3.draw(espn.gfx.random.line(1,3));
+	},interval);
+
+	var line = d3.select("#espn-line")
+	.chart("line",{
+		width : 225,
+		height : 225,
+		keyLeftMargin : 100,
+		chartTitle : 'OVERS',
+		key : ['Runs','Strike rate']
+	});
+
+	line.draw(espn.gfx.random.line(1,7));
+
+	var line2 = d3.select("#espn-line2")
+	.chart("line",{
+		width : 225,
+		height : 225,
+		keyLeftMargin : 100,
+		chartTitle : 'OVERS',
+		key : ['Runs','Strike rate']
+	});
+
+	line2.draw(espn.gfx.random.line(1,2));
+
+	var line3 = d3.select("#espn-line3")
+	.chart("line",{
+		width : 225,
+		height : 225,
+		keyLeftMargin : 100,
+		chartTitle : 'OVERS',
+		key : ['Runs','Strike rate']
+	});
+
+	line3.draw(espn.gfx.random.line(1,3));
+
+	</script>
+</body>
