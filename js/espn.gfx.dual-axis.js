@@ -82,10 +82,10 @@ d3.chart('dual-axis', {
 		this.x = d3.scale.ordinal()
 			.rangeRoundBands([leftMargin / 2, this.width() - rightMargin], .1);
 
-		this.y0 = d3.scale.linear()
+		this.y_1 = d3.scale.linear()
 			.range([this.height() - bottomMargin - topMargin, 0]);
 
-		this.y1 = d3.scale.linear()
+		this.y_2 = d3.scale.linear()
 			.range([this.height() - bottomMargin - topMargin, 0]);
 
 		this.xAxis = d3.svg.axis()
@@ -93,13 +93,13 @@ d3.chart('dual-axis', {
 			.orient('bottom');
 
 		this.yAxisLeft = d3.svg.axis()
-			.scale(this.y0)
+			.scale(this.y_1)
 			.ticks(4)
 			.tickSize(-chart.width() + rightMargin + leftMargin)
 			.orient('left');
 
 		this.yAxisRight = d3.svg.axis()
-			.scale(this.y1)
+			.scale(this.y_2)
 			.ticks(4)
 			.tickSize(-chart.width() + rightMargin + leftMargin)
 			.orient('right');
@@ -108,7 +108,7 @@ d3.chart('dual-axis', {
 
 		/* 1st Y axis */
 
-		function onEnterY0() {
+		function onEnterY_1() {
 
 			this.attr('x', function(d) {
 				return chart.x(d[chart.config.xKey]);
@@ -118,43 +118,43 @@ d3.chart('dual-axis', {
 					return 'fill:' + colors[0];
 				})
 				.attr('y', function(d) {
-					return chart.y0(d[chart.config.y1Key]);
+					return chart.y_1(d[chart.config.y1Key]);
 				})
 				.attr('height', function(d, i, j) {
-					return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin;
+					return chart.height() - bottomMargin - chart.y_1(d[chart.config.y1Key]) - topMargin;
 				});
 		}
 
-		function onTransY0() {
+		function onTransY_1() {
 			this.attr('height', function(d, i, j) {
-				return chart.height() - bottomMargin - chart.y0(d[chart.config.y1Key]) - topMargin;
+				return chart.height() - bottomMargin - chart.y_1(d[chart.config.y1Key]) - topMargin;
 			})
 				.attr('y', function(d) {
-					return chart.y0(d[chart.config.y1Key]);
+					return chart.y_1(d[chart.config.y1Key]);
 				})
 		}
 
-		function dataBindY0(data) {
+		function dataBindY_1(data) {
 			return this.selectAll('.' + chart.config.runsClass + ' rect').data(data, function(d, i) {
 				return d[chart.config.xKey];
 			});
 		}
 
-		function insertY0() {
+		function insertY_1() {
 			return this.insert('rect');
 		}
 
 		var runs = this.layer(chart.config.runsClass, this.wrapper.append('g').attr('class', chart.config.runsClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
-			dataBind: dataBindY0,
-			insert: insertY0
+			dataBind: dataBindY_1,
+			insert: insertY_1
 		});
 
-		runs.on('enter', onEnterY0);
-		runs.on('update:transition', onTransY0);
+		runs.on('enter', onEnterY_1);
+		runs.on('update:transition', onTransY_1);
 
 		/* 2nd Y axis */
 
-		function onEnterY1() {
+		function onEnterY_2() {
 			this.attr('x', function(d) {
 				return chart.x(d[chart.config.xKey]) + chart.x.rangeBand() / 2;
 			})
@@ -163,39 +163,39 @@ d3.chart('dual-axis', {
 					return 'fill:' + colors[1];
 				})
 				.attr('y', function(d) {
-					return chart.y1(d[chart.config.y2Key]);
+					return chart.y_2(d[chart.config.y2Key]);
 				})
 				.attr('height', function(d, i, j) {
-					return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin;
+					return chart.height() - bottomMargin - chart.y_2(d[chart.config.y2Key]) - topMargin;
 				});
 		}
 
-		function onTransY1() {
+		function onTransY_2() {
 			this.attr('height', function(d, i, j) {
-				return chart.height() - bottomMargin - chart.y1(d[chart.config.y2Key]) - topMargin;
+				return chart.height() - bottomMargin - chart.y_2(d[chart.config.y2Key]) - topMargin;
 			})
 				.attr('y', function(d) {
-					return chart.y1(d[chart.config.y2Key]);
+					return chart.y_2(d[chart.config.y2Key]);
 				})
 		}
 
-		function dataBindY1(data) {
+		function dataBindY_2(data) {
 			return this.selectAll('.' + chart.config.ballsClass + ' rect').data(data, function(d, i) {
 				return d[chart.config.xKey];
 			});
 		}
 
-		function insertY1() {
+		function insertY_2() {
 			return this.insert('rect');
 		}
 
 		var balls = this.layer(chart.config.ballsClass, this.wrapper.append('g').attr('class', chart.config.ballsClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
-			dataBind: dataBindY1,
-			insert: insertY1
+			dataBind: dataBindY_2,
+			insert: insertY_2
 		});
 
-		balls.on('enter', onEnterY1);
-		balls.on('update:transition', onTransY1);
+		balls.on('enter', onEnterY_2);
+		balls.on('update:transition', onTransY_2);
 
 		/* TODO: Use as a mixin, Key is same as stacked chart */
 
@@ -270,10 +270,10 @@ d3.chart('dual-axis', {
 		this.x.domain(dataSrc.map(function(d) {
 			return d[chart.config.xKey];
 		}));
-		this.y0.domain([0, d3.max(dataSrc, function(d) {
+		this.y_1.domain([0, d3.max(dataSrc, function(d) {
 			return d[chart.config.y1Key];
 		})]);
-		this.y1.domain([0, d3.max(dataSrc, function(d) {
+		this.y_2.domain([0, d3.max(dataSrc, function(d) {
 			return d[chart.config.y2Key];
 		})]);
 

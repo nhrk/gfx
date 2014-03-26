@@ -24,6 +24,7 @@ d3.chart('line', {
 		y2Key: 'rate',
 		xKey: 'over',
 		lineInterpolation: 'monotone',
+		strokeWidth: 2,
 		titleAttrs: {
 			'font-weight': 'bold',
 			'font-size': '1.3em'
@@ -31,6 +32,8 @@ d3.chart('line', {
 	},
 
 	initialize: function(options) {
+
+		options = options || {};
 
 		var chart = this,
 			colors = options.colors || chart.config.colors,
@@ -41,9 +44,12 @@ d3.chart('line', {
 			keyLeftMargin = options.keyLeftMargin || chart.config.keyLeftMargin,
 			lineInterpolation = options.lineInterpolation || chart.config.lineInterpolation,
 			titleAttrs = options.titleAttrs || chart.config.titleAttrs,
+			strokeWidth = options.strokeWidth || chart.config.strokeWidth,
 			chartTitle = options.chartTitle || null;
 
 		this.base = this.base.append('svg');
+
+		this.comparison = options.comparison;
 
 		this.width(options.width || 400);
 
@@ -60,10 +66,6 @@ d3.chart('line', {
 		this.wrapper.append('g')
 			.attr('class', chart.config.y1Class)
 			.attr('transform', 'translate(' + leftMargin + ',0)');
-
-		this.wrapper.append('g')
-			.attr('class', chart.config.y2Class)
-			.attr('transform', 'translate(' + (this.width() - rightMargin - (leftMargin / 2)) + ',0)');
 
 		if (chartTitle) {
 			chartTitle = this.wrapper.append('text')
@@ -84,9 +86,6 @@ d3.chart('line', {
 		this.y_1 = d3.scale.linear()
 			.range([this.height() - bottomMargin - topMargin, 0]);
 
-		this.y_2 = d3.scale.linear()
-			.range([this.height() - bottomMargin - topMargin, 0]);
-
 		this.xAxis = d3.svg.axis()
 			.scale(this.x)
 			.orient('bottom');
@@ -96,14 +95,6 @@ d3.chart('line', {
 			.ticks(4)
 			.tickSize(-chart.width() + rightMargin + leftMargin)
 			.orient('left');
-
-		this.yAxisRight = d3.svg.axis()
-			.scale(this.y_2)
-			.ticks(4)
-			.tickSize(-chart.width() + rightMargin + leftMargin)
-			.orient('right');
-
-		options = options || {};
 
 		/* 1st Y axis */
 
@@ -116,72 +107,74 @@ d3.chart('line', {
 				return chart.y_1(d[chart.config.y1Key]);
 			});
 
-		function onEnterY1() {
-
-			this.attr('d', line1)
-				.attr('stroke-width', 2)
-				.attr('fill', 'transparent')
-				.attr('stroke', colors[0]);
-		}
-
-		function onTransY1() {
-
-			this.attr('d', line1);
-		}
-
-		function dataBindY1(data) {
-
-			return this.selectAll('.' + chart.config.runsClass + ' path').data([data]);
-		}
-
 		function insert() {
 			return this.insert('path');
 		}
 
 		var runs = this.layer(chart.config.runsClass, this.wrapper.append('g').attr('class', chart.config.runsClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
-			dataBind: dataBindY1,
+			dataBind: function(data) {
+				return this.selectAll('.' + chart.config.runsClass + ' path').data([data]);
+			},
 			insert: insert
 		});
 
-		runs.on('enter', onEnterY1);
-		runs.on('update:transition', onTransY1);
+		runs.on('enter', function onEnterY1() {
+			this.attr('d', line1)
+				.attr('stroke-width', strokeWidth)
+				.attr('fill', 'transparent')
+				.attr('stroke', colors[0]);
+		});
 
+		runs.on('update:transition', function() {
+			this.attr('d', line1);
+		});
 
-		/* 2nd Y axis */
+		if (this.comparison) {
 
-		var line2 = d3.svg.area()
-			.interpolate(lineInterpolation)
-			.x(function(d, i) {
-				return chart.x(d[chart.config.xKey]);
-			})
-			.y(function(d) {
-				return chart.y_2(d[chart.config.y2Key]);
+			this.wrapper.append('g')
+				.attr('class', chart.config.y2Class)
+				.attr('transform', 'translate(' + (this.width() - rightMargin - (leftMargin / 2)) + ',0)');
+
+			this.y_2 = d3.scale.linear()
+				.range([this.height() - bottomMargin - topMargin, 0]);
+
+			this.yAxisRight = d3.svg.axis()
+				.scale(this.y_2)
+				.ticks(4)
+				.tickSize(-chart.width() + rightMargin + leftMargin)
+				.orient('right');
+
+			/* 2nd Y axis */
+
+			var line2 = d3.svg.area()
+				.interpolate(lineInterpolation)
+				.x(function(d, i) {
+					return chart.x(d[chart.config.xKey]);
+				})
+				.y(function(d) {
+					return chart.y_2(d[chart.config.y2Key]);
+				});
+
+			var balls = this.layer(chart.config.srClass, this.wrapper.append('g').attr('class', chart.config.srClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
+				dataBind: function(data) {
+					return this.selectAll('.' + chart.config.srClass + ' path').data([data]);
+				},
+				insert: insert
 			});
 
-		function onEnterY2() {
+			balls.on('enter', function() {
 
-			this.attr('d', line2)
-				.attr('stroke-width', 2)
-				.attr('fill', 'transparent')
-				.attr('stroke', colors[1]);
+				this.attr('d', line2)
+					.attr('stroke-width', strokeWidth)
+					.attr('fill', 'transparent')
+					.attr('stroke', colors[1]);
+			});
+
+			balls.on('update:transition', function() {
+
+				this.attr('d', line2);
+			});
 		}
-
-		function onTransY2() {
-
-			this.attr('d', line2);
-		}
-
-		function dataBindY2(data) {
-			return this.selectAll('.' + chart.config.srClass + ' path').data([data]);
-		}
-
-		var balls = this.layer(chart.config.srClass, this.wrapper.append('g').attr('class', chart.config.srClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
-			dataBind: dataBindY2,
-			insert: insert
-		});
-
-		balls.on('enter', onEnterY2);
-		balls.on('update:transition', onTransY2);
 
 		/* TODO: Use as a mixin, Key is same as stacked chart */
 
@@ -261,11 +254,13 @@ d3.chart('line', {
 			return d[chart.config.y1Key];
 		})]);
 
-		this.y_2.domain([d3.min(dataSrc, function(d, i) {
-			return d[chart.config.y2Key];
-		}), d3.max(dataSrc, function(d, i) {
-			return d[chart.config.y2Key];
-		})]);
+		if (this.comparison) {
+			this.y_2.domain([d3.min(dataSrc, function(d, i) {
+				return d[chart.config.y2Key];
+			}), d3.max(dataSrc, function(d, i) {
+				return d[chart.config.y2Key];
+			})]);
+		}
 
 		this.onTransform(dataSrc);
 		return dataSrc;
@@ -273,7 +268,14 @@ d3.chart('line', {
 
 	onTransform: function(dataSrc) {
 
-		this.xAxis.ticks(dataSrc.length - 1)
+		var chart = this,
+			ticks = (function() {
+				// TODO: Add logic for handling tick display for bigger datasets
+				return dataSrc.length / 2;
+			}());
+
+		this.xAxis
+			.ticks(ticks);
 
 		/* Rescale/update axes on data update */
 		this.wrapper.select('.x.axis')
@@ -282,8 +284,10 @@ d3.chart('line', {
 		this.wrapper.select('.y.axisLeft')
 			.call(this.yAxisLeft);
 
-		this.wrapper.select('.y.axisRight')
-			.call(this.yAxisRight);
+		if (this.comparison) {
+			this.wrapper.select('.y.axisRight')
+				.call(this.yAxisRight);
+		}
 	}
 
 });
