@@ -29,7 +29,8 @@ d3.chart('stacked', {
 		},
 		titleClass: 'title',
 		labelClass: 'label',
-		valueClass: 'value'
+		valueClass: 'value',
+		minSpacing: 25
 	},
 
 	initialize: function(options) {
@@ -55,6 +56,10 @@ d3.chart('stacked', {
 			rightWrapper;
 
 		this.topMargin = options.topMargin || this.config.topMargin;
+
+		this.minSpacing = options.minSpacing || this.config.minSpacing;
+
+		this.barHeight = barHeight;
 
 		this.base = this.base.append('svg');
 
@@ -447,6 +452,9 @@ d3.chart('stacked', {
 			y1StackMax;
 
 		this.length = leftStack[0].length; //assuming both data sets are equal in length
+
+		//Re-size the height based on data length
+		this.height((this.length * (this.barHeight + this.minSpacing)) + this.topMargin);
 
 		leftStack = stack(leftStack);
 

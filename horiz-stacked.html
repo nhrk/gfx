@@ -20,6 +20,7 @@
 </style>
 <body>
 
+	<div id="espn-stacked6" class="espn-gfx"></div>
 	<div id="espn-stacked" class="espn-gfx"></div>
 	<div id="espn-stacked2" class="espn-gfx"></div>
 	<div id="espn-stacked3" class="espn-gfx"></div>
@@ -32,49 +33,42 @@
 
 	<script>
 
-	// Real data from partnerships JSON endpoint
-	// url - http://www.espncricinfo.com/south-africa-v-australia-2013-14/engine/match/648683.html?view=partnership
+	// fow = match.json[fow]
+	var fow = [{"notout":0,"overs":"7.1","player":[{"known_as":"Martin Guptill","player_id":"48927","popular_name":"Guptill","runs":"22"},{"known_as":"Kane Williamson","player_id":"51088","popular_name":"Kane","runs":"34"}],"runs":"57"},{"notout":0,"overs":"1.3","player":[{"known_as":"Brendon McCullum","player_id":"10384","popular_name":"Brendon","runs":"4"},{"known_as":"Kane Williamson","player_id":"51088","popular_name":"Kane","runs":"3"}],"runs":"9"},{"notout":0,"overs":"4.5","player":[{"known_as":"Kane Williamson","player_id":"51088","popular_name":"Kane","runs":"14"},{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"36"}],"runs":"51"},{"notout":0,"overs":"3.0","player":[{"known_as":"Colin Munro","player_id":"49106","popular_name":"Munro","runs":"7"},{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"15"}],"runs":"23"},{"notout":0,"overs":"1.0","player":[{"known_as":"Corey Anderson","player_id":"51057","popular_name":"Anderson","runs":"7"},{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"1"}],"runs":"8"},{"notout":0,"overs":"1.4","player":[{"known_as":"Luke Ronchi","player_id":"17850","popular_name":"Ronchi","runs":"5"},{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"10"}],"runs":"16"},{"notout":0,"overs":"0.4","player":[{"known_as":"Nathan McCullum","player_id":"10386","popular_name":"Nathan","runs":"4"},{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"0"}],"runs":"4"},{"notout":0,"overs":"0.1","player":[{"known_as":"Ross Taylor","player_id":"44930","popular_name":"Taylor","runs":"0"},{"known_as":"Tim Southee","player_id":"49108","popular_name":"Southee","runs":"0"}],"runs":"0"}];
 
-	var data = {"fon":0,"i1":[{"en_o":"2.3","en_w":"1","o":"2.3","p1":"43906","p1_4":0,"p1_6":0,"p1_d":3,"p1_r":2,"p2":"379143","p2_4":1,"p2_6":1,"p2_d":13,"p2_r":11,"r":"15","r1":"2","r2":"11","rr":"6.00","st_o":"","st_r":"15","w":"1st"},{"en_o":"3.4","en_w":"2","o":"1.1","p1":"44828","p1_4":1,"p1_6":0,"p1_d":6,"p1_r":5,"p2":"379143","p2_4":0,"p2_6":0,"p2_d":1,"p2_r":0,"r":"5","r1":"5","r2":0,"rr":"4.28","st_o":"2.3","st_r":"20","st_w":"1","w":"2nd"},{"en_o":"7.3","en_w":"3","o":"3.5","p1":"44932","p1_4":2,"p1_6":0,"p1_d":16,"p1_r":13,"p2":"379143","p2_4":1,"p2_6":0,"p2_d":7,"p2_r":10,"r":"24","r1":"13","r2":"10","rr":"6.26","st_o":"3.4","st_r":"44","st_w":"2","w":"3rd"},{"en_o":"10.5","en_w":"4","o":"3.2","p1":"44936","p1_4":0,"p1_6":1,"p1_d":10,"p1_r":11,"p2":"379143","p2_4":0,"p2_6":1,"p2_d":10,"p2_r":13,"r":"24","r1":"11","r2":"13","rr":"7.20","st_o":"7.3","st_r":"68","st_w":"3","w":"4th"},{"en_o":"12.4","en_w":"5","o":"1.5","p1":"321777","p1_4":0,"p1_6":0,"p1_d":7,"p1_r":2,"p2":"379143","p2_4":0,"p2_6":0,"p2_d":4,"p2_r":3,"r":"7","r1":"2","r2":"3","rr":"3.81","st_o":"10.5","st_r":"75","st_w":"4","w":"5th"},{"en_o":"13.5","en_w":"6","o":"1.1","p1":"46248","p1_4":0,"p1_6":0,"p1_d":2,"p1_r":2,"p2":"379143","p2_4":0,"p2_6":0,"p2_d":5,"p2_r":4,"r":"6","r1":"2","r2":"4","rr":"5.14","st_o":"12.4","st_r":"81","st_w":"5","w":"6th"},{"en_o":"16.3","en_w":"7","o":"2.4","p1":"46248","p1_4":0,"p1_6":2,"p1_d":9,"p1_r":16,"p2":"265564","p2_4":1,"p2_6":0,"p2_d":7,"p2_r":6,"r":"22","r1":"16","r2":"6","rr":"8.25","st_o":"13.5","st_r":"103","st_w":"6","w":"7th"},{"en_o":"20.0","en_w":"7","o":"3.3","p1":"265564","p1_4":0,"p1_6":0,"p1_d":10,"p1_r":11,"p2":"379927","p2_4":0,"p2_6":1,"p2_d":11,"p2_r":12,"r":"25*","r1":"11","r2":"12","rr":"7.14","st_o":"16.3","st_r":"128","st_w":"7","w":"8th"}],"i2":[{"en_o":"4.5","en_w":"1","o":"4.5","p1":"8291","p1_4":2,"p1_6":0,"p1_d":11,"p1_r":14,"p2":"5334","p2_4":5,"p2_6":0,"p2_d":18,"p2_r":29,"r":"43","r1":"14","r2":"29","rr":"8.89","st_o":"","st_r":"43","w":"1st"},{"en_o":"8.1","en_w":"2","o":"3.2","p1":"8180","p1_4":2,"p1_6":0,"p1_d":11,"p1_r":14,"p2":"5334","p2_4":1,"p2_6":0,"p2_d":9,"p2_r":10,"r":"24","r1":"14","r2":"10","rr":"7.20","st_o":"4.5","st_r":"67","st_w":"1","w":"2nd"},{"en_o":"12.4","en_w":"3","o":"4.3","p1":"8180","p1_4":0,"p1_6":2,"p1_d":15,"p1_r":20,"p2":"325026","p2_4":2,"p2_6":0,"p2_d":12,"p2_r":17,"r":"38","r1":"20","r2":"17","rr":"8.44","st_o":"8.1","st_r":"105","st_w":"2","w":"3rd"},{"en_o":"13.1","en_w":"4","o":"0.3","p1":"8180","p1_4":0,"p1_6":0,"p1_d":2,"p1_r":1,"p2":"4451","p2_4":0,"p2_6":0,"p2_d":1,"p2_r":1,"r":"2","r1":"1","r2":"1","rr":"4.00","st_o":"12.4","st_r":"107","st_w":"3","w":"4th"},{"en_o":"15.0","en_w":"4","o":"1.5","p1":"5674","p1_4":0,"p1_6":1,"p1_d":5,"p1_r":11,"p2":"4451","p2_4":0,"p2_6":1,"p2_d":6,"p2_r":11,"r":"22*","r1":"11","r2":"11","rr":"12.00","st_o":"13.1","st_r":"129","st_w":"4","w":"5th"}],"i3":[],"i4":[],"t1":{"n":"South Africa","p":[{"379143":"Quinton de Kock"},{"43906":"Hashim Amla"},{"44828":"Faf du Plessis"},{"44932":"Jean-Paul Duminy"},{"44936":"AB de Villiers"},{"321777":"David Miller"},{"46248":"Albie Morkel"},{"265564":"Wayne Parnell"},{"379927":"Beuran Hendricks"},{"47666":"Lonwabo Tsotsobe"},{"40618":"Imran Tahir"}]},"t2":{"n":"Australia","p":[{"5334":"Aaron Finch"},{"8291":"Cameron White"},{"8180":"Shane Watson"},{"325026":"Glenn Maxwell"},{"4451":"George Bailey"},{"5674":"Brad Hodge"},{"5560":"Brad Haddin"},{"5961":"Moises Henriques"},{"311592":"Mitchell Starc"},{"261354":"Nathan Coulter-Nile"},{"5681":"Brad Hogg"}]}};
-	
-	function getLayers(data,inning){
-		inning = inning || 'i1';
-		// Build arrays that represent layers, 3 in this case
-		var map = {
-			p1 : [[/*Runs*/],[/*4s*/],[/*6s*/]],
-			p2 : [[/*Runs*/],[/*4s*/],[/*6s*/]]
-		},
-		partnership;
+	function getFow(){
+		// TODO: Add runs to the partnerships
+		var left = [],
+			right = [];
+		for(var i=0, len = fow.length; i < len; i ++){
+			var partnership = fow[i],
+				p1 = partnership.player[0],
+				p2 = partnership.player[1];
 
-		for (var i=0, len=data[inning].length;i < len; i++){
-			partnership = data[inning][i];
+			left.push({
+				label : p1.popular_name + ' ' + p1.runs + '(x)',
+				layer : 1, // Single layer, hence hardcoding 1
+				stackId : i.toString() + 1, // unique Id - i + layer #
+				x : i,
+				y : p1.runs
+			});
 
-			for(var m in map){
-				// Runs
-				map[m][0].push({
-					x : i,
-					y : Number(partnership[m+'_r']) - (partnership[m+'_4'] * 4) - (partnership[m+'_6'] * 6),
-					layer : 0,
-					stackId : '' + 0 + '' + i, //unique id for each rect
-					title : partnership.r + ' (' + (partnership.p2_d + partnership.p1_d) + ')'
-				});
-				// 4s
-				map[m][1].push({
-					x : i,
-					y : Number(partnership[m+'_4']) * 4,
-					layer : 1,
-					stackId : '' + 1 + '' + i
-				});
-				// 6s
-				map[m][2].push({
-					x : i,
-					y : Number(partnership[m+'_6']) * 6,
-					layer : 2,
-					stackId : '' + 2 + '' + i
-				});
-			}	
+			right.push({
+				label : p2.popular_name + ' ' + p2.runs + '(x)',
+				layer : 1,
+				stackId : i.toString() + 1,
+				x : i,
+				y : p2.runs,
+				title : partnership.runs
+			});
 		}
-		return map;
+		// The data structure is maintainted mainly in accordance with requirements for d3's stack fn
+		//--------------------------------------------------------------------------------------------
+		// The outer most array has 2 elements, they mainly represent the left and right sections in the chart
+		// The array wrapping left/right is needed to send to d3's stack() fn
+		// The left/right array is just 1 child of the parent wrapping array, they represent the layers (1 in this case)
+		// The left and right array have elements that correspond to number of partnerships
+		return [[left],[right]];
 	}
 
 	var interval = 4000;
@@ -97,8 +91,6 @@
 		topMargin : 50,
 		colors:['#7bcd61','#fd8f20','#fe6321']
 	});
-
-	var dataset = getLayers(data,'i1');
 
 	stacked.draw([espn.gfx.random.partnerships(6),espn.gfx.random.partnerships(6)]);
 
@@ -155,6 +147,18 @@
 	});
 
 	stacked5.draw([espn.gfx.random.partnerships(7,1),espn.gfx.random.partnerships(7,1)]);
+
+	var stacked6 = d3.select("#espn-stacked6")
+	.chart("stacked",{
+		height: 300,
+		width:175,
+		hideLine : true,
+		barHeight : 10,
+		colors:['#7bcd61','#fd8f20','#fe6321'],
+		varyColors: true
+	});
+
+	stacked6.draw(getFow());
 
 	</script>
 </body>
