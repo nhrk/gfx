@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+	<meta charset="utf-8">
+	<title>ESPN Cricinfo - Match Centre</title>
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<style type="text/css" media="screen">
+	html{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+	body{
+		background: #f0f7ff;
+	}
+	.espn-gfx{
+		float:left;
+		clear:both;
+		padding-bottom:10px;
+	}
+	.espn-gfx .axis path, .espn-gfx .axis line {
+		fill: none;
+		stroke: #ced2d3;
+	}
+	/*.espn-gfx .axisRight line{
+		stroke : #7dcc5f;
+	}
+	.espn-gfx .axisLeft line{
+		stroke : #f9901d;
+	}*/
+</style>
+<body>
+
+	<div id="espn-bars1" class="espn-gfx"></div>
+	<div id="espn-bars2" class="espn-gfx"></div>
+	<script src="./bower_components/d3/d3.js"></script>
+	<script src="./bower_components/d3.chart/d3.chart.js"></script>
+	<script src="./js/espn.gfx.random.js"></script>
+	<script src="./js/espn.gfx.bars.js"></script>
+
+	<script>
+
+	var interval = 4000;
+
+	setInterval(function(){
+		bars1.draw(espn.gfx.random.dualAxis());
+		bars2.draw(espn.gfx.random.bars());
+	},interval);
+
+	var bars1 = d3.select("#espn-bars1")
+	.chart("bars",{
+		width : 290,
+		height : 185,
+		keyLeftMargin : 180, /*(use to move the location of legends/keys)*/
+		chartTitle : 'SPELLS (in overs)',
+		key : ['Runs','Balls'],
+		dualAxis : true
+	});
+
+	bars1.draw(espn.gfx.random.dualAxis());
+
+	var bars2 = d3.select("#espn-bars2")
+	.chart("bars",{
+		width : 290,
+		height : 185,
+		keyLeftMargin : 160,
+		chartTitle : 'OVERS',
+		key : ['Normal','Powerplay'],
+		barSpacing: 3,
+		colors : ['#f9901d', 'orangered']
+	});
+
+	bars2.draw(espn.gfx.random.bars());
+
+	</script>
+</body>

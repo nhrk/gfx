@@ -234,6 +234,30 @@ espn.gfx.random = (function() {
         return Math.floor(Math.random() * 100);
     }
 
+    api.bars = function(length, randomLength) {
+
+        length = (randomLength ? random() : length) || 15;
+
+        function random() {
+            return Math.round((Math.random() * 25))
+        }
+
+        var count = 1,
+            arr = [];
+
+        while (count <= length) {
+            arr.push({
+                runs: random(),
+                balls: random(),
+                powerplay: random() < 10 ? true : false,
+                overs: count
+            });
+            count++;
+        }
+
+        return arr;
+    }
+
     api.line = function(start, end) {
 
         start = start || 1
