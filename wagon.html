@@ -43,12 +43,20 @@
 
 	function getZones(zones){
 		var arr = [],
-			len = 8;
+			len = 8,
+			max,
+			runs;
+
 		zones = (zones && zones.length === len) ? zones : [0,0,0,0,0,0,0,0];
+
+		max = Number(d3.max(zones));
+
 		for (var i = 1; i <= len; i++) {
+			runs = (Number(zones[i]) || 0);
 			arr.push({
 				zone : i,
-				runs : (zones[i] || 0)
+				runs : runs,
+				max : (max === runs && max > 0) ? true : false
 			});
 		}
 		return arr;
