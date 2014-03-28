@@ -19,7 +19,7 @@ d3.chart("heatmap", {
 			'fill': '#3e9fca',
 			'font-size': '0.9em'
 		},
-		key: [
+		keyLegends: [
 			['WO', 'O', 'S', 'L', 'WL'],
 			['Y', 'F', 'G', 'S', 'SG']
 		],
@@ -41,7 +41,10 @@ d3.chart("heatmap", {
 			wicketColor = options.wicketColor || chart.config.wicketColor,
 			colorRange = options.colorRange || this.config.colorRange,
 			keyTextAttr = options.keyTextAttr || this.config.keyTextAttr,
+			xGridLength = options.xGridLength || this.config.xGridLength,
+			yGridLength = options.yGridLength || this.config.yGridLength,
 			margin = 0,
+			keyLegends = options.keyLegends || this.config.keyLegends,
 			key,
 			wrapper;
 
@@ -58,12 +61,13 @@ d3.chart("heatmap", {
 		if (legends) {
 			margin = chart.config.margin;
 			wrapper.attr('transform', 'translate(' + (margin * 2) + ',' + (margin * 2) + ')')
-			this.renderLegends(key, keyTextAttr, margin);
+			/* TODO: use obj, too many args */
+			this.renderLegends(key, keyLegends, keyTextAttr, margin, xGridLength, yGridLength);
 		}
 
-		squareHeight = (this.height() - margin) / chart.config.yGridLength;
+		squareHeight = (this.height() - margin) / yGridLength;
 
-		squareWidth = (this.width() - margin) / chart.config.xGridLength;
+		squareWidth = (this.width() - margin) / xGridLength;
 
 		this.colorScale = d3.scale.quantile()
 			.domain([0, 7, 100])
@@ -71,8 +75,8 @@ d3.chart("heatmap", {
 
 		function getGridPosition(i) {
 			return {
-				row: Math.ceil(i / chart.config.xGridLength),
-				column: i - (Math.floor(i / chart.config.xGridLength) * chart.config.xGridLength) || chart.config.xGridLength
+				row: Math.ceil(i / xGridLength),
+				column: i - (Math.floor(i / xGridLength) * xGridLength) || xGridLength
 			};
 		}
 
@@ -189,17 +193,16 @@ d3.chart("heatmap", {
 
 	},
 
-	renderLegends: function(keyEl, keyTextAttr, margin) {
+	renderLegends: function(keyEl, keyLegends, keyTextAttr, margin, xGridLength, yGridLength) {
 		var chart = this,
-			key = chart.config.key,
 			keyText,
 			bbox;
 
-		for (var i = 0, len = key.length; i < len; i++) {
+		for (var i = 0, len = keyLegends.length; i < len; i++) {
 
-			for (var j = 0, jLen = key[i].length; j < jLen; j++) {
+			for (var j = 0, jLen = keyLegends[i].length; j < jLen; j++) {
 
-				keyText = keyEl.append('text').text(key[i][j])
+				keyText = keyEl.append('text').text(keyLegends[i][j])
 					.attr('class', chart.config.keyTextClass)
 					.attr(keyTextAttr);
 
@@ -209,7 +212,7 @@ d3.chart("heatmap", {
 						.attr('text-anchor', 'start');
 
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dx', (j * (chart.width() - margin) / chart.config.xGridLength) - (bbox.width / 2))
+					keyText.attr('dx', (j * (chart.width() - margin) / xGridLength) - (bbox.width / 2))
 						.attr('transform', 'translate(' + margin + ',0)');
 
 				} else if (i === 1) {
@@ -218,7 +221,7 @@ d3.chart("heatmap", {
 						.attr('dx', 7);
 
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dy', (j * (chart.height() - margin) / chart.config.yGridLength) + (bbox.height))
+					keyText.attr('dy', (j * (chart.height() - margin) / yGridLength) + (bbox.height))
 						.attr('transform', 'translate(0,' + margin + ')');
 				}
 			}
