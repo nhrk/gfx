@@ -87,99 +87,23 @@ espn.gfx.random = (function() {
         return data;
     }
 
-    api.heatmap = function() {
+    api.heatmap = function(length) {
 
-        var index,
-            ar = [{
-                runs: Math.round((Math.random() * 10)),
-                zone: 1
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 2
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 3
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 4
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 5
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 6
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 7
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 8
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 9
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 10
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 11
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 12
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 13
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 14
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 15
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 16
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 17
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 18
-            }, {
-                runs: Math.round((Math.random() * 100)),
-                zone: 19
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 20
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 21
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 22
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 23
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 24
-            }, {
-                runs: Math.round((Math.random() * 10)),
-                zone: 25
-            }],
-            c = 0;
+        length = length || 25;
 
-        for (var i = 0, len = ar.length; i < len; i++) {
-            if (ar[i].runs > c) {
-                c = ar[i].runs;
-                index = i;
+        var arr = [],
+            i = 1,
+            random = Math.floor(Math.random() * length) + 1;
+
+            while (i <= length){
+                arr.push({
+                    runs: Math.round((Math.random() * (i < 7 || i > 19  ? 10 : 100))),
+                    zone: i
+                });
+                i++;
             }
-        }
-
-        ar[index].max = true;
-
-        var random = Math.floor(Math.random() * 8) + 1;
-        ar[random].wickets = 1;
-        return ar;
+        if(arr[random]) arr[random].wickets = 1;
+        return arr;
     }
 
     api.spikes = function(dia, len) {

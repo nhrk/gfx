@@ -8,7 +8,8 @@ d3.chart("heatmap", {
 			'text-anchor': 'start',
 			'style': 'color:#000'
 		},
-		gridSize: 5,
+		xGridLength : 5,
+		yGridLength : 5,
 		strokeColor: '#f1bd7f',
 		textColor: '#000',
 		wicketColor: "#f9901d",
@@ -60,9 +61,9 @@ d3.chart("heatmap", {
 			this.renderLegends(key, keyTextAttr, margin);
 		}
 
-		squareHeight = (this.height() - margin) / chart.config.gridSize;
+		squareHeight = (this.height() - margin) / chart.config.yGridLength;
 
-		squareWidth = (this.width() - margin) / chart.config.gridSize;
+		squareWidth = (this.width() - margin) / chart.config.xGridLength;
 
 		this.colorScale = d3.scale.quantile()
 			.domain([0, 7, 100])
@@ -70,8 +71,8 @@ d3.chart("heatmap", {
 
 		function getGridPosition(i) {
 			return {
-				row: Math.ceil(i / chart.config.gridSize),
-				column: i - (Math.floor(i / chart.config.gridSize) * chart.config.gridSize) || chart.config.gridSize
+				row: Math.ceil(i / chart.config.xGridLength),
+				column: i - (Math.floor(i / chart.config.xGridLength) * chart.config.xGridLength) || chart.config.xGridLength
 			};
 		}
 
@@ -208,7 +209,7 @@ d3.chart("heatmap", {
 						.attr('text-anchor', 'start');
 
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dx', (j * (chart.width() - margin) / chart.config.gridSize) - (bbox.width / 2))
+					keyText.attr('dx', (j * (chart.width() - margin) / chart.config.xGridLength) - (bbox.width / 2))
 						.attr('transform', 'translate(' + margin + ',0)');
 
 				} else if (i === 1) {
@@ -217,7 +218,7 @@ d3.chart("heatmap", {
 						.attr('dx', 7);
 
 					bbox = keyText[0][0].getBBox();
-					keyText.attr('dy', (j * (chart.height() - margin) / chart.config.gridSize) + (bbox.height))
+					keyText.attr('dy', (j * (chart.height() - margin) / chart.config.yGridLength) + (bbox.height))
 						.attr('transform', 'translate(0,' + margin + ')');
 				}
 			}
