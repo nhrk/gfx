@@ -39,6 +39,21 @@
 	
 	<script>
 
+	var scoring_zone = ["","","","","","","",""];
+
+	function getZones(zones){
+		var arr = [],
+			len = 8;
+		zones = (zones && zones.length === len) ? zones : [0,0,0,0,0,0,0,0];
+		for (var i = 1; i <= len; i++) {
+			arr.push({
+				zone : i,
+				runs : (zones[i] || 0)
+			});
+		}
+		return arr;
+	}
+
 	var interval = 4000;
 
 	setInterval(function(){
@@ -54,7 +69,7 @@
 		colors : ["#7ace5c","#f88f22","white"]
 	});
 
-	wagon.draw(espn.gfx.random.wagon());
+	wagon.draw(getZones(scoring_zone));
 
 	var wagon2 = d3.select("#espn-wagon2")
 	.chart("wagon",{
