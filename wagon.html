@@ -53,10 +53,10 @@
 			return Number(d);
 		});
 
-		for (var i = 1; i <= len; i++) {
+		for (var i = 0; i < len; i++) {
 			runs = (Number(zones[i]) || 0);
 			arr.push({
-				zone : i,
+				zone : (i + 1),
 				runs : runs,
 				max : (max === runs && max > 0) ? true : false
 			});
