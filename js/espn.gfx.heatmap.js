@@ -150,25 +150,28 @@ d3.chart("heatmap", {
 		}
 
 		function getColorCode(d, i) {
-			// Switched from the colorScale to manual computation based on request
-			var code;
-			if (d.runs >= 0 && d.runs < 10) {
+			// Switched from the colorScale to manual computation based on product request
+			var code,
+				percent = (d.runs/chart._sum * 100 || 1);
+
+			if (percent >= 0 && percent < 10) {
 				code = 0;
-			} else if (d.runs >= 10 && d.runs < 20) {
+			} else if (percent >= 10 && percent < 20) {
 				code = 1;
-			} else if (d.runs >= 20 && d.runs < 30) {
+			} else if (percent >= 20 && percent < 30) {
 				code = 3;
-			} else if (d.runs >= 30 && d.runs < 40) {
+			} else if (percent >= 30 && percent < 40) {
 				code = 4;
-			} else if (d.runs >= 40 && d.runs < 60) {
+			} else if (percent >= 40 && percent < 60) {
 				code = 5;
-			} else if (d.runs >= 60 && d.runs < 70) {
+			} else if (percent >= 60 && percent < 70) {
 				code = 6;
-			} else if (d.runs >= 70 && d.runs < 85) {
+			} else if (percent >= 70 && percent < 85) {
 				code = 7;
-			} else if (d.runs >= 85) {
+			} else if (percent >= 85) {
 				code = 8;
 			}
+
 			return colorRange[code];
 		}
 
@@ -248,6 +251,10 @@ d3.chart("heatmap", {
 
 	transform: function(dataSrc) {
 		/* TODO: type checks */
+
+		this._sum = d3.sum(dataSrc,function(d){
+							return d.runs;
+						});
 		return dataSrc;
 	}
 
