@@ -22,12 +22,38 @@
 <body>
 	
 	<div id="espn-spikes" class="espn-gfx"></div>
+	<div id="espn-spikes2" class="espn-gfx"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.spikes.js"></script>
 	
 	<script>
+
+	var wagon = [["48","111","2"],["100","50","1"],["232","323","1"],["237","321","1"],["355","142","6"],["124","34","1"],["223","200","1"],["309","140","1"],["218","226","1"],["130","320","1"],["285","320","4"],["35","266","4"],["343","116","4"],["126","136","1"],["44","120","2"],["311","132","1"],["230","287","1"],["140","56","1"],["281","262","2"],["352","221","4"],["295","145","1"],["46","192","1"],["257","208","1"],["266","266","1"],["307","126","1"],["96","293","2"],["91","277","1"],["286","77","1"],["244","139","1"],["28","96","4"],["116","205","1"],["107","196","1"]];
+
+	function getSpikes(wagon,dimension,strokeWidth){
+		// @constant - x,y coords are relative to this constant
+		var DIAMETER = 350,
+			arr = [],
+			cur;
+
+		dimension = dimension || 225; // Circle Diameter
+		strokeWidth = strokeWidth || 3; // Stroke Width for the Ground (Circle)
+
+		dimension = dimension - (strokeWidth*2);
+
+		for (var i = 0, len = wagon.length; i < len; i++) {
+			cur = wagon[i]; 
+			arr.push({
+				x: (Number(cur[0]) * dimension)/DIAMETER,
+				y: (Number(cur[1]) * dimension)/DIAMETER,
+				runs: Number(cur[2])
+			});
+		}
+
+		return arr;
+	}
 
 	var interval = 4000;
 
@@ -43,6 +69,15 @@
 	});
 
 	spikes.draw(espn.gfx.random.spikes());
+
+	var spikes2 = d3.select("#espn-spikes2")
+	.chart("spikes",{
+		diameter : 225,
+		textPadding : 15,
+		colors : ["#7ace5c","#f88f22","#7ace5c"]
+	});
+
+	spikes2.draw(getSpikes(wagon));
 
 	</script>
 </body>
