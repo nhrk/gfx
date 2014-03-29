@@ -7,7 +7,7 @@ d3.chart('bar', {
 		colors: ['#f8911b', '#fff'],
 		animDuration: 750,
 		barPosY: 25,
-		textPaddingLeft: 12,
+		textPaddingLeft: 5,
 		labelPaddingTop: 30,
 		textPosX: 1,
 		textPosY: 15,
@@ -36,6 +36,7 @@ d3.chart('bar', {
 			valAttr = options.valAttr || this.config.valAttr,
 			textPosY = options.textPosY || this.config.textPosY,
 			textPosX = options.textPosX || this.config.textPosX,
+			textPaddingLeft = options.textPaddingLeft || this.config.textPaddingLeft,
 			showLabel = (!options.hideLabel),
 			colorMeter = options.colorMeter,
 			colors = options.colors || this.config.colors,
@@ -104,7 +105,7 @@ d3.chart('bar', {
 							})
 							.attr('dx', function() {
 								var bbox = label[0][0].getBBox();
-								return bbox.width + chart.config.textPaddingLeft;
+								return bbox.width + textPaddingLeft;
 							})
 							.attr('dy', textPosY)
 							.attr(valAttr)
