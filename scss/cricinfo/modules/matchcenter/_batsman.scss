@@ -2,3 +2,207 @@
 .mcr-bat .mcr-all-player-mugshot{
     @include bat-bowl-mugshots-box;
 }
+
+.mcr-bat{
+	.mcr-vis{
+		background:#f2f2f2;
+	}
+	.pref-shot{
+    	margin-top:5px;
+    	p{
+    		color: #cecece;
+			font-size: 10px
+    	}
+    	p.shotname{
+    		color: #fff;
+			font-size: 11px
+    	}
+    }
+    .mcr-bat-left {
+    	float:left;
+    	padding-left:10px;
+    	.mcr-bat-upper{
+    		height:40px;
+	    	padding:6px 0;
+	    	border-bottom:1px solid #dbdbdb;
+	    	span{
+	    		padding: 10px 3px 12px 6px;
+	    	}
+	    	span.active{
+	    		background:#767676;
+	    	}
+	    }
+    }	
+   
+    .mcr-bat-right{
+    	float:right;
+    	padding-right:10px;
+    	.mcr-bat-upper{
+	    	padding:8px 0;
+	    	height:40px;
+	    	border-bottom:1px solid #dbdbdb;	    	
+	    	span.active{
+	    		background:#767676;
+	    	}
+	    	.mcr-filter-1 {
+	    		text-align:right;	
+	    		padding:4px 0;    		
+     			span{
+     				-webkit-border-radius: 5px;
+	     			border-radius: 5px;
+	     			border:1px solid #bdbdbd;
+	     			background:#fff;
+	     			font-family:BentonSansBold;
+	     			font-size:12px;
+	     			color:#000;
+	     			padding:3px;	     			
+	     			img{
+	     				margin-top:-4px;
+	     			}
+     			}
+	    	}
+	    	.mcr-filter-2 { 
+	    		text-align:left;
+	    		padding:4px 0 0 0;
+	    		span{
+	    			-webkit-border-radius: 5px;
+	     			border-radius: 5px;
+	     			border:1px solid #f9901d;
+	     			background:#fff;
+	     			font-family:BentonSansBold;
+	     			font-size:12px;
+	     			color:#000;
+	     			padding:3px;
+	    		}	    		
+	    	}
+	    	.mcr-over{
+	    		text-align:right;
+	    		padding:3px;
+	    		span{
+	    			padding:0;
+	    			font-family:BentonSansBold;
+	     			font-size:11px;
+	    		}
+	    	}
+	    	.mcr-over-filter{
+	    		text-align:right;
+	    		span{
+	    			float:left;
+	    			input{
+			    		font-family: BentonSans;
+						color: #000;
+						font-size: 10px;
+						font-style: italic;
+						font-family:BentonSansBold;	     			
+						padding: 0 3px;
+						margin: 0;
+						width: 40px;
+						height:20px;
+			    	}
+	    		}
+	    	}
+	    	
+	    }
+	    .mcr-bat-down{
+	    	ul{
+	    		margin:0;
+	    		padding:0;
+	    		li{
+	    			display:inline;
+	    			float:left;
+	    			text-align:center;
+	    			border-right:1px solid #dbdbdb; 
+	    			line-height:22px; 			
+	    		}
+	    		li:last-child{
+	    			border-right:0;
+	    		}
+	    	}
+	    	ul.last{
+	    		li{
+	    			border-bottom:1px solid #dbdbdb; 
+	    			padding-bottom:5px;
+	    		}
+	    	}
+	    	ul.header{
+	    		height:20px;	    		
+	    		font-family:BentonSans;
+	    		li{	    						
+	    			font-size:10px;
+	    			color:#7e7e7e;
+	    		}
+	    	}
+	    	.mcr-bat-data{
+	    		li{
+	    			color:#000;
+	    			font-family:BentonSansBold;
+	    			font-size:12px;
+	    		}
+	    	}
+	    	.mcr-bat-summary{
+	    		padding:10px 0;
+	    		div{
+	    			float:left;
+	    		}
+	    		li{
+	    			color:#000;
+	    			font-family:BentonSans;
+	    			font-size:11px;
+	    			border:0;
+	    			span{
+	    				padding-right:8px;
+	    			}
+	    			input{
+	    				margin-right:5px;
+	    			}
+	    		}
+	    		.mcr-fltr-header{
+	    			color:#000;
+	    			font-family:BentonSansBold;
+	    			font-size:11px;
+	    			padding-bottom:5px;
+	    		}
+	    		.ones{
+	    			background:#cc00ff;
+	    			color:#fff;
+	    			padding:2px;
+	    		}
+	    		.twos{
+	    			background:#642c01;
+	    			color:#fff;
+	    			padding:2px;
+	    		}
+	    		.threes{
+	    			background:#ffea00;
+	    			color:#000;
+	    			padding:2px;
+	    		}
+	    		.fours{
+	    			background:#fff;
+	    			color:#000;
+	    			padding:2px;
+	    		}
+	    		.fives{
+	    			background:#034466;
+	    			color:#fff;
+	    			padding:2px;
+	    		}
+	    		.sixs{
+	    			background:#fa280c;
+	    			color:#fff;
+	    			padding:2px;
+	    		}
+	    		.summary{
+	    			li{
+	    				display:block;
+	    				float:left;
+	    				width:100%;
+	    				text-align:left;
+	    				font-family:BentonSans;
+	    				font-size:11px;
+	    			}
+	    		}
+	    	}
+	    }
+    }
+} 
