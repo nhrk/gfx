@@ -49,7 +49,9 @@
 
 		zones = (zones && zones.length === len) ? zones : [0,0,0,0,0,0,0,0];
 
-		max = Number(d3.max(zones));
+		max = d3.max(zones,function(d){
+			return Number(d);
+		});
 
 		for (var i = 1; i <= len; i++) {
 			runs = (Number(zones[i]) || 0);
