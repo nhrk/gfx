@@ -23,6 +23,8 @@ d3.chart('line', {
 		y1Key: 'runs',
 		y2Key: 'rate',
 		xKey: 'over',
+		minTickSpacing : 20,
+		maxTicks : 20,
 		lineInterpolation: 'monotone',
 		strokeWidth: 2,
 		titleAttrs: {
@@ -50,6 +52,8 @@ d3.chart('line', {
 		this.base = this.base.append('svg');
 
 		this.comparison = options.comparison;
+
+		this.maxTicks = options.maxTicks || chart.config.maxTicks;
 
 		this.width(options.width || 400);
 
@@ -271,14 +275,8 @@ d3.chart('line', {
 
 	onTransform: function(dataSrc) {
 
-		var chart = this,
-			ticks = (function() {
-				// TODO: Add logic for handling tick display for bigger datasets
-				return dataSrc.length / 2;
-			}());
-
 		this.xAxis
-			.ticks(ticks);
+			.ticks((dataSrc.length > this.maxTicks) ? Math.floor(this.width()/this.config.minTickSpacing) : dataSrc.length-1);
 
 		/* Rescale/update axes on data update */
 		this.wrapper.select('.x.axis')
