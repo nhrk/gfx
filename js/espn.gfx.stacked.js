@@ -463,13 +463,13 @@ d3.chart('stacked', {
 		// get the largest layer from each stack and use the higher value for x domain
 		y0StackMax = d3.max(leftStack, function(layer) {
 			return d3.max(layer, function(d) {
-				return d.y0 + d.y;
+				return Number(d.y0) + Number(d.y);
 			});
 		});
 
 		y1StackMax = d3.max(rightStack, function(layer) {
 			return d3.max(layer, function(d) {
-				return d.y0 + d.y;
+				return Number(d.y0) + Number(d.y);
 			});
 		});
 
