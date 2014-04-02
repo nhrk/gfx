@@ -4,8 +4,8 @@ d3.chart('line', {
 
 	config: {
 		colors: ['#f9901d', '#7dcc5f'],
-		runsClass: 'line1',
-		srClass: 'line2',
+		line1Class: 'mcr-chart-line1',
+		line2Class: 'mcr-chart-line2',
 		bottomMargin: 45,
 		leftMargin: 20,
 		topMargin: 20,
@@ -15,16 +15,16 @@ d3.chart('line', {
 		keyLeftMargin: 16,
 		keyTextRightMargin: 16,
 		keyTextBottomMargin: 11,
-		keyClass: 'key',
-		wrapperClass: 'wrapperClass',
-		xClass: 'x axis',
-		y1Class: 'y axis axisLeft',
-		y2Class: 'y axis axisRight',
+		keyClass: 'mcr-chart-key',
+		wrapperClass: 'mcr-chart-line-wrapper',
+		xClass: 'mcr-chart-x mcr-chart-axis',
+		y1Class: 'mcr-chart-y mcr-chart-axis mcr-chart-axisLeft',
+		y2Class: 'mcr-chart-y mcr-chart-axis mcr-chart-axisRight',
 		y1Key: 'runs',
 		y2Key: 'rate',
 		xKey: 'over',
-		minTickSpacing : 20,
-		maxTicks : 20,
+		minTickSpacing: 20,
+		maxTicks: 20,
 		lineInterpolation: 'monotone',
 		strokeWidth: 2,
 		titleAttrs: {
@@ -131,9 +131,9 @@ d3.chart('line', {
 			return this.insert('path');
 		}
 
-		var runs = this.layer(chart.config.runsClass, this.wrapper.append('g').attr('class', chart.config.runsClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
+		var runs = this.layer(chart.config.line1Class, this.wrapper.append('g').attr('class', chart.config.line1Class).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
 			dataBind: function(data) {
-				return this.selectAll('.' + chart.config.runsClass + ' path').data([data]);
+				return this.selectAll('.' + chart.config.line1Class + ' path').data([data]);
 			},
 			insert: insert
 		});
@@ -162,9 +162,9 @@ d3.chart('line', {
 					return chart.y_2(d[chart.config.y2Key]);
 				});
 
-			var balls = this.layer(chart.config.srClass, this.wrapper.append('g').attr('class', chart.config.srClass).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
+			var balls = this.layer(chart.config.line2Class, this.wrapper.append('g').attr('class', chart.config.line2Class).attr('transform', 'translate(' + leftMargin / 2 + ',0)'), {
 				dataBind: function(data) {
-					return this.selectAll('.' + chart.config.srClass + ' path').data([data]);
+					return this.selectAll('.' + chart.config.line2Class + ' path').data([data]);
 				},
 				insert: insert
 			});
@@ -276,17 +276,17 @@ d3.chart('line', {
 	onTransform: function(dataSrc) {
 
 		this.xAxis
-			.ticks((dataSrc.length > this.maxTicks) ? Math.floor(this.width()/this.config.minTickSpacing) : dataSrc.length-1);
+			.ticks((dataSrc.length > this.maxTicks) ? Math.floor(this.width() / this.config.minTickSpacing) : dataSrc.length - 1);
 
 		/* Rescale/update axes on data update */
-		this.wrapper.select('.x.axis')
+		this.wrapper.select('.' + this.config.xClass.split(' ').join('.'))
 			.call(this.xAxis);
 
-		this.wrapper.select('.y.axisLeft')
+		this.wrapper.select('.' + this.config.y1Class.split(' ').join('.'))
 			.call(this.yAxisLeft);
 
 		if (this.comparison) {
-			this.wrapper.select('.y.axisRight')
+			this.wrapper.select('.' + this.config.y2Class.split(' ').join('.'))
 				.call(this.yAxisRight);
 		}
 	}

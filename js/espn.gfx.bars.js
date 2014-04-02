@@ -5,11 +5,8 @@ d3.chart('bars', {
 	config: {
 		barSpacing: 10,
 		colors: ['#f9901d', '#7dcc5f', 'orangered'],
-		bars1Class: 'bars1',
-		bars2Class: 'bars2',
-		xAxClass: '',
-		yAx2Class: '',
-		yAx1Class: '',
+		bars1Class: 'mcr-chart-bars1',
+		bars2Class: 'mcr-chart-bars2',
 		xScaleValue: 'overs',
 		bottomMargin: 45,
 		leftMargin: 20,
@@ -20,11 +17,11 @@ d3.chart('bars', {
 		keyLeftMargin: 16,
 		keyTextRightMargin: 16,
 		keyTextBottomMargin: 11,
-		keyClass: 'key',
-		wrapperClass: 'wrapperClass',
-		xClass: 'x axis',
-		y1Class: 'y axis axisLeft',
-		y2Class: 'y axis axisRight',
+		keyClass: 'mcr-chart-key',
+		wrapperClass: 'mcr-chart-wrapper',
+		xClass: 'mcr-chart-x mcr-chart-axis',
+		y1Class: 'mcr-chart-y mcr-chart-axis mcr-chart-axisLeft',
+		y2Class: 'mcr-chart-y mcr-chart-axis mcr-chart-axisRight',
 		y1Key: 'runs',
 		y2Key: 'balls',
 		xKey: 'overs',
@@ -216,7 +213,7 @@ d3.chart('bars', {
 			bars2.on('exit:transition', onExit);
 		}
 
-		/* TODO: Use as a mixin, Key is same as stacked chart */
+		/* TODO: Use as a mixin, Key is same as in stacked/line chart */
 
 		if (options.key && options.key.length) {
 
@@ -312,14 +309,14 @@ d3.chart('bars', {
 		this.xAxis.ticks(5);
 
 		if (this.dualAxis) {
-			this.wrapper.select('.y.axisRight')
+			this.wrapper.select('.' + this.config.y2Class.split(' ').join('.'))
 				.call(this.yAxisRight);
 		}
 
-		this.wrapper.select('.x.axis')
+		this.wrapper.select('.' + this.config.xClass.split(' ').join('.'))
 			.call(this.xAxis);
 
-		this.wrapper.select('.y.axisLeft')
+		this.wrapper.select('.' + this.config.y1Class.split(' ').join('.'))
 			.call(this.yAxisLeft);
 	}
 

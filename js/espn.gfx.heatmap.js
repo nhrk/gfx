@@ -8,12 +8,12 @@ d3.chart("heatmap", {
 			'text-anchor': 'start',
 			'style': 'color:#000'
 		},
-		xGridLength : 5,
-		yGridLength : 5,
+		xGridLength: 5,
+		yGridLength: 5,
 		strokeColor: '#f1bd7f',
 		textColor: '#000',
 		wicketColor: "#f9901d",
-		keyClass: 'key',
+		keyClass: 'mcr-chart-key',
 		margin: 15,
 		keyTextAttr: {
 			'fill': '#3e9fca',
@@ -23,7 +23,7 @@ d3.chart("heatmap", {
 			['WO', 'O', 'S', 'L', 'WL'],
 			['Y', 'F', 'G', 'S', 'SG']
 		],
-		keyTextClass: 'keyTextClass',
+		keyTextClass: 'mcr-chart-keyText',
 		colorRange: ["#ffcb92", "#ffe401", "#fdcd00", "#ffba00", "#ff9c00", "#ff7204", "#fe5400", "#fd3100", "#f40000"]
 	},
 
@@ -152,7 +152,7 @@ d3.chart("heatmap", {
 		function getColorCode(d, i) {
 			// Switched from the colorScale to manual computation based on product request
 			var code,
-				percent = (d.runs/chart._sum * 100 || 1);
+				percent = (d.runs / chart._sum * 100 || 1);
 
 			if (percent >= 0 && percent < 10) {
 				code = 0;
@@ -250,11 +250,9 @@ d3.chart("heatmap", {
 	},
 
 	transform: function(dataSrc) {
-		/* TODO: type checks */
-
-		this._sum = d3.sum(dataSrc,function(d){
-							return d.runs;
-						});
+		this._sum = d3.sum(dataSrc, function(d) {
+			return Number(d.runs);
+		});
 		return dataSrc;
 	}
 

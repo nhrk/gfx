@@ -11,8 +11,8 @@ d3.chart('bar', {
 		labelPaddingTop: 30,
 		textPosX: 1,
 		textPosY: 15,
-		barClass: 'barClass',
-		linearGradient: 'linearGradient',
+		barClass: 'mcr-chart-bar',
+		linearGradient: 'mcr-chart-linearGradient',
 		labelAttr: {
 			'font-size': '14px',
 			'text-anchor': 'start',
@@ -22,8 +22,8 @@ d3.chart('bar', {
 			'font-size': '16px',
 			'font-weight': 'bold'
 		},
-		markerClass: 'markerClass',
-		gradientId: 'linearGradient',
+		markerClass: 'mcr-chart-marker',
+		gradientId: 'mcr-chart-line-gradient',
 		count: 0
 	},
 

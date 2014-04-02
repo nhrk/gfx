@@ -14,12 +14,14 @@ d3.chart('wagon', {
 		maxLabelColor: '#fff',
 		animDuration: 100,
 		shadeColor: '#fff',
-		gradientDefId: 'radialGradient',
+		gradientDefId: 'mcr-chart-wagon-gradient',
 		gradientColors: ['#7dcc5f', '#74c24c'],
-		arcClass: 'arcClass'
+		arcClass: 'mcr-chart-wagon-arc'
 	},
 
 	initialize: function(options) {
+
+		options = options || {};
 
 		var chart = this,
 			diameter = options.diameter || chart.config.diameter,

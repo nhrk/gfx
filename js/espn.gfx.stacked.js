@@ -14,9 +14,9 @@ d3.chart('stacked', {
 		keyLeftMargin: 0,
 		keyTextRightMargin: 16,
 		keyTextBottomMargin: 11,
-		keyClass: 'key',
-		leftStackClass: 'left',
-		rightStackClass: 'right',
+		keyClass: 'mcr-chart-key',
+		leftStackClass: 'mcr-chart-leftStack',
+		rightStackClass: 'mcr-chart-rightStack',
 		titleAttr: {
 			'font-weight': 'bold',
 			'font-size': '1.2em'
@@ -27,9 +27,9 @@ d3.chart('stacked', {
 		valueAttr: {
 			'font-size': '1.1em'
 		},
-		titleClass: 'title',
-		labelClass: 'label',
-		valueClass: 'value',
+		titleClass: 'mcr-chart-barTitle',
+		labelClass: 'mcr-chart-barLabel',
+		valueClass: 'mcr-chart-barValue',
 		minSpacing: 25
 	},
 

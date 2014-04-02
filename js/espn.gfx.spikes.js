@@ -6,7 +6,7 @@ d3.chart('spikes', {
 		diameter: 150,
 		maxLabelColor: '#fff',
 		shadeColor: '#fff',
-		gradientDefId: 'radialGradient',
+		gradientDefId: 'mcr-chart-spikes-gradient',
 		gradientColors: ['#7dcc5f', '#7ac85b'],
 		colorMap: {
 			'1': '#8a17a7',
@@ -18,7 +18,7 @@ d3.chart('spikes', {
 		},
 		offset: 17,
 		strokeWidth: 2,
-		spikesClass: 'spikesClass',
+		spikesClass: 'mcr-chart-spikes',
 		pitch: {
 			width: 22,
 			height: 52,
@@ -43,6 +43,8 @@ d3.chart('spikes', {
 	},
 
 	initialize: function(options) {
+
+		options = options || {};
 
 		var chart = this,
 			diameter = options.diameter || chart.config.diameter,
