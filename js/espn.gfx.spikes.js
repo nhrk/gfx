@@ -39,7 +39,8 @@ d3.chart('spikes', {
 			fill: '#fff',
 			radius: 3,
 			stroke: '#000'
-		}
+		},
+		count: 0
 	},
 
 	initialize: function(options) {
@@ -65,13 +66,15 @@ d3.chart('spikes', {
 
 		center = diameter / 2;
 
+		this.config.count++;
+
 		this.base.append('circle')
 			.attr('cx', center)
 			.attr('cy', center)
 			.attr('r', radius)
 			.attr('stroke-width', '5')
 			.attr('stroke', chart.config.ground.stroke)
-			.attr('fill', 'url(#' + chart.config.gradientDefId + ')');
+			.attr('fill', 'url(#' + chart.config.gradientDefId + '_' + chart.config.count + ')');
 
 		// Append Pitch
 		this.base.append('rect')
@@ -99,7 +102,7 @@ d3.chart('spikes', {
 		// Gradient
 		gradient = this.base.append('defs')
 			.append('radialGradient')
-			.attr('id', chart.config.gradientDefId)
+			.attr('id', chart.config.gradientDefId + '_' + chart.config.count)
 			.attr('r', '65%');
 
 		gradient.append('stop')

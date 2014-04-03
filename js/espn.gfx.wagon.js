@@ -12,11 +12,11 @@ d3.chart('wagon', {
 			'font-size': '12px'
 		},
 		maxLabelColor: '#fff',
-		animDuration: 100,
 		shadeColor: '#fff',
 		gradientDefId: 'mcr-chart-wagon-gradient',
 		gradientColors: ['#7dcc5f', '#74c24c'],
-		arcClass: 'mcr-chart-wagon-arc'
+		arcClass: 'mcr-chart-wagon-arc',
+		count: 0
 	},
 
 	initialize: function(options) {
@@ -62,9 +62,13 @@ d3.chart('wagon', {
 		wrapper = this.base.append('g')
 			.attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
 
+		chart.config.count++;
+
+		this._gradientId = chart.config.gradientDefId + '-' + chart.config.count;
+
 		gradient = this.base.append('defs')
 			.append('radialGradient')
-			.attr('id', chart.config.gradientDefId)
+			.attr('id', chart._gradientId)
 			.attr('r', '65%');
 
 		gradient.append('stop')
@@ -91,7 +95,7 @@ d3.chart('wagon', {
 				.attr('d', arc)
 				.style('stroke', colors[2])
 				.style('fill', function(d, i) {
-					return d.data.max ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
+					return d.data.max ? colors[1] : 'url(#' + chart._gradientId + ')';
 				});
 
 			if (chart.filterZone) {
@@ -140,7 +144,7 @@ d3.chart('wagon', {
 					wrapper.selectAll('.' + chart.config.arcClass + ' path')
 						.each(function(d, i) {
 							d3.select(this).style('fill', function() {
-								return (chart.selectedZones[d.data.zone]) ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
+								return (chart.selectedZones[d.data.zone]) ? colors[1] : 'url(#' + chart._gradientId + ')';
 							});
 						});
 
@@ -192,10 +196,8 @@ d3.chart('wagon', {
 						return (d.data.max) ? maxLabelColor : labelAttr.fill;
 					});
 				g.select('path')
-					.style('fill', chart.config.gradientColors[0])
-					.transition(chart.config.animDuration)
 					.style('fill', function(d, i) {
-						return d.data.max ? colors[1] : 'url(#' + chart.config.gradientDefId + ')';
+						return d.data.max ? colors[1] : 'url(#' + chart._gradientId + ')';
 					});
 			});
 		}
