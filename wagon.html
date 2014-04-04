@@ -97,7 +97,9 @@
 		diameter : 150,
 		colors : ["#7ace5c","#f88f22","white"],
 		labelAttr : {'fill':"#000", "font-size":"14px", "font-weight": "bold"},
-		textPadding : 30
+		textPadding : 30,
+		onMouseover : function(el,d,box){ console.log(el,d,box); },
+		onMouseout : function(el,d,box){ console.log('out'); }
 	});
 
 	wagon3.draw(espn.gfx.random.wagon());

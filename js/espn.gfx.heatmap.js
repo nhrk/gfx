@@ -46,6 +46,8 @@ d3.chart("heatmap", {
 			margin = 0,
 			keyLegends = options.keyLegends || this.config.keyLegends,
 			key,
+			onMouseover = options.onMouseover,
+			onMouseout = options.onMouseout,
 			wrapper;
 
 		this.base = this.base.append("svg");
@@ -95,6 +97,16 @@ d3.chart("heatmap", {
 				.attr("width", squareWidth)
 				.attr("height", function(d, i) {
 					return squareHeight;
+				}).on('mouseover', function(d, i) {
+					if (typeof onMouseover === 'function') {
+						var bbox = this.getBBox();
+						onMouseover(chart.base.node(), d, bbox);
+					}
+				}).on('mouseout', function(d, i) {
+					if (typeof onMouseout === 'function') {
+						var bbox = this.getBBox();
+						onMouseout(chart.base.node(), d, bbox);
+					}
 				});
 
 			if (showValues) {
@@ -111,7 +123,7 @@ d3.chart("heatmap", {
 							.attr('dy', 0)
 							.attr("text-anchor", 'start');
 
-					bbox = text[0][0].getBBox();
+					bbox = text.node().getBBox();
 
 					// Re set x y pos based on text elements dimensions
 					text.attr('dx', function() {
@@ -137,7 +149,7 @@ d3.chart("heatmap", {
 								return d.wickets ? d.wickets + 'w' : '';
 							});
 
-					bbox = text[0][0].getBBox();
+					bbox = text.node().getBBox();
 
 					text.attr('dx', function() {
 						var pos = getGridPosition(i + 1);
@@ -214,7 +226,7 @@ d3.chart("heatmap", {
 						.attr('dx', 0)
 						.attr('text-anchor', 'start');
 
-					bbox = keyText[0][0].getBBox();
+					bbox = keyText.node().getBBox();
 					keyText.attr('dx', (j * (chart.width() - margin) / xGridLength) - (bbox.width / 2))
 						.attr('transform', 'translate(' + margin + ',0)');
 
@@ -223,7 +235,7 @@ d3.chart("heatmap", {
 						.attr('text-anchor', 'middle')
 						.attr('dx', 7);
 
-					bbox = keyText[0][0].getBBox();
+					bbox = keyText.node().getBBox();
 					keyText.attr('dy', (j * (chart.height() - margin) / yGridLength) + (bbox.height))
 						.attr('transform', 'translate(0,' + margin + ')');
 				}

@@ -37,6 +37,8 @@ d3.chart('wagon', {
 			wrapper,
 			arc,
 			pie,
+			onMouseover = options.onMouseover,
+			onMouseout = options.onMouseout,
 			gradient;
 
 		if (options.type === 'filter') {
@@ -96,6 +98,16 @@ d3.chart('wagon', {
 				.style('stroke', colors[2])
 				.style('fill', function(d, i) {
 					return d.data.max ? colors[1] : 'url(#' + chart._gradientId + ')';
+				}).on('mouseover', function(d, i) {
+					if (typeof onMouseover === 'function') {
+						var bbox = this.getBBox();
+						onMouseover(chart.base.node(), d, bbox);
+					}
+				}).on('mouseout', function(d, i) {
+					if (typeof onMouseout === 'function') {
+						var bbox = this.getBBox();
+						onMouseout(chart.base.node(), d, bbox);
+					}
 				});
 
 			if (chart.filterZone) {

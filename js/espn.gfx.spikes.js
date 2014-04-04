@@ -56,6 +56,8 @@ d3.chart('spikes', {
 			colorMap = options.colorMap || chart.config.colorMap,
 			wrapper,
 			center,
+			onMouseover = options.onMouseover,
+			onMouseout = options.onMouseout,
 			gradient;
 
 		this.base = this.base.append('svg');
@@ -133,8 +135,15 @@ d3.chart('spikes', {
 				})
 				.attr('stroke-width', chart.config.strokeWidth)
 				.on('mouseover', function(d, i) {
-					var bbox = this.getBBox();
-					console.log('comms:', d.comms, 'x:', bbox.x, 'y:', bbox.y, 'runs:', d.runs);
+					if (typeof onMouseover === 'function') {
+						var bbox = this.getBBox();
+						onMouseover(chart.base.node(), d, bbox);
+					}
+				}).on('mouseout', function(d, i) {
+					if (typeof onMouseout === 'function') {
+						var bbox = this.getBBox();
+						onMouseout(chart.base.node(), d, bbox);
+					}
 				});
 		}
 

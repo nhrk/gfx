@@ -74,7 +74,9 @@
 	.chart("spikes",{
 		diameter : 225,
 		textPadding : 15,
-		colors : ["#7ace5c","#f88f22","#7ace5c"]
+		colors : ["#7ace5c","#f88f22","#7ace5c"],
+		onMouseover : function(el,d,box){ console.log(el,d,box); },
+		onMouseout : function(el,d,box){ console.log('out'); }
 	});
 
 	spikes2.draw(getSpikes(wagon));

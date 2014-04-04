@@ -18,18 +18,42 @@
 		clear:both;
 		padding-bottom:10px;
 	}
+	.tooltip{
+		position: relative;
+		display: none;
+	}
 </style>
 <body>
 	
 	<div id="espn-heatmap" class="espn-gfx"></div>
 	<div id="espn-heatmap2" class="espn-gfx"></div>
 	<div id="espn-heatmap3" class="espn-gfx"></div>
+	<div class="tooltip"></div>
 	<script src="./bower_components/d3/d3.js"></script>
 	<script src="./bower_components/d3.chart/d3.chart.js"></script>
 	<script src="./js/espn.gfx.random.js"></script>
 	<script src="./js/espn.gfx.heatmap.js"></script>
 	
 	<script>
+
+	function tooltip(svgElem, data, bbox){
+		// Crude example of tooltip
+		// TODO: proper tooltip positioning by getting positions for svgElem, use jQuery for cross browser support
+		var pos = getNodePos(svgElem);
+		d3.select('.tooltip').attr({style:"display:block;left:" + (pos.x + bbox.x) + "px;top:" + (pos.y + bbox.y) + "px;"}).html(data.runs + ' Run/s');
+	}
+
+	function closeTip(){
+		d3.select('.tooltip').style('display','none');
+	}
+
+	function getNodePos(el){
+		var body = d3.select('body').node();
+		for (var lx = 0, ly = 0;
+			el != null && el != body;
+			lx += (el.offsetLeft || el.clientLeft), ly += (el.offsetTop || el.clientTop), el = (el.offsetParent || el.parentNode));
+		return {x: lx, y: ly};
+	}
 
 	var interval = 4000;
 
@@ -42,7 +66,9 @@
 	.chart("heatmap",{
 		width : 100,
 		height : 125,
-		legends : true
+		legends : true,
+		onMouseover : tooltip,
+		onMouseout : closeTip
 	});
 
 	heatmap.draw(espn.gfx.random.heatmap());
@@ -97,7 +123,9 @@
 		keyLegends: [
 			['O', 'S', 'L'],
 			['Y', 'F', 'L', 'S', 'B']
-		]
+		],
+		onMouseover : tooltip,
+		onMouseout : closeTip
 	});
 
 	heatmap3.draw(getPitchMap(pitchMap));
