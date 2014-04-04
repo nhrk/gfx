@@ -226,7 +226,8 @@ d3.chart('bar', {
 		value = (typeof value === 'number') ? value : Number(value);
 
 		if (isNaN(value)) {
-			throw new Error('Invalid data! Input is not a number');
+			// use 0 if NaN
+			value = 0;
 		}
 
 		return [{
