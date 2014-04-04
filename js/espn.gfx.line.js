@@ -23,7 +23,7 @@ d3.chart('line', {
 		y1Key: 'runs',
 		y2Key: 'rate',
 		xKey: 'over',
-		minTickSpacing: 20,
+		minTickSpacing: 25,
 		maxTicks: 10,
 		lineInterpolation: 'monotone',
 		strokeWidth: 2,
