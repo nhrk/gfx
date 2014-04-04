@@ -104,7 +104,7 @@ d3.chart('bar', {
 								return d.percent;
 							})
 							.attr('dx', function() {
-								var bbox = label[0][0].getBBox();
+								var bbox = label.node().getBBox();
 								return bbox.width + textPaddingLeft;
 							})
 							.attr('dy', textPosY)

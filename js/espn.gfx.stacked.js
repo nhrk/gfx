@@ -138,7 +138,7 @@ d3.chart('stacked', {
 							.attr(titleAttr)
 							.text(d.title);
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 						//place text element in DOM, calculate dimensions and reassign dx dy to center text
 						text.attr('dx', chart.width() / 2 - bbox.width / 2)
 						text.attr('dy', chart.y(d.x) - bbox.height / 2)
@@ -153,7 +153,7 @@ d3.chart('stacked', {
 							.attr(labelAttr)
 							.text(d.label);
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 
 						text.attr('dx', chart.width());
 
@@ -190,7 +190,7 @@ d3.chart('stacked', {
 								return (d.y > 0) ? d.y : '';
 							});
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 
 						text.attr('dy', chart.y(d.x) + (getBarHeight() / 2) + (bbox.height / 4));
 					}
@@ -234,7 +234,7 @@ d3.chart('stacked', {
 								return (d.y > 0) ? d.y : '';
 							});
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 
 						text.attr('dy', chart.y(d.x) + (getBarHeight() / 2) + (bbox.height / 4));
 					}
@@ -300,7 +300,7 @@ d3.chart('stacked', {
 							.attr(labelAttr)
 							.text(d.label);
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 
 						if (labelPos === 'bottom') {
 							text.attr('dy', chart.y(d.x) + getBarHeight() + bbox.height)
@@ -319,7 +319,7 @@ d3.chart('stacked', {
 								return (d.y > 0) ? d.y : '';
 							});
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 						text.attr('dy', chart.y(d.x) + (getBarHeight() / 2) + (bbox.height / 4));
 					}
 				});
@@ -359,7 +359,7 @@ d3.chart('stacked', {
 								return (d.y > 0) ? d.y : '';
 							});
 
-						bbox = text[0][0].getBBox();
+						bbox = text.node().getBBox();
 
 						text.attr('dy', chart.y(d.x) + (getBarHeight() / 2) + (bbox.height / 4));
 					}

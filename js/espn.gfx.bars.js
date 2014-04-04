@@ -80,7 +80,7 @@ d3.chart('bars', {
 				.attr('dx', 0)
 				.attr('dy', 0);
 
-			var bbox = chartTitle[0][0].getBBox();
+			var bbox = chartTitle.node().getBBox();
 
 			chartTitle.attr('dx', (chart.width() / 2) - (bbox.width / 2))
 				.attr('dy', chart.height() - (bbox.height * 2));
