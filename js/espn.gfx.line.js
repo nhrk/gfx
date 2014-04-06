@@ -23,10 +23,11 @@ d3.chart('line', {
 		y1Key: 'runs',
 		y2Key: 'rate',
 		xKey: 'over',
-		minTickSpacing: 25,
+		minTickSpacing: 30,
 		maxTicks: 10,
 		lineInterpolation: 'monotone',
 		strokeWidth: 2,
+		yAxTicks: 4,
 		titleAttrs: {
 			'font-weight': 'bold',
 			'font-size': '1.3em'
@@ -96,7 +97,7 @@ d3.chart('line', {
 
 		this.yAxisLeft = d3.svg.axis()
 			.scale(this.y_1)
-			.ticks(4)
+			.ticks(this.config.yAxTicks)
 			.tickSize(-chart.width() + rightMargin + leftMargin)
 			.orient('left');
 
@@ -111,7 +112,7 @@ d3.chart('line', {
 
 			this.yAxisRight = d3.svg.axis()
 				.scale(this.y_2)
-				.ticks(4)
+				.ticks(this.config.yAxTicks)
 				.tickSize(-chart.width() + rightMargin + leftMargin)
 				.orient('right');
 		}
@@ -275,8 +276,21 @@ d3.chart('line', {
 
 	onTransform: function(dataSrc) {
 
+		var maxY1,
+			maxY2,
+			chart = this;
+
 		this.xAxis
 			.ticks((dataSrc.length > this.maxTicks) ? Math.floor(this.width() / this.config.minTickSpacing) : dataSrc.length - 1);
+
+		maxY1 = d3.max(dataSrc,function(d,i){
+						return d[chart.config.y1Key];
+					});
+
+		if(maxY1 < this.config.yAxTicks){
+			this.yAxisLeft
+			.ticks(maxY1);
+		}
 
 		/* Rescale/update axes on data update */
 		this.wrapper.select('.' + this.config.xClass.split(' ').join('.'))
@@ -286,6 +300,16 @@ d3.chart('line', {
 			.call(this.yAxisLeft);
 
 		if (this.comparison) {
+
+			maxY2 = d3.max(dataSrc,function(d,i){
+				return d[chart.config.y2Key];
+			});
+
+			if(maxY2 < this.config.yAxTicks){
+				this.yAxisLeft
+				.ticks(maxY2);
+			}
+
 			this.wrapper.select('.' + this.config.y2Class.split(' ').join('.'))
 				.call(this.yAxisRight);
 		}
