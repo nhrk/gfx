@@ -4722,6 +4722,13 @@ p.dummy {
     color: #000;
     font-family: BentonSansBold;
     font-size: 12px; }
+  .mcr-bat .mcr-bat-right .mcr-bat-down .mcr-gbat-data li {
+    color: #000;
+    font-family: BentonSansBold;
+    font-size: 12px;
+    width: 100%;
+    border-left: 1px solid #dbdbdb;
+    border-right: 0; }
   .mcr-bat .mcr-bat-right .mcr-bat-down .mcr-bat-summary {
     padding: 10px 0; }
     .mcr-bat .mcr-bat-right .mcr-bat-down .mcr-bat-summary div {
