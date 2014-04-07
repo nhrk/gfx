@@ -107,7 +107,10 @@
 	var wagon4 = d3.select("#espn-wagon4")
 	.chart("wagon",{
 		diameter : 47,
-		type : 'filter'
+		type : 'filter',
+		onClick : function(zones){
+			console.log(zones);
+		}
 	});
 
 	wagon4.draw();

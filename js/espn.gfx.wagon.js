@@ -39,6 +39,7 @@ d3.chart('wagon', {
 			pie,
 			onMouseover = options.onMouseover,
 			onMouseout = options.onMouseout,
+			onClick = options.onClick,
 			gradient;
 
 		if (options.type === 'filter') {
@@ -111,7 +112,12 @@ d3.chart('wagon', {
 				});
 
 			if (chart.filterZone) {
-				this.on('click', filterZone.toggle);
+				this.on('click', function(d){
+					var zones = filterZone.toggle(d);
+					if(typeof onClick === 'function'){
+						return onClick(zones);
+					}
+				});
 			}
 
 			this.append('text')
@@ -160,7 +166,6 @@ d3.chart('wagon', {
 							});
 						});
 
-					console.log('zones :', getSelectedZones());
 					return getSelectedZones();
 				},
 				all: function() {
