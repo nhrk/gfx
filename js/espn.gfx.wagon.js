@@ -174,11 +174,11 @@ d3.chart('wagon', {
 						"7": 1,
 						"8": 1
 					};
-					filterZone.toggle();
+					return filterZone.toggle();
 				},
 				none: function() {
 					chart.selectedZones = {};
-					filterZone.toggle();
+					return filterZone.toggle();
 				}
 			}
 
