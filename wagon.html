@@ -128,5 +128,34 @@
 		wagon4.filterZone.toggle([1,7]);
 	});
 
+	// Example showing runs filter
+	var wagonKey = [["30","234","2"],["333","260","4"],["245","44","1"],["39","288","4"],["235","59","1"],["20","231","2"],["73","223","1"],["291","78","1"],["345","230","4"],["235","319","1"],["255","201","1"],["32","183","2"],["28","273","6"]];
+
+	function filterRuns(wagon,map){
+		var arr = [];
+		if(!map || !wagon || wagon && wagon.length === 0){
+			return arr;
+		}
+		for (var i = 0; i < wagon.length; i++) {
+			var run = Number(wagon[i][2]);
+			if(map[run]){
+				arr.push(wagon[i]);
+			}
+		}
+		return arr;
+	}
+
+	function createMap(runs){
+		var obj = {};
+		for (var i = 0; i < runs.length; i++) {
+			obj[runs[i]] = 1;
+		}
+		return obj;
+	}
+
+	var map = createMap([1,4]);
+
+	console.log(filterRuns(wagonKey,map));
+
 	</script>
 </body>
