@@ -100,12 +100,12 @@ d3.chart("heatmap", {
 				}).on('mouseover', function(d, i) {
 					if (typeof onMouseover === 'function') {
 						var bbox = this.getBBox();
-						onMouseover(chart.base.node(), d, bbox);
+						onMouseover(d3.event, d, chart.base.node(), bbox);
 					}
 				}).on('mouseout', function(d, i) {
 					if (typeof onMouseout === 'function') {
 						var bbox = this.getBBox();
-						onMouseout(chart.base.node(), d, bbox);
+						onMouseout(d3.event, d, chart.base.node(), bbox);
 					}
 				});
 
