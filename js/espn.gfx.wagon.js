@@ -40,6 +40,7 @@ d3.chart('wagon', {
 			onMouseover = options.onMouseover,
 			onMouseout = options.onMouseout,
 			onClick = options.onClick,
+			onBaseClick = options.onBaseClick,
 			gradient;
 
 		if (options.type === 'filter') {
@@ -57,6 +58,10 @@ d3.chart('wagon', {
 			});
 
 		this.base = this.base.append('svg');
+
+		if(typeof onBaseClick === 'function'){
+			this.base.on('click',onBaseClick);
+		}
 
 		this.width(diameter);
 

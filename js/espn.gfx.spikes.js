@@ -58,9 +58,14 @@ d3.chart('spikes', {
 			center,
 			onMouseover = options.onMouseover,
 			onMouseout = options.onMouseout,
+			onBaseClick = options.onBaseClick,
 			gradient;
 
 		this.base = this.base.append('svg');
+
+		if(typeof onBaseClick === 'function'){
+			this.base.on('click',onBaseClick);
+		}
 
 		this.width(diameter);
 

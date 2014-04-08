@@ -22,6 +22,9 @@
 		position: relative;
 		display: none;
 	}
+	.mcr-chart-key text{
+		cursor: help;
+	}
 </style>
 <body>
 	
@@ -39,7 +42,6 @@
 	function tooltip(event, data, svgElem, bbox){
 		// Crude example of tooltip
 		// TODO: proper tooltip positioning by getting positions for svgElem, use jQuery for cross browser support
-		console.log(event);
 		var pos = getNodePos(svgElem);
 		d3.select('.tooltip').attr({style:"display:block;left:" + (pos.x + bbox.x) + "px;top:" + (pos.y + bbox.y) + "px;"}).html(data.runs + ' Run/s');
 	}
@@ -69,7 +71,16 @@
 		height : 125,
 		legends : true,
 		onMouseover : tooltip,
-		onMouseout : closeTip
+		onMouseout : closeTip,
+		onBaseClick : function(){
+			console.log('clicked');
+		},
+		onKeyMouseover : function(event,data){
+			console.log(event,data,'over');
+		},
+		onKeyMouseout : function(event,data){
+			console.log(event,data,'out');
+		}
 	});
 
 	heatmap.draw(espn.gfx.random.heatmap());
