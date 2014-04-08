@@ -243,7 +243,9 @@ d3.chart('stacked', {
 		}
 
 		function onExit() {
-			/* TODO: Remove nodes */
+			this.each(function(d,i){
+				d3.select(this.parentNode).remove();
+			});
 		}
 
 		this.layer('rightAxis').on('exit', onExit);
@@ -372,11 +374,7 @@ d3.chart('stacked', {
 			return (height > 0) ? height : 1;
 		}
 
-		function onExitLeft() {
-			/* TODO: Remove nodes */
-		}
-
-		this.layer('leftAxis').on('enter', onExitLeft);
+		this.layer('leftAxis').on('exit', onExit);
 		this.layer('leftAxis').on('enter', onEnterLeft);
 		this.layer('leftAxis').on('update:transition', onTransLeft);
 
