@@ -19,6 +19,7 @@ d3.chart("heatmap", {
 			'fill': '#3e9fca',
 			'font-size': '0.9em'
 		},
+		mapKey: 'balls',
 		keyLegends: [
 			[{
 				key : 'WO',
@@ -84,6 +85,8 @@ d3.chart("heatmap", {
 			wrapper;
 
 		this.base = this.base.append("svg");
+
+		this.mapKey = options.mapKey || chart.config.mapKey;
 
 		if(typeof onBaseClick === 'function'){
 			this.base.on('click',onBaseClick);
@@ -200,13 +203,13 @@ d3.chart("heatmap", {
 
 		function getColorCode(d, i) {
 			// Switched from the colorScale to manual computation based on product request
-			var code,
-				percent = (d.runs / chart._sum * 100 || 1);
+			var code = 0,
+				percent = (d[chart.mapKey] / chart._sum * 100 || 1);
 
-			if (percent >= 0 && percent < 10) {
-				code = 0;
-			} else if (percent >= 10 && percent < 20) {
+			if (percent > 0 && percent < 10) {
 				code = 1;
+			} else if (percent >= 10 && percent < 20) {
+				code = 2;
 			} else if (percent >= 20 && percent < 30) {
 				code = 3;
 			} else if (percent >= 30 && percent < 40) {
@@ -314,7 +317,7 @@ d3.chart("heatmap", {
 
 	transform: function(dataSrc) {
 		this._sum = d3.sum(dataSrc, function(d) {
-			return Number(d.runs);
+			return Number(d[this.mapKey]);
 		});
 		return dataSrc;
 	}
