@@ -223,7 +223,7 @@ d3.chart("heatmap", {
 				code = 7;
 			} else if (percent >= 80 && percent < 90) {
 				code = 8;
-			} else if (percent >= 90 && percent < 100) {
+			} else if (percent >= 90 && percent <= 100) {
 				code = 9;
 			}
 
