@@ -186,7 +186,7 @@ d3.chart('bar', {
 			.attr('stop-opacity', 1);
 
 		gradient.append('svg:stop')
-			.attr('offset', '70%')
+			.attr('offset', '60%')
 			.attr('stop-color', 'rgb(255,255,0)')
 			.attr('stop-opacity', 1);
 
