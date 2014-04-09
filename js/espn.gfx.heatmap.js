@@ -55,7 +55,7 @@ d3.chart("heatmap", {
 			}]
 		],
 		keyTextClass: 'mcr-chart-keyText',
-		colorRange: ["#ffcb92", "#ffe401", "#fdcd00", "#ffba00", "#ff9c00", "#ff7204", "#fe5400", "#fd3100", "#f40000"]
+		colorRange: ['#ffd5a7', '#ffe570', '#fecf00', '#fdb700', '#fca000', '#fa7700', '#f96200', '#f64500', '#f52c00', '#e20303']
 	},
 
 	initialize: function(options) {
@@ -206,7 +206,8 @@ d3.chart("heatmap", {
 			var code = 0,
 				percent = (d[chart.mapKey] / chart._sum * 100 || 1);
 
-			if (percent > 0 && percent < 10) {
+			// Keeping a simple if else logic until the colors are finalized
+			if (percent > 1 && percent < 10) {
 				code = 1;
 			} else if (percent >= 10 && percent < 20) {
 				code = 2;
@@ -218,10 +219,12 @@ d3.chart("heatmap", {
 				code = 5;
 			} else if (percent >= 60 && percent < 70) {
 				code = 6;
-			} else if (percent >= 70 && percent < 85) {
+			} else if (percent >= 70 && percent < 80) {
 				code = 7;
-			} else if (percent >= 85) {
+			} else if (percent >= 80 && percent < 90) {
 				code = 8;
+			} else if (percent >= 90 && percent < 100) {
+				code = 9;
 			}
 
 			return colorRange[code];
@@ -316,8 +319,9 @@ d3.chart("heatmap", {
 	},
 
 	transform: function(dataSrc) {
+		var chart = this;
 		this._sum = d3.sum(dataSrc, function(d) {
-			return Number(d[this.mapKey]);
+			return Number(d[chart.mapKey]);
 		});
 		return dataSrc;
 	}
