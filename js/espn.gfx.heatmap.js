@@ -82,6 +82,7 @@ d3.chart("heatmap", {
 			onMouseover = options.onMouseover,
 			onMouseout = options.onMouseout,
 			onBaseClick = options.onBaseClick,
+			flipLegends = options.flipLegends,
 			wrapper;
 
 		this.base = this.base.append("svg");
@@ -104,7 +105,7 @@ d3.chart("heatmap", {
 			margin = chart.config.margin;
 			wrapper.attr('transform', 'translate(' + (margin * 2) + ',' + (margin * 2) + ')')
 			/* TODO: use obj, too many args */
-			this.renderLegends(key, keyLegends, keyTextAttr, margin, xGridLength, yGridLength, onKeyMouseover, onKeyMouseout);
+			this.renderLegends(key, keyLegends, keyTextAttr, margin, xGridLength, yGridLength, onKeyMouseover, onKeyMouseout, flipLegends);
 		}
 
 		squareHeight = (this.height() - margin) / yGridLength;
@@ -251,12 +252,16 @@ d3.chart("heatmap", {
 
 	},
 
-	renderLegends: function(keyEl, keyLegends, keyTextAttr, margin, xGridLength, yGridLength, onKeyMouseover, onKeyMouseout) {
+	renderLegends: function(keyEl, keyLegends, keyTextAttr, margin, xGridLength, yGridLength, onKeyMouseover, onKeyMouseout, flipLegends) {
 		var chart = this,
 			keyText,
 			bbox;
 
 		for (var i = 0, len = keyLegends.length; i < len; i++) {
+
+			if(flipLegends && i === 0){
+				keyLegends[i] = keyLegends[i].reverse();
+			}
 
 			for (var j = 0, jLen = keyLegends[i].length; j < jLen; j++) {
 
