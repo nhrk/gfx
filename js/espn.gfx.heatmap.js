@@ -262,7 +262,7 @@ d3.chart("heatmap", {
 		for (var i = 0, len = keyLegends.length; i < len; i++) {
 
 			if(flipLegends && i === 0){
-				keyLegends[i] = keyLegends[i].reverse();
+				keyLegends[i] = keyLegends[i].slice(0).reverse();
 			}
 
 			for (var j = 0, jLen = keyLegends[i].length; j < jLen; j++) {
