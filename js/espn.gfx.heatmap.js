@@ -54,6 +54,7 @@ d3.chart("heatmap", {
 				text : 'Short good length'
 			}]
 		],
+		textKey: 'wickets',
 		keyTextClass: 'mcr-chart-keyText',
 		colorRange: ['#ffd5a7', '#ffe570', '#fecf00', '#fdb700', '#fca000', '#fa7700', '#f96200', '#f64500', '#f52c00', '#e20303']
 	},
@@ -82,6 +83,7 @@ d3.chart("heatmap", {
 			onMouseover = options.onMouseover,
 			onMouseout = options.onMouseout,
 			onBaseClick = options.onBaseClick,
+			textHandler = options.textHandler,
 			flipLegends = options.flipLegends,
 			wrapper;
 
@@ -155,8 +157,8 @@ d3.chart("heatmap", {
 					var bbox,
 						text = d3.select(this.parentNode)
 							.append('text')
-							.text(function() {
-								return d.wickets ? d.wickets + 'w' : '';
+							.text(typeof textHandler === 'function' ? textHandler(d) : function() {
+								return d[chart.config.textKey] ? d[chart.config.textKey] + 'w' : '';
 							})
 							.attr('fill', textColor)
 							.attr(labelAttr)
@@ -186,8 +188,8 @@ d3.chart("heatmap", {
 
 					var bbox,
 						text = d3.select(this.parentNode).select('text')
-							.text(function() {
-								return d.wickets ? d.wickets + 'w' : '';
+							.text(typeof textHandler === 'function' ? textHandler(d) : function() {
+								return d[chart.config.textKey] ? d[chart.config.textKey] + 'w' : '';
 							});
 
 					bbox = text.node().getBBox();

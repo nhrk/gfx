@@ -92,7 +92,10 @@
 		height : 190,
 		legends : true,
 		mapKey : 'runs',
-		showValues : true
+		showValues : true,
+		textHandler : function(d){
+			if(d.wickets) return d.wickets + 'w';
+		}
 	});
 
 	heatmap2.draw(espn.gfx.random.heatmap());
