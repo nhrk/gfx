@@ -25,7 +25,13 @@ d3.chart('bar', {
 		markerClass: 'mcr-chart-marker',
 		gradientId: 'mcr-chart-line-gradient',
 		count: 0,
-		markerScale : 0.7
+		markerScale : 0.7,
+		stopColor1 : 'red',
+		stopColor1Offset : '0%',
+		stopColor2 : 'yellow',
+		stopColor2Offset : '60%',
+		stopColor3 : 'green',
+		stopColor3Offset : '100%'
 	},
 
 	initialize: function(options) {
@@ -41,6 +47,12 @@ d3.chart('bar', {
 			showLabel = (!options.hideLabel),
 			colorMeter = options.colorMeter,
 			colors = options.colors || this.config.colors,
+			stopColor1 = options.stopColor1 || chart.config.stopColor1,
+			stopColor1Offset = options.stopColor1Offset || chart.config.stopColor1Offset,
+			stopColor2 = options.stopColor2 || chart.config.stopColor2,
+			stopColor2Offset = options.stopColor2Offset || chart.config.stopColor2Offset,
+			stopColor3 = options.stopColor3 || chart.config.stopColor3,
+			stopColor3Offset = options.stopColor3Offset || chart.config.stopColor3Offset,
 			label,
 			showMarker,
 			barHeight,
@@ -61,7 +73,16 @@ d3.chart('bar', {
 
 		if (colorMeter) {
 			this.base.append('rect').attr('class', chart.config.linearGradient);
-			this.appendGradient(barHeight, barPosY);
+			this.appendGradient({
+				stopColor1 : stopColor1,
+				stopColor1Offset : stopColor1Offset,
+				stopColor2 : stopColor2,
+				stopColor2Offset : stopColor2Offset,
+				stopColor3 : stopColor3,
+				stopColor3Offset : stopColor3Offset,
+				barHeight : barHeight,
+				barPosY : barPosY
+			});
 		}
 
 		wrapper = this.base.append('g');
@@ -169,7 +190,15 @@ d3.chart('bar', {
 
 	},
 
-	appendGradient: function(barHeight, barPosY) {
+	appendGradient: function(options) {
+		var barHeight = options.barHeight,
+			barPosY = options.barPosY,
+			stopColor1 = options.stopColor1,
+			stopColor1Offset = options.stopColor1Offset,
+			stopColor2 = options.stopColor2,
+			stopColor2Offset = options.stopColor2Offset,
+			stopColor3 = options.stopColor3,
+			stopColor3Offset = options.stopColor3Offset;
 
 		this.config.count++;
 
@@ -183,18 +212,18 @@ d3.chart('bar', {
 			.attr('spreadMethod', 'pad');
 
 		gradient.append('svg:stop')
-			.attr('offset', '0%')
-			.attr('stop-color', 'rgb(255,0,0)')
+			.attr('offset', stopColor1Offset)
+			.attr('stop-color', stopColor1)
 			.attr('stop-opacity', 1);
 
 		gradient.append('svg:stop')
-			.attr('offset', '60%')
-			.attr('stop-color', 'rgb(255,255,0)')
+			.attr('offset', stopColor2Offset)
+			.attr('stop-color', stopColor2)
 			.attr('stop-opacity', 1);
 
 		gradient.append('svg:stop')
-			.attr('offset', '100%')
-			.attr('stop-color', 'green')
+			.attr('offset', stopColor3Offset)
+			.attr('stop-color', stopColor3)
 			.attr('stop-opacity', 1);
 
 		this.base

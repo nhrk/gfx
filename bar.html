@@ -29,6 +29,7 @@
 <body>
 
 	<div id="espn-bar" class="espn-gfx"></div>
+	<div id="espn-bar7" class="espn-gfx"></div>
 	<table style="clear:both;">
 		<caption>table</caption>
 		<thead>
@@ -121,6 +122,28 @@
 	.chart("bar", options);
 
 	bar5.draw(espn.gfx.random.bar());
+
+	var bar7 = d3.select("#espn-bar7")
+	.chart("bar",{
+		title : "Control %",
+		labelAttr : {"font-size": "12px", 'text-anchor': 'start', 'font-style': 'italic'},
+		valAttr : {"font-size": "15px", 'font-weight':'bold'},
+		width : 85,
+		height : 28,
+		barHeight : 7,
+		barPosY: 20,
+		textPosY : 13,
+		colorMeter : true,
+		marker : true,
+		stopColor1 : 'green',
+		stopColor1Offset : '0%',
+		stopColor2 : 'yellow',
+		stopColor2Offset : '47.5%',
+		stopColor3 : 'red',
+		stopColor3Offset : '100%'
+	});
+
+	bar7.draw(100);
 
 	</script>
 </body>
