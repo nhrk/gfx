@@ -44,6 +44,7 @@ d3.chart('bar', {
 			textPosY = options.textPosY || this.config.textPosY,
 			textPosX = options.textPosX || this.config.textPosX,
 			textPaddingLeft = options.textPaddingLeft || this.config.textPaddingLeft,
+			valueXpos = options.valueXpos,
 			showLabel = (!options.hideLabel),
 			colorMeter = options.colorMeter,
 			colors = options.colors || this.config.colors,
@@ -126,6 +127,9 @@ d3.chart('bar', {
 								return d.percent;
 							})
 							.attr('dx', function() {
+								if(valueXpos){
+									return valueXpos;
+								}
 								var bbox = label.node().getBBox();
 								return bbox.width + textPaddingLeft;
 							})
