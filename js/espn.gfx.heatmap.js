@@ -152,17 +152,22 @@ d3.chart("heatmap", {
 				.attr("width", squareWidth)
 				.attr("height", function(d, i) {
 					return squareHeight;
-				}).on('mouseover', function(d, i) {
+				}).on('mouseover', mouseover)
+				.on('mouseout', mouseout);
+
+				function mouseover(d, i){
 					if (typeof onMouseover === 'function') {
 						var bbox = this.getBBox();
 						onMouseover(d3.event, d, chart.base.node(), bbox);
 					}
-				}).on('mouseout', function(d, i) {
+				}
+
+				function mouseout(d, i){
 					if (typeof onMouseout === 'function') {
 						var bbox = this.getBBox();
 						onMouseout(d3.event, d, chart.base.node(), bbox);
 					}
-				});
+				}
 
 			if (showValues) {
 				this.each(function(d, i) {
@@ -188,7 +193,8 @@ d3.chart("heatmap", {
 						.attr('dy', function() {
 							var pos = getGridPosition(i + 1);
 							return (pos.row * squareHeight) - (squareHeight / 2) + (bbox.height / 2) - margin;
-						});
+						}).on('mouseover', mouseover)
+						.on('mouseout', mouseout);
 				});
 			}
 		}
