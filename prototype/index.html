@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Match centre Prototype</title>
+        <!-- <link rel="stylesheet" href="css/style.css"> -->
+    </head>
+    <body>
+        
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="js/centre.js"></script>
+        <script src="js/innings-card.js"></script>
+        <script src="js/batting-card.js"></script>
+        <script src="js/bowling-card.js"></script>
+        <script>
+        	var inningsCard = centre.getCard('innings');
+        	inningsCard.trigger({api: '0.0.2'});
+        </script>
+        <div id='battingCard'>
+	        <fieldset>
+	        	<legend>Tests for Batting card</legend>
+	        	<input type="button" name="stop" value="stop polling"/>
+		        <input type="button" name="start" value="start polling"/>
+		        <input type="button" name="addparams" value="Add params/ apply filter to polling"/>
+		        <input type="button" name="removeparams" value="remove params/ apply filter to polling"/>
+		        <input type="button" name="getelem" value="Get Elem"/>
+		        <input type="button" name="clear" value="Clear events/stop polling"/>
+		        <input type="button" name="frequency" value="set Frequency"/>
+	        </fieldset>
+        </div>
+        <br>
+        <div id='bowlingCard'>
+        	<fieldset>
+	        	<legend>Tests for Bowling card</legend>
+	        	<input type="button" name="stop" value="stop polling"/>
+		        <input type="button" name="start" value="start polling"/>
+	      </fieldset>  
+        </div>
+    </body>
+</html>
